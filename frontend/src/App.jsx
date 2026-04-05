@@ -1,15 +1,21 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+
+/*COMPONENTS*/
+import BackgroundImage from './components/BackgroundImage';
+import HeroSection from './components/HeroSection';
+
+/*IMAGES*/
+import backgroundImage from "./assets/background_image.jpg"
+
 import './App.css'
 
 function App() {
   return (
-    <div className="p-10">
-      <h1 className="text-4xl font-bold text-blue-500">
-        Tailwind está a funcionar
-      </h1>
+    <div className="h-screen w-screen flex justify-center">
+        {/* BACKGROUND IMAGE*/}
+        <BackgroundImage backgroundImage={backgroundImage} />
+        {/* HERO SECTION */}
+        <HeroSection />
     </div>
   );
 }
