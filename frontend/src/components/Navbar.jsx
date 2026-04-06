@@ -4,7 +4,7 @@ import logoImage from "../assets/logo_purple_background.png"
 function Navbar() {
     return (
         <>
-            <nav className="relative h-[100px] bg-black/70 w-full flex items-center justify-between p-4 pl-12 pr-12">
+            <nav className="relative h-[100px] bg-black/50 w-full flex items-center justify-between p-4 pl-12 pr-12">
                 <div className="w-[250px] flex items-center justify-center">
                     <img src={logoImage} className="w-full" alt="CineFlix" />
                 </div>

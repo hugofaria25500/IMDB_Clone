@@ -9,7 +9,7 @@ function HeroSection() {
         <>
             {/* HERO SECTION */}
             <div className="relative w-full h-[750px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroSectionImage})` }}>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/70 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
                 <div className="relative z-20">
                     <Navbar />

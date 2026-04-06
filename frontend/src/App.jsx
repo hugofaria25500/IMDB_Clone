@@ -6,6 +6,9 @@ import MultiItemCarousel from './components/MultiItemCarousel';
 import PromoSection from './components/PromoSection';
 import Footer from './components/Footer';
 
+/*JS*/
+import {popularMovies, newReleases} from "./js/data";
+
 import './App.css'
 
 function App() {
@@ -16,9 +19,9 @@ function App() {
         {/* HERO SECTION */}
         <HeroSection />
         {/* MOVIE CAROUSELS */}
-        <MultiItemCarousel title="Popular Movies" />
+        <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
         {/*TRENDING MOVIES*/}
-        <MultiItemCarousel title="New Releases" />
+        <MultiItemCarousel title="New Releases" movies={newReleases} />
         {/*PROMO SECTION*/}
         <PromoSection />
         {/*FOOTER*/}
