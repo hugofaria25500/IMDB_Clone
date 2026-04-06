@@ -13,7 +13,7 @@ import './App.css'
 
 function App() {
   return (
-    <div className="w-full flex flex-col justify-center">
+    <div className="w-full flex flex-col justify-center bg-black">
         {/*NAVBAR*/}
         {/*<Navbar />*/}
         {/* HERO SECTION */}
