@@ -1,16 +1,28 @@
 import { useState } from 'react'
 
 /*COMPONENTS*/
-import BackgroundImage from './components/BackgroundImage';
 import HeroSection from './components/HeroSection';
+import MultiItemCarousel from './components/MultiItemCarousel';
+import PromoSection from './components/PromoSection';
+import Footer from './components/Footer';
 
 import './App.css'
 
 function App() {
   return (
-    <div className="h-screen w-screen flex justify-center">
+    <div className="w-full flex flex-col justify-center">
+        {/*NAVBAR*/}
+        {/*<Navbar />*/}
         {/* HERO SECTION */}
         <HeroSection />
+        {/* MOVIE CAROUSELS */}
+        <MultiItemCarousel title="Popular Movies" />
+        {/*TRENDING MOVIES*/}
+        <MultiItemCarousel title="New Releases" />
+        {/*PROMO SECTION*/}
+        <PromoSection />
+        {/*FOOTER*/}
+        <Footer />
     </div>
   );
 }
