@@ -1,92 +1,49 @@
-/*REACT*/
-import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
-/*COMPONENTS*/
-import CarouselCard from "./CarouselCard";
+import "swiper/css";
+import "swiper/css/navigation";
 
-/*IMAGES*/
-import backgroundImage from "../assets/section_background.png";
-import LeftArrowLogo from "../assets/left_arrow_logo.png";
-import RightArrowLogo from "../assets/right_arrow_logo.png";
-
-/*STYLES*/
 import "../css/MultiItemCarousel.css";
 
+import CarouselCard from "./CarouselCard";
 
-function MultiItemCarousel({ title, movies }) {
-    const sliderRef = useRef(null);
-    let animationFrame = null;
-
-    const scrollSpeed = 50; // ajusta aqui
-
-    const startScroll = (direction) => {
-        const step = () => {
-            if (!sliderRef.current) return;
-
-            sliderRef.current.scrollLeft += direction * scrollSpeed;
-            animationFrame = requestAnimationFrame(step);
-        };
-
-        step();
-    };
-
-    const stopScroll = () => {
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-        }
-    };
-
+function MultiItemCarouselSwiper({ title, movies }) {
     return (
-        <div
-            className="relative w-full h-[420px] bg-cover bg-center bg-no-repeat pt-4 px-[50px] pb-[20px] flex flex-col"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-            {/* OVERLAYS */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
-            <div className="absolute inset-0 backdrop-blur-[4px]" />
-
+        <div className="w-full px-[50px] py-6 bg-black">
+            
             {/* TITLE */}
-            <h2 className="relative text-2xl font-bold text-white z-20">
+            <h2 className="text-2xl font-bold text-white mb-4">
                 {title}
             </h2>
 
-            {/* CAROUSEL */}
-            <div className="flex items-center gap-4 relative z-20 h-full">
-
-                {/* BOTÃO ESQUERDA */}
-                <div
-                    onMouseDown={() => startScroll(-1)}
-                    onMouseUp={stopScroll}
-                    onMouseLeave={stopScroll}
-                    className="w-[50px] p-2 flex items-center justify-center cursor-pointer bg-violet-600/20 hover:bg-violet-700 rounded-full active:scale-90 transition"
-                >
-                    <img src={LeftArrowLogo} alt="Left" />
-                </div>
-
-                {/* SLIDER */}
-                <div
-                    ref={sliderRef}
-                    className="flex gap-4 overflow-x-auto no-scrollbar px-4"
-                >
-                    {movies.map((movie, index) => (
-                        <div key={index} className="shrink-0">
+            {/* SWIPER */}
+            <Swiper
+                modules={[Navigation]}
+                navigation
+                spaceBetween={5}
+                slidesPerView={8}
+                slidesPerGroup={1}
+                loop={false}
+                breakpoints={{
+                    0: { slidesPerView: 1 },
+                    320: { slidesPerView: 2 },
+                    640: { slidesPerView: 3 },
+                    800: { slidesPerView: 4 },
+                    1024: { slidesPerView: 5 },
+                    1280: { slidesPerView: 7 },
+                    1500: { slidesPerView: 8 },
+                }}>
+                {movies.map((movie, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="rounded-xl overflow-hidden">
                             <CarouselCard movie={movie} />
                         </div>
-                    ))}
-                </div>
-
-                {/* BOTÃO DIREITA */}
-                <div
-                    onMouseDown={() => startScroll(1)}
-                    onMouseUp={stopScroll}
-                    onMouseLeave={stopScroll}
-                    className="w-[50px] p-2 flex items-center justify-center cursor-pointer bg-violet-600/20 hover:bg-violet-700 rounded-full active:scale-90 transition"
-                >
-                    <img src={RightArrowLogo} alt="Right" />
-                </div>
-            </div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
         </div>
     );
 }
 
-export default MultiItemCarousel;
+export default MultiItemCarouselSwiper;

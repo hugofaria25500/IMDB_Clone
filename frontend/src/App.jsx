@@ -1,11 +1,14 @@
+/*REACT*/
 import { useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 /*COMPONENTS*/
 import Navbar from "./components/Navbar";
 import HeroSection from './components/HeroSection';
-import MultiItemCarousel from './components/MultiItemCarousel';
 import PromoSection from './components/PromoSection';
 import Footer from './components/Footer';
+import MultiItemCarousel from './components/MultiItemCarousel';
+import CarouselCard from "./components/MultiItemCarousel";
 
 /*JS*/
 import {popularMovies, newReleases} from "./js/data";
