@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 /*COMPONENTS*/
+import Navbar from "./components/Navbar";
 import HeroSection from './components/HeroSection';
 import MultiItemCarousel from './components/MultiItemCarousel';
 import PromoSection from './components/PromoSection';
@@ -15,7 +16,7 @@ function App() {
   return (
     <div className="w-full flex flex-col justify-center bg-black">
         {/*NAVBAR*/}
-        {/*<Navbar />*/}
+        <Navbar />
         {/* HERO SECTION */}
         <HeroSection />
         {/* MOVIE CAROUSELS */}

@@ -11,10 +11,6 @@ function HeroSection() {
             <div className="relative w-full h-[750px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroSectionImage})` }}>
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
-                <div className="relative z-20">
-                    <Navbar />
-                </div>
-
                 <div className="absolute h-[250px] w-[400px] top-[275px] left-[200px] right-0 bottom-0 z-20 flex flex-col items-center justify-center">
                     <h1 className="text-5xl font-bold text-white text-center">Unlimited Movies, TV Shows and More</h1>
                     <span className="block text-lg text-gray-300 mt-4 text-center">Explore ratings, reviews, and trending content. Build your personal watchlist.</span>
