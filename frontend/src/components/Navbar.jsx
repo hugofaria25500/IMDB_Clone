@@ -1,6 +1,9 @@
 /*IMAGES*/
 import logoImage from "../assets/logo_purple_background.png"
 
+/*COMPONENTS*/
+import NavbarOption from "./NavbarOption";
+
 function Navbar() {
     return (
         <>
@@ -11,15 +14,15 @@ function Navbar() {
                 
                 <div>
                     <ul className="flex space-x-2 text-white font-semibold">
-                        <li><a href="#" className="px-4 py-2 rounded hover:bg-violet-900">Home</a></li>
-                        <li><a href="#" className="px-4 py-2 rounded hover:bg-violet-900">Movies</a></li>
-                        <li><a href="#" className="px-4 py-2 rounded hover:bg-violet-900">TV Shows</a></li>
-                        <li><a href="#" className="px-4 py-2 rounded hover:bg-violet-900">Project</a></li>
+                        <NavbarOption to="/" label="Home" isOption={true}/>
+                        <NavbarOption to="/movies" label="Movies" isOption={true}/>
+                        <NavbarOption to="/series" label="TV Shows" isOption={true} />
+                        <NavbarOption to="https://github.com/hugofaria25500/IMDB_Clone" label="Project" isOption={true}/>
                     </ul>
                 </div>
 
                 <div>
-                    <button className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-violet-700">Log In</button>
+                    <NavbarOption to="/login" label="Log In" isOption={false} />
                 </div>
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-violet-900/70 blur-md" />
