@@ -1,35 +1,30 @@
 /*REACT*/
-import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /*COMPONENTS*/
-import Navbar from "./components/Navbar";
-import HeroSection from './components/HeroSection';
-import PromoSection from './components/PromoSection';
-import Footer from './components/Footer';
-import MultiItemCarousel from './components/MultiItemCarousel';
-import CarouselCard from "./components/MultiItemCarousel";
-
-/*JS*/
-import {popularMovies, newReleases} from "./js/data";
-
-import './App.css'
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import MoviesPage from "./pages/MoviesPage";
+import SeriesPage from "./pages/SeriesPage";
+import WatchlistPage from "./pages/WatchListPage";
 
 function App() {
   return (
-    <div className="w-full flex flex-col justify-center bg-black">
-        {/*NAVBAR*/}
-        <Navbar />
-        {/* HERO SECTION */}
-        <HeroSection />
-        {/* MOVIE CAROUSELS */}
-        <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
-        {/*TRENDING MOVIES*/}
-        <MultiItemCarousel title="New Releases" movies={newReleases} />
-        {/*PROMO SECTION*/}
-        <PromoSection />
-        {/*FOOTER*/}
-        <Footer />
+    <div>
+        {/*MAPPING THE APP ROUTES - NAVIGATION*/}    
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route path="/movies" element={<MoviesPage />} />
+
+                <Route path="/series" element={<SeriesPage />} />
+
+                <Route path="/watchlist" element={<WatchlistPage />} />
+            </Routes>
+        </BrowserRouter>
     </div>
   );
 }
