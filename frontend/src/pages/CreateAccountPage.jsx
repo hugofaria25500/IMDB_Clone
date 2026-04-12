@@ -1,24 +1,24 @@
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import LoginCard from "../components/LoginCard";
+import CreateAccountCard from "../components/CreateAccountCard";
 import Footer from "../components/Footer";
 
 /*IMAGES*/
-import loginBackground from "../assets/login_background.png"
+import loginBackground from "../assets/create_account_background.png"
 
-function LoginPage() {
+function CreateAccountPage() {
     return (
         <div className="w-full flex flex-col justify-center bg-black srt">
             {/*NAVBAR*/}
             <Navbar />
 
-            {/*LOGIN CARD*/}
+            {/*CREATE ACCOUNT CARD*/}
             <div className="h-[calc(100vh-150px)] flex items-center justify-center z-10 bg-cover bg-[position:50%_35%] bg-no-repeat" style={{ backgroundImage: `url(${loginBackground})` }}>
 
                 {/*GRADIENT OVERLAY*/}
                 <div className="absolute h-[calc(100vh-150px)] inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
-                <LoginCard />
+                <CreateAccountCard />
             </div>
 
             {/*FOOTER*/}
@@ -27,4 +27,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default CreateAccountPage;
