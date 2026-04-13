@@ -141,7 +141,7 @@ export const popularMovies = [
   }
 ];
 
-export const newReleases = [
+export const trendingMovies = [
   {
     id: 101,
     title: "Dune: Part Two",
@@ -281,5 +281,43 @@ export const newReleases = [
     year: 2023,
     rating: 7.0,
     image: "https://image.tmdb.org/t/p/w500/aQPeznSu7XDTrrdCtT5eLiu52Yu.jpg"
+  }
+];
+
+export const newReleases = [
+  {
+    id: 693134,
+    title: "Dune: Part Two",
+    year: 2024,
+    rating: 8.7,
+    image: "https://image.tmdb.org/t/p/w1280/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg"
+  },
+  {
+    id: 9806,
+    title: "The Incredibles",
+    year: 2004,
+    rating: 7.7,
+    image: "https://image.tmdb.org/t/p/w1280/se5Hxz7PArQZOG3Nx2bpfOhLhtV.jpg"
+  },
+  {
+    id: 76600,
+    title: "WALL·E",
+    year: 2008,
+    rating: 8.0,
+    image: "https://image.tmdb.org/t/p/w1280/fK5ssgvtI43z19FoWigdlqgpLRE.jpg"
+  },
+  {
+    id: 19995,
+    title: "Avatar",
+    year: 2009,
+    rating: 7.5,
+    image: "https://image.tmdb.org/t/p/w1280/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg"
+  },
+  {
+    id: 603,
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.2,
+    image: "https://image.tmdb.org/t/p/w1280/l4QHerTSbMI7qgvasqxP36pqjN6.jpg"
   }
 ];
