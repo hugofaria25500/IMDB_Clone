@@ -15,9 +15,9 @@ function Homepage() {
         <Navbar />
         {/* HERO SECTION */}
         <HeroSection />
-        {/* MOVIE CAROUSELS */}
+        {/* POPULAR MOVIES CAROUSEL */}
         <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
-        {/*TRENDING MOVIES*/}
+        {/*TRENDING MOVIES CAROUSEL */}
         <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
         {/*PROMO SECTION*/}
         <PromoSection />
