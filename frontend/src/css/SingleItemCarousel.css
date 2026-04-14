@@ -1,0 +1,26 @@
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+    opacity: 0.9;
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 30px;
+    height: 30px;
+    margin: 10px !important;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(98, 5, 124, 0.3);
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+  width: 10px;
+  height: 10px;
+  color: white;
+}
