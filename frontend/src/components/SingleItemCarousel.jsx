@@ -1,17 +1,34 @@
+/*REACT*/
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from 'swiper/modules';
+
 /*COMPONENTS*/
 import ReleaseMovieCard from "./ReleaseMovieCard";
 
+/*CSS*/
+import "../css/SingleItemCarousel.css";
+
 function SingleItemCarousel( { movies } ) {
     return (
-        <div>
-            <h2>Single Item Carousel</h2>
-            <div className="h-[600px] " >
-                {movies.map((movie, index) => (
-                    <ReleaseMovieCard key={index} movie={movie} />
+        <div className="bg-black w-full h-auto">
+
+            <Swiper
+                pagination={{
+                type: 'progressbar',
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                loop={true}
+                className="mySwiper"
+            >
+                {movies.map((movie) => (
+                    <SwiperSlide key={movie.id}>
+                        <ReleaseMovieCard movie={movie} />
+                    </SwiperSlide>
                 ))}
-            </div>    
+            </Swiper>
         </div>
     );
-}   
+}
 
 export default SingleItemCarousel;

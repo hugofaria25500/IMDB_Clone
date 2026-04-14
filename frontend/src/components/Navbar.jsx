@@ -16,7 +16,7 @@ function Navbar() {
                     <ul className="flex space-x-2 text-white font-semibold">
                         <NavbarOption to="/" label="Home" isOption={true}/>
                         <NavbarOption to="/movies" label="Movies" isOption={true}/>
-                        <NavbarOption to="/series" label="TV Shows" isOption={true} />
+                        <NavbarOption to="/series" label="Series" isOption={true} />
                         <NavbarOption to="https://github.com/hugofaria25500/IMDB_Clone" label="Project" isOption={true}/>
                     </ul>
                 </div>

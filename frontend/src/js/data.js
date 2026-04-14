@@ -284,12 +284,13 @@ export const trendingMovies = [
   }
 ];
 
-export const newReleases = [
+export const newMovieReleases = [
   {
     id: 693134,
     title: "Dune: Part Two",
     year: 2024,
     rating: 8.7,
+    description: "Paul Atreides unites with the Fremen to seek revenge against those who destroyed his family while embracing his destiny.",
     image: "https://image.tmdb.org/t/p/w1280/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg"
   },
   {
@@ -297,13 +298,15 @@ export const newReleases = [
     title: "The Incredibles",
     year: 2004,
     rating: 7.7,
+    description: "A family of undercover superheroes is forced back into action to save the world from a dangerous new villain.",
     image: "https://image.tmdb.org/t/p/w1280/se5Hxz7PArQZOG3Nx2bpfOhLhtV.jpg"
   },
   {
     id: 76600,
-    title: "WALL·E",
+    title: "WALL-E",
     year: 2008,
     rating: 8.0,
+    description: "A small waste-collecting robot embarks on a space journey that will decide the fate of humanity.",
     image: "https://image.tmdb.org/t/p/w1280/fK5ssgvtI43z19FoWigdlqgpLRE.jpg"
   },
   {
@@ -311,6 +314,7 @@ export const newReleases = [
     title: "Avatar",
     year: 2009,
     rating: 7.5,
+    description: "A marine on an alien planet becomes torn between following orders and protecting the world he feels is his home.",
     image: "https://image.tmdb.org/t/p/w1280/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg"
   },
   {
@@ -318,6 +322,7 @@ export const newReleases = [
     title: "The Matrix",
     year: 1999,
     rating: 8.2,
+    description: "A hacker discovers the true nature of reality and his role in the war against its controllers.",
     image: "https://image.tmdb.org/t/p/w1280/l4QHerTSbMI7qgvasqxP36pqjN6.jpg"
   }
 ];

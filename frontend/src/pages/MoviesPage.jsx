@@ -4,15 +4,15 @@ import SingleItemCarousel from "../components/SingleItemCarousel";
 import Footer from "../components/Footer";
 
 /*JS*/
-import {newReleases } from "../js/data";
+import { newMovieReleases } from "../js/data";
 
 function MoviesPage() {
     return (
         <div>
+            <div className="h-[100px] bg-black"></div>
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel movies={newReleases} />
-            <div className="h-[800px]"></div>
+            <SingleItemCarousel movies={newMovieReleases} />
             <Footer />
         </div>
     );
