@@ -2,7 +2,7 @@ function Filters() {
     let currentYear = new Date().getFullYear();
 
     return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white px-[50px]">
 
         <h1 className="text-5xl font-bold text-white text-center mt-[80px]">Search for what you like</h1>
 
@@ -36,7 +36,7 @@ function Filters() {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="flex gap-8 px-6 mt-10">
+      <div className="flex gap-8 mt-10">
 
         {/* SIDEBAR */}
         <div className="hidden lg:block w-[250px] bg-zinc-900/70 backdrop-blur-md p-5 rounded-xl h-fit sticky">
@@ -87,7 +87,7 @@ function Filters() {
 
           {/* MOVIES GRID */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(24)].map((_, i) => (
               <div
                 key={i}
                 className="bg-zinc-900 rounded-xl overflow-hidden hover:scale-105 transition cursor-pointer"
