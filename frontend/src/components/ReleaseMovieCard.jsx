@@ -15,14 +15,15 @@ function ReleaseMovieCard({ movie }) {
                 <button className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 mt-4 font-bold">Watch Trailer</button>
             
             </div>
+            
         </div>
 
-        <div className="relative h-full w-[65%] bg-black">
+        <div className="relative aspect-[16/9] w-[65%] bg-black overflow-hidden">
 
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
 
-            <img className="bg-cover" src={movie.image} alt={movie.title} />
+            <img className="w-full h-full object-cover object-[center_50%] border-2 border-black" src={movie.image} alt={movie.title} />
         </div>
 
     </div>

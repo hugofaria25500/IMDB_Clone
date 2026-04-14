@@ -25,7 +25,7 @@ function Navbar() {
                     <NavbarOption to="/login" label="Log In" isOption={false} />
                 </div>
 
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-violet-900/70 blur-md" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] bg-violet-900/70 blur-md" />
             </nav>
         </>
     );

@@ -1,11 +1,19 @@
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
+import SingleItemCarousel from "../components/SingleItemCarousel";
+import Footer from "../components/Footer";
+
+/*JS*/
+import { newSeriesReleases } from "../js/data";
 
 function SeriesPage() {
     return (
         <div>
+            <div className="h-[100px] bg-black"></div>
             <Navbar />
-            <h1 className="mt-[100px]">Series Page</h1>
+            {/* SERIES CAROUSELS */}
+            <SingleItemCarousel movies={newSeriesReleases} />
+            <Footer />
         </div>
     );
 }

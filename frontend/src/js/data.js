@@ -326,3 +326,46 @@ export const newMovieReleases = [
     image: "https://image.tmdb.org/t/p/w1280/l4QHerTSbMI7qgvasqxP36pqjN6.jpg"
   }
 ];
+
+export const newSeriesReleases = [
+  {
+    id: 1399,
+    title: "Game of Thrones",
+    year: 2011,
+    rating: 8.4,
+    description: "Noble families fight for control of the Iron Throne while an ancient enemy returns from beyond the Wall.",
+    image: "https://image.tmdb.org/t/p/w1280/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg"
+  },
+  {
+    id: 66732,
+    title: "Stranger Things",
+    year: 2016,
+    rating: 8.6,
+    description: "A group of kids uncover supernatural mysteries and secret experiments in their small town.",
+    image: "https://image.tmdb.org/t/p/w1280/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
+  },
+  {
+    id: 82856,
+    title: "The Mandalorian",
+    year: 2019,
+    rating: 8.5,
+    description: "A lone bounty hunter travels the outer reaches of the galaxy, far from the authority of the New Republic.",
+    image: "https://image.tmdb.org/t/p/w1280/9ijMGlJKqcslswWUzTEwScm82Gs.jpg"
+  },
+  {
+    id: 1396,
+    title: "Breaking Bad",
+    year: 2008,
+    rating: 9.5,
+    description: "A chemistry teacher turned meth producer partners with a former student in a dangerous criminal world.",
+    image: "https://image.tmdb.org/t/p/w1280/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg"
+  },
+  {
+    id: 2316,
+    title: "The Office",
+    year: 2005,
+    rating: 8.5,
+    description: "A mockumentary on a group of typical office workers dealing with everyday absurd situations.",
+    image: "https://image.tmdb.org/t/p/w1280/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg"
+  }
+];

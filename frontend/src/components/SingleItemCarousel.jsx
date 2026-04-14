@@ -10,12 +10,9 @@ import "../css/SingleItemCarousel.css";
 
 function SingleItemCarousel( { movies } ) {
     return (
-        <div className="bg-black w-full h-auto">
+        <div className="bg-black w-full h-[auto]">
 
             <Swiper
-                pagination={{
-                type: 'progressbar',
-                }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
                 loop={true}
