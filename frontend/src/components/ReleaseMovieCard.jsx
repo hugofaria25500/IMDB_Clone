@@ -1,6 +1,6 @@
 function ReleaseMovieCard({ movie }) {
   return (
-    <div className="relative h-full w-full flex flex-row items-center justify-center">
+    <div className="relative h-[calc(100vh-100px)] w-full flex flex-row items-center justify-center">
       
         <div className="relative h-full w-[35%] flex flex-col items-center justify-center z-20">
 
