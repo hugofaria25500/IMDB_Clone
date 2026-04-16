@@ -6,7 +6,7 @@ import PromoSection from '../components/PromoSection';
 import Footer from '../components/Footer';
 
 /*JS*/
-import {popularMovies, newReleases} from "../js/data";
+import {popularMovies, trendingMovies} from "../js/data";
 
 function Homepage() {
   return (
@@ -15,10 +15,10 @@ function Homepage() {
         <Navbar />
         {/* HERO SECTION */}
         <HeroSection />
-        {/* MOVIE CAROUSELS */}
+        {/* POPULAR MOVIES CAROUSEL */}
         <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
-        {/*TRENDING MOVIES*/}
-        <MultiItemCarousel title="New Releases" movies={newReleases} />
+        {/*TRENDING MOVIES CAROUSEL */}
+        <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
         {/*PROMO SECTION*/}
         <PromoSection />
         {/*FOOTER*/}

@@ -16,7 +16,7 @@ function Navbar() {
                     <ul className="flex space-x-2 text-white font-semibold">
                         <NavbarOption to="/" label="Home" isOption={true}/>
                         <NavbarOption to="/movies" label="Movies" isOption={true}/>
-                        <NavbarOption to="/series" label="TV Shows" isOption={true} />
+                        <NavbarOption to="/series" label="Series" isOption={true} />
                         <NavbarOption to="https://github.com/hugofaria25500/IMDB_Clone" label="Project" isOption={true}/>
                     </ul>
                 </div>
@@ -25,7 +25,7 @@ function Navbar() {
                     <NavbarOption to="/login" label="Log In" isOption={false} />
                 </div>
 
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-violet-900/70 blur-md" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] bg-violet-900/70 blur-md" />
             </nav>
         </>
     );

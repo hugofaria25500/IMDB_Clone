@@ -1,11 +1,33 @@
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
+import FilterSection from '../components/FilterSection';
+import SingleItemCarousel from "../components/SingleItemCarousel";
+import MultiItemCarousel from '../components/MultiItemCarousel';
+import ShuffleSection from "../components/ShuffleSection";
+import Footer from "../components/Footer";
+
+/*JS*/
+import { newMovieReleases, popularMovies, trendingMovies} from "../js/data";
 
 function MoviesPage() {
     return (
-        <div>
+        <div className="bg-black">
+            {/* SPACE */}
+            <div className="h-[100px] bg-black"></div>
+            {/* NAVBAR */}
             <Navbar />
-            <h1 className="mt-[100px]">Movies Page</h1>
+            {/* MOVIE CAROUSELS */}
+            <SingleItemCarousel movies={newMovieReleases} />
+            {/* MOVIE FILTERS */}
+            <FilterSection />
+            {/* POPULAR MOVIES CAROUSEL */}
+            <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
+            {/* TRENDING MOVIES CAROUSEL */}
+            <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
+            {/* SHUFFLE SECTION */}
+            <ShuffleSection />
+            {/* FOOTER */}
+            <Footer />
         </div>
     );
 }   
