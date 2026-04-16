@@ -18,7 +18,7 @@ function ReleaseMovieCard({ movie }) {
             
         </div>
 
-        <div className="relative aspect-[16/9] w-[65%] bg-black overflow-hidden">
+        <div className="relative w-full h-full bg-black overflow-hidden">
 
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />

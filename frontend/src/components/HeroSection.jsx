@@ -8,7 +8,7 @@ function HeroSection() {
     return (
         <>
             {/* HERO SECTION */}
-            <div className="relative w-full h-[750px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroSectionImage})` }}>
+            <div className="relative w-full h-[700px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroSectionImage})` }}>
                 <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
                 <div className="absolute h-[250px] w-[400px] top-[275px] left-[200px] right-0 bottom-0 z-20 flex flex-col items-center justify-center">

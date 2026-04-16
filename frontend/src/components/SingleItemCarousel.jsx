@@ -10,7 +10,7 @@ import "../css/SingleItemCarousel.css";
 
 function SingleItemCarousel( { movies } ) {
     return (
-        <div className="bg-black w-full h-[auto]">
+        <div className="bg-black w-full h-[calc(100vh-100px)] flex items-center justify-center">
 
             <Swiper
                 navigation={true}
