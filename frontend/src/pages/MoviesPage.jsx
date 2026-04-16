@@ -1,6 +1,6 @@
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import Filters from '../components/Filters';
+import FilterSection from '../components/FilterSection';
 import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
@@ -19,7 +19,7 @@ function MoviesPage() {
             {/* MOVIE CAROUSELS */}
             <SingleItemCarousel movies={newMovieReleases} />
             {/* MOVIE FILTERS */}
-            <Filters />
+            <FilterSection />
             {/* POPULAR MOVIES CAROUSEL */}
             <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
             {/* TRENDING MOVIES CAROUSEL */}

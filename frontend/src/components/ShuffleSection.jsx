@@ -14,13 +14,11 @@ function ShuffleSection() {
             </div>
 
             {/* SHUFFLE SECTION */}
-
             <div>
                 <div className="w-[200px] h-[260px] mt-[20px] bg-gray-800 rounded-lg flex items-center justify-center">
                     <p className="text-gray-400">Movie</p>
                 </div>
             </div>
-
 
             <button
                 onClick={() => {console.log("Shuffle button clicked");}}
