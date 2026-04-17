@@ -16,9 +16,9 @@ function Homepage() {
         {/* HERO SECTION */}
         <HeroSection />
         {/* POPULAR MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
+        <MultiItemCarousel title="Popular Movies" catalog={popularMovies} />
         {/*TRENDING MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
+        <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} />
         {/*PROMO SECTION*/}
         <PromoSection />
         {/*FOOTER*/}

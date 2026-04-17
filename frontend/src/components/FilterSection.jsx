@@ -8,14 +8,11 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-/*JS*/
-import { moviesMock } from "../js/data";
-
-function FilterSection() {
+function FilterSection({ catalog }) {
   const pageSize = 24;
 
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(moviesMock.length / pageSize);
+  const totalPages = Math.ceil(catalog.length / pageSize);
 
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -71,7 +68,7 @@ function FilterSection() {
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
 
-    return moviesMock.slice(start, end);
+    return catalog.slice(start, end);
   };
 
   return (
@@ -95,7 +92,7 @@ function FilterSection() {
    
         <div className="flex-1">
           {/* MOVIES GRID */}
-          <Grid movies={movies} loading={loading} />
+          <Grid catalog={movies} loading={loading} />
 
           {/* PAGINATION */}
           <GridPagination
