@@ -8,7 +8,7 @@ import "../css/MultiItemCarousel.css";
 
 import CarouselCard from "./CarouselCard";
 
-function MultiItemCarouselSwiper({ title, movies }) {
+function MultiItemCarouselSwiper({ title, catalog }) {
     return (
         <div className="w-full px-[50px] py-6 bg-black">
             
@@ -34,10 +34,10 @@ function MultiItemCarouselSwiper({ title, movies }) {
                     1280: { slidesPerView: 7 },
                     1500: { slidesPerView: 8 },
                 }}>
-                {movies.map((movie, index) => (
+                {catalog.map((catalog, index) => (
                     <SwiperSlide key={index}>
                         <div className="rounded-xl overflow-hidden">
-                            <CarouselCard movie={movie} />
+                            <CarouselCard catalog={catalog} />
                         </div>
                     </SwiperSlide>
                 ))}

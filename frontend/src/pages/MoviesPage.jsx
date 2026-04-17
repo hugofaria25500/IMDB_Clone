@@ -21,9 +21,9 @@ function MoviesPage() {
             {/* MOVIE FILTERS */}
             <FilterSection />
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} />
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} />
             {/* SHUFFLE SECTION */}
             <ShuffleSection />
             {/* FOOTER */}

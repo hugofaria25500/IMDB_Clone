@@ -7,7 +7,7 @@ import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
 
 /*JS*/
-import { newSeriesReleases, seriesMock } from "../js/data";
+import { newSeriesReleases, popularSeries, trendingSeries } from "../js/data";
 
 function SeriesPage() {
     return (
@@ -21,9 +21,9 @@ function SeriesPage() {
             {/* SERIES FILTERS */}
             <FilterSection />
             {/* POPULAR SERIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Series" movies={seriesMock} />
+            <MultiItemCarousel title="Popular Series" catalog={popularSeries} />
             {/* TRENDING SERIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Series" movies={seriesMock} />
+            <MultiItemCarousel title="Trending Series" catalog={trendingSeries} />
             {/* SHUFFLE SECTION */}
             <ShuffleSection />
             {/* FOOTER */}
