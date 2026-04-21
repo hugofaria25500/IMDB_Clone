@@ -7,9 +7,19 @@ import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
 
 /*JS*/
-import { moviesMock, popularMovies, trendingMovies, newMovieReleases } from "../js/data";
+import { useMovies } from "../hooks/useMovies";
+import { usePopularMovies } from "../hooks/usePopularMovies";
+import { useTrendingMovies } from "../hooks/useTrendingMovies";
+import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
+import { useRandomMovie } from "../hooks/useRandomMovie";
 
 function MoviesPage() {
+    const { movies, loading } = useMovies();
+    const { popularMovies, popularMoviesLoading } = usePopularMovies();
+    const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
+    const { randomMovie, randomMovieLoading } = useRandomMovie();
+
     return (
         <div className="bg-black">
             {/* SPACE */}
@@ -17,15 +27,15 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel movies={newMovieReleases} />
+            <SingleItemCarousel movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={moviesMock} />
+            <FilterSection catalog={movies} loading={loading} />
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading} />
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection />
+            <ShuffleSection movie={randomMovie} loading={randomMovieLoading} />
             {/* FOOTER */}
             <Footer />
         </div>
