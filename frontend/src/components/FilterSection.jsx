@@ -8,73 +8,56 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function FilterSection({ catalog }) {
+function FilterSection({ catalog = [], loading = false }) {
   const pageSize = 24;
+  const scrollOffset = 300;
 
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(catalog.length / pageSize);
+  const resultsRef = useRef(null);
 
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  /* Keep at least one page available while the catalog is still loading. */
+  const totalPages = Math.max(Math.ceil(catalog.length / pageSize), 1);
 
-  const cache = useRef({});
+  /* The current page decides which slice of the catalog is shown in the grid. */
+  const firstItemIndex = (page - 1) * pageSize;
+  const lastItemIndex = firstItemIndex + pageSize;
+  const paginatedCatalog = catalog.slice(firstItemIndex, lastItemIndex);
 
+  /* When the catalog changes, return to page one so the page number never feels stale. */
   useEffect(() => {
-    let isMounted = true;
+    setPage(1);
+  }, [catalog]);
 
-    const load = async () => {
-      if (cache.current[page]) {
-        setMovies(cache.current[page]);
-        return;
-      }
+  const scrollToResults = () => {
+    if (!resultsRef.current) return;
 
-      setLoading(true);
-      const data = await fetchMovies(page);
+    const resultsTop =
+      resultsRef.current.getBoundingClientRect().top +
+      window.scrollY -
+      scrollOffset;
 
-      if (!isMounted) return;
-
-      cache.current[page] = data;
-      setMovies(data);
-      setLoading(false);
-
-      if (!cache.current[page + 1] && page < totalPages) {
-        fetchMovies(page + 1).then((nextData) => {
-          cache.current[page + 1] = nextData;
-        });
-      }
-    };
-
-    load();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [page]);
-
-  const getPages = () => {
-    let start = Math.max(page - 2, 1);
-    let end = Math.min(start + 4, totalPages);
-
-    if (end - start < 4) {
-      start = Math.max(end - 4, 1);
-    }
-
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    window.scrollTo({
+      top: resultsTop,
+      behavior: "smooth",
+    });
   };
 
-  const fetchMovies = async (page) => {
-    await new Promise((res) => setTimeout(res, 500));
+  const getValidPage = (nextPage) => {
+    return Math.min(Math.max(nextPage, 1), totalPages);
+  };
 
-    const start = (page - 1) * pageSize;
-    const end = start + pageSize;
+  const handlePageChange = (nextPage) => {
+    const validPage = getValidPage(nextPage);
 
-    return catalog.slice(start, end);
+    if (validPage === page) return;
+
+    setPage(validPage);
+    scrollToResults();
   };
 
   return (
     <div className="min-h-screen bg-black text-white px-[25px]">
-
-      {/* HERO */}
+      {/* Hero section */}
       <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
         <h1 className="text-5xl font-bold text-violet-500">Your Movie Journey Starts Here</h1>
         <p className="text-gray-400 mt-2">Search and discover films you'll love</p>
@@ -82,30 +65,27 @@ function FilterSection({ catalog }) {
 
       <SearchBar />
 
-      {/* QUICK FILTERS */}
+      {/* Fast category shortcuts above the full filter area */}
       <QuickFilters />
 
-      <div className="flex gap-8 px-6 mt-10">
-
-        {/* FILTER BOX */}
+      <div ref={resultsRef} className="flex gap-8 px-6 mt-10">
+        {/* Left column with the detailed filters */}
         <FilterBox />
-   
-        <div className="flex-1">
-          {/* MOVIES GRID */}
-          <Grid catalog={movies} loading={loading} />
 
-          {/* PAGINATION */}
+        <div className="flex-1">
+          {/* Only the items for the selected page reach the grid */}
+          <Grid catalog={paginatedCatalog} loading={loading} />
+
+          {/* Page controls send the next page request back to this component */}
           <GridPagination
             currentPage={page}
             totalPages={totalPages}
-            onPageChange={(p) => setPage(p)}
-          />  
+            onPageChange={handlePageChange}
+          />
         </div>
-
       </div>
     </div>
   );
 }
-
 
 export default FilterSection;

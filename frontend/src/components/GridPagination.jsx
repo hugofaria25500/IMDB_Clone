@@ -1,7 +1,7 @@
 /*REACT*/
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
-function GridPagination({ currentPage, totalPages }) {
+function GridPagination({ currentPage, totalPages, onPageChange }) {
 
     const page = currentPage;
     
@@ -19,7 +19,7 @@ function GridPagination({ currentPage, totalPages }) {
           <div className="flex justify-center mt-10 gap-2 flex-wrap">
 
             <button
-              onClick={() => setPage((p) => Math.max(p - 1, 1))}
+              onClick={() => onPageChange(page - 1)}
               disabled={page === 1}
               className="px-4 py-2 rounded-md bg-zinc-800 disabled:opacity-50 hover:bg-purple-600 transition"
             >
@@ -29,7 +29,7 @@ function GridPagination({ currentPage, totalPages }) {
             {getPages().map((p) => (
               <button
                 key={p}
-                onClick={() => setPage(p)}
+                onClick={() => onPageChange(p)}
                 className={`px-4 py-2 rounded-md transition-all duration-300 ${
                   page === p
                     ? "bg-purple-600 text-white"
@@ -41,7 +41,7 @@ function GridPagination({ currentPage, totalPages }) {
             ))}
 
             <button
-              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+              onClick={() => onPageChange(page + 1)}
               disabled={page === totalPages}
               className="px-4 py-2 rounded-md bg-zinc-800 disabled:opacity-50 hover:bg-purple-600 transition"
             >
