@@ -65,7 +65,7 @@ export const trendingMovies = [
 ]
 
 
-export const newMovieReleases = [
+export const newMoviesReleases = [
   {
     id: 693134,
     title: "Dune: Part Two",
@@ -108,6 +108,8 @@ export const newMovieReleases = [
   }
 ];
 
+
+export const randomMovie = moviesMock[Math.floor(Math.random() * moviesMock.length)];
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +178,6 @@ export const trendingSeries = [
   seriesMock[10]
 ]
 
-
 export const newSeriesReleases = [
   {
     id: 1399,
@@ -219,3 +220,5 @@ export const newSeriesReleases = [
     image: "https://image.tmdb.org/t/p/w1280/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg"
   }
 ];
+
+export const randomSerie = seriesMock[Math.floor(Math.random() * seriesMock.length)];
