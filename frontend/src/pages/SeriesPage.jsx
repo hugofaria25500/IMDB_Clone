@@ -9,7 +9,12 @@ import Footer from "../components/Footer";
 /*JS*/
 import { seriesMock, popularSeries, trendingSeries, newSeriesReleases } from "../js/data";
 
+import { useSeries } from "../hooks/useSeries";
+
 function SeriesPage() {
+
+    const { series, loading } = useSeries();
+
     return (
         <div className="bg-black">
              {/* SPACE */}
@@ -19,7 +24,7 @@ function SeriesPage() {
             {/* SERIES CAROUSELS */}
             <SingleItemCarousel movies={newSeriesReleases} />
             {/* SERIES FILTERS */}
-            <FilterSection catalog={seriesMock} />
+            <FilterSection catalog={series} loading={loading} />
             {/* POPULAR SERIES CAROUSEL */}
             <MultiItemCarousel title="Popular Series" catalog={popularSeries} />
             {/* TRENDING SERIES CAROUSEL */}
