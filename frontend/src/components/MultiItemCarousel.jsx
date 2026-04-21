@@ -8,7 +8,7 @@ import "../css/MultiItemCarousel.css";
 
 import CarouselCard from "./CarouselCard";
 
-function MultiItemCarouselSwiper({ title, catalog }) {
+function MultiItemCarouselSwiper({ title, catalog, loading }) {
     return (
         <div className="w-full px-[50px] py-6 bg-black">
             

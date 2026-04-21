@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-function ShuffleSection() {
-
-    const [randomMovie, setRandomMovie] = useState(null);
+function ShuffleSection( { movie, loading } ) {
 
     return (
         <div className="w-full flex flex-col items-center justify-center mt-8 px-4">
