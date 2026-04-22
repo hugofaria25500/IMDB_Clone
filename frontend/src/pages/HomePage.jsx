@@ -6,9 +6,13 @@ import PromoSection from '../components/PromoSection';
 import Footer from '../components/Footer';
 
 /*JS*/
-import {popularMovies, trendingMovies} from "../js/data";
+import { usePopularMovies } from "../hooks/usePopularMovies";
+import { useTrendingMovies } from "../hooks/useTrendingMovies";
 
 function Homepage() {
+  const { popularMovies, popularMoviesLoading } = usePopularMovies();
+  const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+
   return (
     <div className="w-full flex flex-col justify-center bg-black">
         {/*NAVBAR*/}

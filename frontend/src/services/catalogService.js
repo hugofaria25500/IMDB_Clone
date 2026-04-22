@@ -21,7 +21,10 @@ export async function getNewMoviesReleases() {
 }
 
 export async function getRandomMovie() {
-  return randomMovie;
+  return getMovies().then(movies => {
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    return movies[randomIndex];
+  });
 }
 
 /*SERIES*/
@@ -42,5 +45,8 @@ export async function getNewSeriesReleases() {
 }
 
 export async function getRandomSerie() {
-  return randomSerie;
+  return getSeries().then(series => {
+    const randomIndex = Math.floor(Math.random() * series.length);
+    return series[randomIndex];
+  });
 }

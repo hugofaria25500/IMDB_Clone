@@ -36,7 +36,7 @@ function SeriesPage() {
             {/* TRENDING SERIES CAROUSEL */}
             <MultiItemCarousel title="Trending Series" catalog={trendingSeries} loading={trendingSeriesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection movie={randomSerie} loading={randomSerieLoading} />
+            <ShuffleSection type={"Serie"} catalog={randomSerie} loading={randomSerieLoading} />
             {/* FOOTER */}
             <Footer />
         </div>

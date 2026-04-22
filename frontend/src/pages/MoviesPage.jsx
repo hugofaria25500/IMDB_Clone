@@ -35,7 +35,7 @@ function MoviesPage() {
             {/* TRENDING MOVIES CAROUSEL */}
             <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection movie={randomMovie} loading={randomMovieLoading} />
+            <ShuffleSection type={"Movie"} catalog={movies} loading={loading} />
             {/* FOOTER */}
             <Footer />
         </div>
