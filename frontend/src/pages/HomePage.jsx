@@ -27,6 +27,8 @@ function Homepage() {
         <PromoSection />
         {/*FOOTER*/}
         <Footer />
+
+        
     </div>
   );
 }

@@ -1,3 +1,7 @@
+/*REACT*/
+import { useState } from "react";
+import { useEffect } from "react";
+
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
 import FilterSection from '../components/FilterSection';
@@ -5,6 +9,7 @@ import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
+import MediaModal from "../components/MediaModal";
 
 /*JS*/
 import { useMovies } from "../hooks/useMovies";
@@ -19,6 +24,16 @@ function MoviesPage() {
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
     const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
     const { randomMovie, randomMovieLoading } = useRandomMovie();
+
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    function openModal(item) {
+        setSelectedItem(item);
+    }
+
+    function closeModal() {
+        setSelectedItem(null);
+    }
 
     return (
         <div className="bg-black">
@@ -35,9 +50,17 @@ function MoviesPage() {
             {/* TRENDING MOVIES CAROUSEL */}
             <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Movie"} catalog={movies} loading={loading} />
+            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={loading} />
             {/* FOOTER */}
             <Footer />
+            {/* MODAL */}
+            {selectedItem && (
+                console.log("Selected Item:", selectedItem), // Log the selected item for debugging
+                <MediaModal
+                    item={selectedItem}
+                    onClose={closeModal}
+                />
+            )}
         </div>
     );
 }   

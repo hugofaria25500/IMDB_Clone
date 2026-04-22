@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
+/*COMPONENTS*/
+import MediaCard from "./MediaCard";
+
 /*JS*/
 import { useRandomMovie } from "../hooks/useRandomMovie";
 import { useRandomSerie } from "../hooks/useRandomSerie";
@@ -9,7 +12,7 @@ import { useRandomSerie } from "../hooks/useRandomSerie";
 import { getRandomMovie } from "../services/catalogService";
 import { getRandomSerie } from "../services/catalogService";
 
-function ShuffleSection( { type, catalog, loading } ) {
+function ShuffleSection( { type, onOpenModal, loading } ) {
 
     const { randomMovie, randomMovieLoading } = useRandomMovie();
     const { randomSerie, randomSerieLoading } = useRandomSerie();
@@ -58,26 +61,7 @@ function ShuffleSection( { type, catalog, loading } ) {
             )}
             
             {selectedItem && !isShuffling && (
-                <div key={selectedItem.id} className="group bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <div className="relative h-[250px] w-[200px]">
-                        <img
-                            src={selectedItem.image}
-                            alt={selectedItem.title}
-                            className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                            <span className="opacity-0 group-hover:opacity-100 transition text-sm text-white">
-                                View Details
-                            </span>
-                        </div>
-                    </div>
-                    <div className="p-3">
-                        <h3 className="text-white text-sm font-bold">{selectedItem.title}</h3>
-                        <p className="text-xs text-gray-400">
-                            {selectedItem.year} • ⭐ {selectedItem.rating}
-                        </p>
-                    </div>
-                </div>
+                <MediaCard item={selectedItem} onClick={onOpenModal} />
             )}
 
             <button

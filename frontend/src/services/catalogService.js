@@ -27,6 +27,11 @@ export async function getRandomMovie() {
   });
 }
 
+export async function getMovieDetails(id) {
+  const movies = await getMovies();
+  return movies.find(movie => movie.id === id);
+}
+
 /*SERIES*/
 export async function getSeries() {
   return seriesMock;
