@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovieDetails } from "../services/catalogService";
+import { getMediaDetails } from "../services/catalogService";
 
 function MediaModal({ item, onClose }) {
 
@@ -9,7 +9,7 @@ function MediaModal({ item, onClose }) {
         async function loadDetails() {
             if (!item) return;
 
-            const result = await getMovieDetails(item.id);
+            const result = await getMediaDetails(item.id);
             setData(result);
         }
 

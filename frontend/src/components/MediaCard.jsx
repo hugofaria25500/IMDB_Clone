@@ -2,14 +2,14 @@ function MediaCard({ item, onClick }) {
 
     return (
         <div
-            onClick={() => onClick && onClick(item)}
-            className="group bg-zinc-900 rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 cursor-pointer"
+            onClick={() => {onClick && onClick(item);}}
+            className="group bg-zinc-900 rounded-xl overflow-hidden cursor-pointer"
         >
-            <div className="relative h-[250px] w-[200px]">
+            <div className="relative h-[250px] w-[200px] overflow-hidden">
                 <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
 
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition flex items-center justify-center">

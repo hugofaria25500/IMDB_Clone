@@ -6,9 +6,9 @@ import "swiper/css/navigation";
 
 import "../css/MultiItemCarousel.css";
 
-import CarouselCard from "./CarouselCard";
+import MediaCard from "./MediaCard";
 
-function MultiItemCarouselSwiper({ title, catalog, loading }) {
+function MultiItemCarouselSwiper({ title, catalog, onOpenModal, loading }) {
     return (
         <div className="w-full px-[50px] py-6 bg-black">
             
@@ -36,8 +36,8 @@ function MultiItemCarouselSwiper({ title, catalog, loading }) {
                 }}>
                 {catalog.map((catalog, index) => (
                     <SwiperSlide key={index}>
-                        <div className="rounded-xl overflow-hidden">
-                            <CarouselCard catalog={catalog} />
+                    <div className="rounded-xl my-[10px]">
+                            <MediaCard item={catalog} onClick={onOpenModal} />
                         </div>
                     </SwiperSlide>
                 ))}

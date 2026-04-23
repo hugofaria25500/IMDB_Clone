@@ -8,11 +8,12 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function FilterSection({ catalog = [], loading = false }) {
+function FilterSection({ catalog = [], onOpenModal, loading = false }) {
   const pageSize = 24;
   const scrollOffset = 300;
 
   const [page, setPage] = useState(1);
+  const [isPageLoading, setIsPageLoading] = useState(false);
   const resultsRef = useRef(null);
 
   /* Keep at least one page available while the catalog is still loading. */
@@ -46,14 +47,19 @@ function FilterSection({ catalog = [], loading = false }) {
     return Math.min(Math.max(nextPage, 1), totalPages);
   };
 
-  const handlePageChange = (nextPage) => {
-    const validPage = getValidPage(nextPage);
+ const handlePageChange = async (nextPage) => {
+      const validPage = getValidPage(nextPage);
 
-    if (validPage === page) return;
+      if (validPage === page) return;
 
-    setPage(validPage);
-    scrollToResults();
-  };
+      setPage(validPage);
+      scrollToResults();
+
+      setIsPageLoading(true);
+      // delay fake
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setIsPageLoading(false);
+  };    
 
   return (
     <div className="min-h-screen bg-black text-white px-[25px]">
@@ -74,7 +80,7 @@ function FilterSection({ catalog = [], loading = false }) {
 
         <div className="flex-1">
           {/* Only the items for the selected page reach the grid */}
-          <Grid catalog={paginatedCatalog} loading={loading} />
+          <Grid catalog={paginatedCatalog} onOpenModal={onOpenModal} loading={loading || isPageLoading} />
 
           {/* Page controls send the next page request back to this component */}
           <GridPagination

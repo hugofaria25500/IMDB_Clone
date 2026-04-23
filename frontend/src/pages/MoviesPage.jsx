@@ -44,18 +44,17 @@ function MoviesPage() {
             {/* MOVIE CAROUSELS */}
             <SingleItemCarousel movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={movies} loading={loading} />
+            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} />
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={loading} />
+            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={randomMovieLoading} />
             {/* FOOTER */}
             <Footer />
-            {/* MODAL */}
+            {/* MEDIA MODAL */}
             {selectedItem && (
-                console.log("Selected Item:", selectedItem), // Log the selected item for debugging
                 <MediaModal
                     item={selectedItem}
                     onClose={closeModal}
