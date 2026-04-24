@@ -38,6 +38,164 @@ export const moviesMock = [
   { id: 30, title: "The Wolf of Wall Street", year: 2013, rating: 8.2, views: 990000, genres: ["Drama"], image: "https://image.tmdb.org/t/p/w500/34m2tygAYBGqA9MXKhRDtzYd4MR.jpg" },
 ];
 
+export const moviesDetailedMock = [
+  {
+    id: 1,
+    title: "Inception",
+    year: 2010,
+    rating: 8.8,
+    views: 950000,
+    runtime: 148,
+    genres: ["Sci-Fi", "Action"],
+    language: "English",
+    ageRating: "13+",
+
+    overview:
+      "A skilled thief who steals corporate secrets through dream-sharing technology is given a chance to erase his past crimes.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/s3TBrRGB1iav7gFOCNx3H31MoES.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=YoHD9XEInc0"
+    },
+
+    cast: [
+      { name: "Leonardo DiCaprio", character: "Cobb", photo: "https://image.tmdb.org/t/p/w200/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg" },
+      { name: "Joseph Gordon-Levitt", character: "Arthur", photo: "https://image.tmdb.org/t/p/w200/zSuXCR6xCKu1qL4E7T5z6nYQX6y.jpg" },
+      { name: "Elliot Page", character: "Ariadne", photo: "https://image.tmdb.org/t/p/w200/eCeGQv7Rkq2h5e7nC4n3xG9pZzN.jpg" },
+      { name: "Tom Hardy", character: "Eames", photo: "https://image.tmdb.org/t/p/w200/4CR1X0X2E3gZV9z8rWb1x1o1tKT.jpg" },
+      { name: "Ken Watanabe", character: "Saito", photo: "https://image.tmdb.org/t/p/w200/ps7vVd3hE0E0E5WDL66iRS0LlwM.jpg" }
+    ],
+
+    director: "Christopher Nolan",
+
+    tags: ["Dream", "Subconscious", "Heist"],
+
+    recommendations: [3, 5, 14, 29]
+  },
+
+  {
+    id: 2,
+    title: "The Dark Knight",
+    year: 2008,
+    rating: 9.0,
+    views: 1200000,
+    runtime: 152,
+    genres: ["Action", "Crime"],
+    language: "English",
+    ageRating: "13+",
+
+    overview:
+      "Batman faces the Joker, a criminal mastermind who plunges Gotham into chaos.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/hqkIcbrOHL86UncnHIsHVcVmzue.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=EXeTwQWrcwY"
+    },
+
+    cast: [
+      { name: "Christian Bale", character: "Bruce Wayne", photo: "https://image.tmdb.org/t/p/w200/qCpZn2e3dimwbryLnqxZuI88PTi.jpg" },
+      { name: "Heath Ledger", character: "Joker", photo: "https://image.tmdb.org/t/p/w200/5Y9HnYYa9jF4NunY9lSgJGj7cFQ.jpg" },
+      { name: "Aaron Eckhart", character: "Harvey Dent", photo: "https://image.tmdb.org/t/p/w200/5EFJ1Q7D1n1x7KkZZrVSu2Vvula.jpg" },
+      { name: "Gary Oldman", character: "Gordon", photo: "https://image.tmdb.org/t/p/w200/2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg" },
+      { name: "Michael Caine", character: "Alfred", photo: "https://image.tmdb.org/t/p/w200/bVZRMlpjTAO2pJK6v90buFgVbSW.jpg" }
+    ],
+
+    director: "Christopher Nolan",
+
+    tags: ["Hero", "Chaos", "Villain"],
+
+    recommendations: [13, 26, 9, 23]
+  },
+
+  {
+    id: 3,
+    title: "Interstellar",
+    year: 2014,
+    rating: 8.6,
+    views: 980000,
+    runtime: 169,
+    genres: ["Sci-Fi", "Drama"],
+    language: "English",
+    ageRating: "10+",
+
+    overview:
+      "A team travels through a wormhole in space in an attempt to ensure humanity's survival.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=zSWdZVtXT7E"
+    },
+
+    cast: [
+      { name: "Matthew McConaughey", character: "Cooper", photo: "https://image.tmdb.org/t/p/w200/euDPyqLnuwaWMHajcU3oZ9uZezR.jpg" },
+      { name: "Anne Hathaway", character: "Brand", photo: "https://image.tmdb.org/t/p/w200/tLelKoPNiyJCSEtQTz1FGv4TLGc.jpg" },
+      { name: "Jessica Chastain", character: "Murph", photo: "https://image.tmdb.org/t/p/w200/6n6yR0JX7h3wzGQb5z1n1nJ2p6X.jpg" },
+      { name: "Michael Caine", character: "Professor Brand", photo: "https://image.tmdb.org/t/p/w200/bVZRMlpjTAO2pJK6v90buFgVbSW.jpg" },
+      { name: "Matt Damon", character: "Mann", photo: "https://image.tmdb.org/t/p/w200/k8n2Jm9yq3xF4Z7pK0p3xH7o5dF.jpg" }
+    ],
+
+    director: "Christopher Nolan",
+
+    tags: ["Space", "Time", "Survival"],
+
+    recommendations: [1, 14, 29, 12]
+  },
+
+  // ? Para não ficar gigante, mantenho o mesmo padrão para os restantes:
+
+  {
+    id: 5,
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7,
+    views: 1100000,
+    runtime: 136,
+    genres: ["Sci-Fi", "Action"],
+    language: "English",
+    ageRating: "16+",
+
+    overview:
+      "A hacker discovers the reality he lives in is a simulation and joins a rebellion.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/9tgRZr1nVnqf7lVvP9nY5t8zq2y.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=vKQi3bBA1y8"
+    },
+
+    cast: [
+      { name: "Keanu Reeves", character: "Neo", photo: "https://image.tmdb.org/t/p/w200/rRdru6REr9i3WIHv2mntpcgxnoY.jpg" },
+      { name: "Laurence Fishburne", character: "Morpheus", photo: "https://image.tmdb.org/t/p/w200/8suOhUmPbfKqDQ17jQ1Gy0mI3zZ.jpg" },
+      { name: "Carrie-Anne Moss", character: "Trinity", photo: "https://image.tmdb.org/t/p/w200/xD4jTA3KmVp5Rq3aHcymL9DUGjD.jpg" }
+    ],
+
+    director: "Wachowski Sisters",
+
+    tags: ["Simulation", "Reality", "AI"],
+
+    recommendations: [1, 29, 14, 8]
+  }
+];
+
 export const popularMovies = [
   moviesMock[0],
   moviesMock[1],
@@ -222,3 +380,194 @@ export const newSeriesReleases = [
 ];
 
 export const randomSerie = seriesMock[Math.floor(Math.random() * seriesMock.length)];
+
+export const seriesDetailedMock = [
+  {
+    id: 101,
+    title: "Breaking Bad",
+    year: 2008,
+    rating: 9.5,
+    views: 2000000,
+    seasons: 5,
+    genres: ["Drama"],
+    language: "English",
+    ageRating: "18+",
+
+    overview:
+      "A high school chemistry teacher turned methamphetamine producer partners with a former student to secure his family's future.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=HhesaQXLuRY"
+    },
+
+    cast: [
+      { name: "Bryan Cranston", character: "Walter White", photo: "https://image.tmdb.org/t/p/w200/7Jahy5LZX2Fo8fGJltMreAI49hC.jpg" },
+      { name: "Aaron Paul", character: "Jesse Pinkman", photo: "https://image.tmdb.org/t/p/w200/9PrED3MCHsBam1a8h1V6W0yK8w.jpg" },
+      { name: "Anna Gunn", character: "Skyler White", photo: "https://image.tmdb.org/t/p/w200/7lZ0b4p6Z9z1zH3kZ9XcY3k1.jpg" },
+      { name: "Dean Norris", character: "Hank Schrader", photo: "https://image.tmdb.org/t/p/w200/6n5F9ZkL6sFQ3rF7z5z2G3z.jpg" },
+      { name: "Bob Odenkirk", character: "Saul Goodman", photo: "https://image.tmdb.org/t/p/w200/7F2x0yFh1v1u3c7k7.jpg" }
+    ],
+
+    director: "Vince Gilligan",
+
+    tags: ["Drugs", "Crime", "Transformation"],
+
+    recommendations: [128, 115, 109, 112]
+  },
+
+  {
+    id: 102,
+    title: "Game of Thrones",
+    year: 2011,
+    rating: 9.2,
+    views: 2100000,
+    seasons: 8,
+    genres: ["Fantasy", "Drama"],
+    language: "English",
+    ageRating: "18+",
+
+    overview:
+      "Nine noble families wage war against each other in order to gain control over the mythical land of Westeros.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/suopoADq0k8YZr4dQXcU6pToj6s.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=KPLWWIOCOOQ"
+    },
+
+    cast: [
+      { name: "Emilia Clarke", character: "Daenerys", photo: "https://image.tmdb.org/t/p/w200/86je4dVbZk9a.jpg" },
+      { name: "Kit Harington", character: "Jon Snow", photo: "https://image.tmdb.org/t/p/w200/8CuuNIKMzMUL1NKOPv9AqEwM7og.jpg" },
+      { name: "Peter Dinklage", character: "Tyrion", photo: "https://image.tmdb.org/t/p/w200/lRsRgnksAhBRXwAB68MFjmTtLrk.jpg" },
+      { name: "Lena Headey", character: "Cersei", photo: "https://image.tmdb.org/t/p/w200/6tK1pZ.jpg" },
+      { name: "Sophie Turner", character: "Sansa", photo: "https://image.tmdb.org/t/p/w200/vc2z7Q.jpg" }
+    ],
+
+    director: "David Benioff & D.B. Weiss",
+
+    tags: ["War", "Dragons", "Power"],
+
+    recommendations: [108, 118, 114, 121]
+  },
+
+  {
+    id: 103,
+    title: "Stranger Things",
+    year: 2016,
+    rating: 8.7,
+    views: 1800000,
+    seasons: 4,
+    genres: ["Sci-Fi", "Horror"],
+    language: "English",
+    ageRating: "16+",
+
+    overview:
+      "When a young boy disappears, his friends uncover supernatural forces and secret experiments.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=b9EkMc79ZSU"
+    },
+
+    cast: [
+      { name: "Millie Bobby Brown", character: "Eleven", photo: "https://image.tmdb.org/t/p/w200/dhJ0jZ.jpg" },
+      { name: "Finn Wolfhard", character: "Mike", photo: "https://image.tmdb.org/t/p/w200/7z4.jpg" },
+      { name: "David Harbour", character: "Hopper", photo: "https://image.tmdb.org/t/p/w200/4gY.jpg" },
+      { name: "Winona Ryder", character: "Joyce", photo: "https://image.tmdb.org/t/p/w200/5z.jpg" }
+    ],
+
+    director: "Duffer Brothers",
+
+    tags: ["Supernatural", "80s", "Mystery"],
+
+    recommendations: [117, 114, 107, 124]
+  },
+
+  {
+    id: 106,
+    title: "The Mandalorian",
+    year: 2019,
+    rating: 8.8,
+    views: 1600000,
+    seasons: 3,
+    genres: ["Sci-Fi", "Action"],
+    language: "English",
+    ageRating: "13+",
+
+    overview:
+      "A lone bounty hunter travels the outer reaches of the galaxy, far from the authority of the New Republic.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/9ijMGlJKqcslswWUzTEwScm82Gs.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=aOC8E8z_ifw"
+    },
+
+    cast: [
+      { name: "Pedro Pascal", character: "Mando", photo: "https://image.tmdb.org/t/p/w200/9VYK7oxcqhjd5LAH6ZFJ3XzOlID.jpg" },
+      { name: "Grogu", character: "The Child", photo: "https://image.tmdb.org/t/p/w200/placeholder.jpg" }
+    ],
+
+    director: "Jon Favreau",
+
+    tags: ["Star Wars", "Bounty Hunter", "Galaxy"],
+
+    recommendations: [110, 113, 108, 114]
+  },
+
+  {
+    id: 109,
+    title: "Peaky Blinders",
+    year: 2013,
+    rating: 8.8,
+    views: 1550000,
+    seasons: 6,
+    genres: ["Crime"],
+    language: "English",
+    ageRating: "18+",
+
+    overview:
+      "A gangster family epic set in Birmingham, England, following the Shelby crime family.",
+
+    poster:
+      "https://image.tmdb.org/t/p/w500/bGZn5RVzMMXju4ev7xbl1aLdXqq.jpg",
+
+    backdrop:
+      "https://image.tmdb.org/t/p/original/5zmiBoMzeeVdQ62no55JOJMY498.jpg",
+
+    trailer: {
+      url: "https://www.youtube.com/watch?v=oVzVdvGIC7U"
+    },
+
+    cast: [
+      { name: "Cillian Murphy", character: "Tommy Shelby", photo: "https://image.tmdb.org/t/p/w200/2v9FVVBUrrkW2m3QOcYkuhq9A6o.jpg" },
+      { name: "Paul Anderson", character: "Arthur", photo: "https://image.tmdb.org/t/p/w200/3k.jpg" },
+      { name: "Tom Hardy", character: "Alfie Solomons", photo: "https://image.tmdb.org/t/p/w200/4CR1X0X2E3gZV9z8rWb1x1o1tKT.jpg" }
+    ],
+
+    director: "Steven Knight",
+
+    tags: ["Gangster", "Family", "Power"],
+
+    recommendations: [115, 120, 123, 112]
+  }
+];
