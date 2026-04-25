@@ -34,7 +34,7 @@ function MediaModal({ item, onClose }) {
             onClick={onClose}
         >
             <div
-                className="bg-gray-800 text-white p-6 rounded-lg w-[40%] h-[80%] overflow-auto"
+                className="bg-black/90 text-white p-6 rounded-lg w-[40%] h-[80%] overflow-auto shadow-[0_0_30px_rgba(168,85,247,0.6)]"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button onClick={onClose}>Close</button>
@@ -55,10 +55,11 @@ function MediaModal({ item, onClose }) {
                                 />
                             </div>
                         ) : null}
-                        {data.overview ? (<p>{data.overview}</p>) : null}
+                        {data.overview ? (<p><span className="font-bold">Overview:</span> {data.overview}</p>) : null}
 
-                        {data.runtime ? (<p>Runtime: {data.runtime} minutes</p>) : null}
-                        {data.seasons ? (<p>Seasons: {data.seasons}</p>) : null}
+                        {data.runtime ? (<p><span className="font-bold">Runtime:</span> {data.runtime} minutes</p>) : null}
+                        {data.seasons ? (<p><span className="font-bold">Seasons:</span> {data.seasons}</p>) : null}
+
                     </div>
                 ) : (
                     <p>Loading...</p>
