@@ -42,7 +42,8 @@ function MediaModal({ item, onClose }) {
                 {data ? (
 
                     <div>
-                        {data.title ? (<h2 className="text-2xl font-bold mb-4">{data.title}</h2>) : null}
+                        {data.title ? (<h2 className="text-2xl font-semibold text-violet-500">{data.title}</h2>) : null}
+                        {data.year ? (<p className="mb-4 text-sm">{data.year}</p>) : null}
                         {data.trailer ? (
                             <div className="mb-4 rounded-lg overflow-hidden">
                                 <iframe
@@ -55,6 +56,19 @@ function MediaModal({ item, onClose }) {
                                 />
                             </div>
                         ) : null}
+                        <div>
+                            {data.genres ? (
+                                data.genres.map((genre, index) => (
+                                    <span
+                                        key={index}
+                                        className="inline-block bg-purple-600 text-white font-semibold text-xs px-3 py-2 rounded-xl mr-2 mb-2"
+                                    >
+                                        {genre}
+                                    </span>
+                                ))
+                            ) : null}
+                        </div>
+
                         {data.overview ? (<p><span className="font-bold">Overview:</span> {data.overview}</p>) : null}
 
                         {data.runtime ? (<p><span className="font-bold">Runtime:</span> {data.runtime} minutes</p>) : null}
