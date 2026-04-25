@@ -1,20 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getMediaDetails } from "../services/catalogService";
 
 function MediaModal({ item, onClose }) {
 
     const [data, setData] = useState(null);
 
-    useEffect(() => {
-        async function loadDetails() {
-            if (!item) return;
+    const requestIdRef = useRef(0);
 
+    useEffect(() => {
+        if (!item) return;
+
+        setData(null);
+
+        const requestId = ++requestIdRef.current;
+
+        async function loadDetails() {
             const result = await getMediaDetails(item.id);
-            setData(result);
+
+            if (requestId === requestIdRef.current) {
+                setData(result);
+            }
         }
 
         loadDetails();
-    }, [item]); // ?? IMPORTANTE
+
+    }, [item]);
 
     if (!item) return null;
 
@@ -24,19 +34,37 @@ function MediaModal({ item, onClose }) {
             onClick={onClose}
         >
             <div
-                className="bg-gray-800 text-white p-6 rounded-lg w-[400px]"
+                className="bg-gray-800 text-white p-6 rounded-lg w-[40%] h-[80%] overflow-auto"
                 onClick={(e) => e.stopPropagation()}
             >
-                {!data ? (
-                    <p>Loading...</p>
+                <button onClick={onClose}>Close</button>
+
+                {data ? (
+
+                    <div>
+                        {data.title ? (<h2 className="text-2xl font-bold mb-4">{data.title}</h2>) : null}
+                        {data.trailer ? (
+                            <div className="mb-4 rounded-lg overflow-hidden">
+                                <iframe
+                                    className="w-full h-[300px]"
+                                    src={data.trailer.url.replace("watch?v=", "embed/")}
+                                    title="Trailer"
+                                    frameBorder="0"
+                                    allow="autoplay; encrypted-media"
+                                    allowFullScreen
+                                />
+                            </div>
+                        ) : null}
+                        {data.overview ? (<p>{data.overview}</p>) : null}
+
+                        {data.runtime ? (<p>Runtime: {data.runtime} minutes</p>) : null}
+                        {data.seasons ? (<p>Seasons: {data.seasons}</p>) : null}
+                    </div>
                 ) : (
-                    <>
-                        <h2>{data.title}</h2>
-                        <p>{data.rating}</p>
-                    </>
+                    <p>Loading...</p>
                 )}
 
-                <button onClick={onClose}>Close</button>
+              
             </div>
         </div>
     );
