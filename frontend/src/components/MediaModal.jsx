@@ -1,5 +1,13 @@
+/*REACT*/
 import { useEffect, useState, useRef } from "react";
+
+/*COMPONENTS*/
 import { getMediaDetails } from "../services/catalogService";
+
+/*IMAGES*/
+import crossLogo from "../assets/cross_logo.png";
+import heartLogo from "../assets/heart_logo.png";
+import starLogo from "../assets/star_logo.png";
 
 function MediaModal({ item, onClose }) {
 
@@ -56,17 +64,22 @@ function MediaModal({ item, onClose }) {
                                 />
                             </div>
                         ) : null}
-                        <div>
-                            {data.genres ? (
-                                data.genres.map((genre, index) => (
-                                    <span
-                                        key={index}
-                                        className="inline-block bg-purple-600 text-white font-semibold text-xs px-3 py-2 rounded-xl mr-2 mb-2"
-                                    >
-                                        {genre}
-                                    </span>
-                                ))
-                            ) : null}
+                        <div className="flex flex-row w-full">
+                            <div className="w-[60%] text-center">
+                                {data.genres ? (
+                                    data.genres.map((genre, index) => (
+                                        <span
+                                            key={index}
+                                            className="inline-block bg-purple-600 text-white font-semibold text-xs px-3 py-2 rounded-xl mr-2 mb-2"
+                                        >
+                                            {genre}
+                                        </span>
+                                    ))
+                                ) : null}
+                            </div>
+                            <div className="w-[40%] text-center">
+                                
+                            </div>
                         </div>
 
                         {data.overview ? (<p><span className="font-bold">Overview:</span> {data.overview}</p>) : null}
