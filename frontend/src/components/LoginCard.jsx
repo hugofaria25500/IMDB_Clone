@@ -59,23 +59,11 @@ function LoginCard() {
                     Access your CineFlix account
                 </p>
 
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col gap-4"
-                >
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition"
-                    />
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition" />
 
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
+                    <input type="password" placeholder="Password" value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition"
                     />

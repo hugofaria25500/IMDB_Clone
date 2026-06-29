@@ -34,7 +34,6 @@ function AuthProvider({ children }) {
     }, []);
 
     async function login(email, password) {
-
         const response = await authService.login(email, password);
 
         saveToken(response.accessToken);
@@ -45,13 +44,11 @@ function AuthProvider({ children }) {
     }
 
     async function register(name, email, password) {
-
         await authService.register(name, email, password);
-
+        await login(email, password);
     }
 
     async function logout() {
-
         await authService.logout();
 
         removeToken();
