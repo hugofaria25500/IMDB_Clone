@@ -7,7 +7,9 @@ import LoginPage from "./pages/LoginPage";
 import CreateAccountPage from "./pages/CreateAccountPage";
 import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
+import ProfilePage from "./pages/ProfilePage";
 import WatchlistPage from "./pages/WatchListPage";
+import FavouritesPage from "./pages/FavouitesPage";
 
 function App() {
   return (
@@ -25,7 +27,12 @@ function App() {
 
                 <Route path="/series" element={<SeriesPage />} />
 
+                <Route path="/profile" element={<ProfilePage />} />
+
                 <Route path="/watchlist" element={<WatchlistPage />} />
+
+                <Route path="/favourites" element={<FavouritesPage />} />
+
             </Routes>
         </BrowserRouter>
     </div>
