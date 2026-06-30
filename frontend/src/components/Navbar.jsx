@@ -1,3 +1,6 @@
+/*REACT*/
+import {useNavigate} from "react-router-dom";
+
 /*IMAGES*/
 import logoImage from "../assets/logo_purple_background.png"
 
@@ -11,11 +14,12 @@ import useAuth from "../hooks/useAuth";
 function Navbar() {
 
     const {isAuthenticated} = useAuth();
+    const navigate = useNavigate();
 
     return (
         <>
             <nav className="absolute inset-0 h-[100px] bg-black/50 w-full flex items-center justify-between p-4 pl-12 pr-12 z-20">
-                <div className="w-[250px] flex items-center justify-center">
+                <div className="w-[250px] flex items-center justify-center hover:cursor-pointer" onClick={() => navigate("/")}>
                     <img src={logoImage} className="w-full" alt="CineFlix" />
                 </div>
                 
