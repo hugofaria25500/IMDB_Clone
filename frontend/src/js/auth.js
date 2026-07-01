@@ -5,7 +5,7 @@ const users = [
         email: "hugo@test.com",
         password: "123456",
         role: "USER",
-        avatar: "https://i.pravatar.cc/150?img=12"
+        avatar_id: 2
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ const users = [
         email: "admin@test.com",
         password: "admin123",
         role: "ADMIN",
-        avatar: "https://i.pravatar.cc/150?img=15"
+        avatar_id: 5
     }
 ];
 
@@ -41,7 +41,7 @@ export async function login(email, password) {
             name: user.name,
             email: user.email,
             role: user.role,
-            avatar: user.avatar
+            avatar_id: user.avatar_id
         }
     };
 }
@@ -62,7 +62,7 @@ export async function register(name, email, password) {
         email,
         password,
         role: "USER",
-        avatar: "https://i.pravatar.cc/150"
+        avatar_id: 1
     };
 
     users.push(newUser);

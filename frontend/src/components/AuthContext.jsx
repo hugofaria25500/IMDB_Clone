@@ -58,6 +58,11 @@ function AuthProvider({ children }) {
         setUser(null);
     }
 
+    function updateUser(updatedUser) {
+        saveUser(updatedUser);
+        setUser(updatedUser);
+    }
+
     return (
         <AuthContext.Provider
             value={{
@@ -67,7 +72,8 @@ function AuthProvider({ children }) {
                 isAuthenticated: !!token,
                 login,
                 register,
-                logout
+                logout,
+                updateUser
             }}
         >
             {children}
