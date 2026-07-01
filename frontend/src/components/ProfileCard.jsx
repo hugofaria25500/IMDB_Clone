@@ -36,7 +36,7 @@ function ProfileCard() {
             </div>
         
             {/*USER INFO*/}
-            <div className="w-[600px] h-[auto] bg-white/10 rounded-lg shadow-lg p-6">
+            <div className="w-[600px] h-[auto] bg-white/10 rounded-lg shadow-lg p-5">
                 <div className="flex flex-row items-center justify-start mb-4">
                     <div>
                         <img src={accountLogo} alt="Account Logo" className="h-[20px] w-[20px] inline-block mr-2"/>
@@ -71,7 +71,7 @@ function ProfileCard() {
             </div>
 
             {/*USER CHOOSE AVATAR */}
-            <div className="w-[600px] h-[auto] bg-white/10 rounded-lg shadow-lg p-6 mt-4">
+            <div className="w-[600px] h-[auto] bg-white/10 rounded-lg shadow-lg p-5 mt-4">
                 <div className="flex flex-row items-center justify-start mb-4">
                     <div>
                         <img src={paletteLogo} alt="Palette Logo" className="h-[20px] w-[20px] inline-block mr-2"/>
@@ -79,15 +79,15 @@ function ProfileCard() {
                     <h2 className="text-white text-xl font-semibold">Choose Avatar</h2>
                 </div>
 
-                <div className="grid grid-cols-5 gap-4 flex flex-wrap">
+                <div className="grid grid-cols-7 gap-3 flex flex-wrap">
                     {avatars.map((avatar) => (
                         <div key={avatar.id} className="flex flex-col items-center justify-center">
-                            <img src={avatar.src} alt={`Avatar ${avatar.id}`} onClick={() => setSelectedAvatar(avatar.id)} className={`h-[60px] w-[60px] rounded-full object-cover border-4 ${user.avatar_id === avatar.id ? 'border-violet-600' : 'border-transparent'} hover:cursor-pointer hover:scale-105 transition`} />
+                            <img src={avatar.src} alt={`Avatar ${avatar.id}`} onClick={() => setSelectedAvatar(avatar.id)} className={`h-[55px] w-[55px] rounded-full object-cover border-4 ${user.avatar_id === avatar.id ? 'border-violet-600' : 'border-transparent'} hover:cursor-pointer hover:scale-105 transition`} />
                         </div>
                     ))}
                 </div>
 
-                <div className="w-full flex justify-center mt-[30px]">
+                <div className="w-full flex justify-center mt-[20px]">
                     <button onClick={async () => {
                         try {
                             updateUser({
@@ -98,7 +98,7 @@ function ProfileCard() {
                         } catch (error) {
                             console.error("Error updating avatar:", error);
                         }
-                    }} className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 font-bold">
+                    }} className="bg-violet-600 text-white text-sm px-5 py-1 rounded-full hover:bg-violet-700 font-bold">
                         Save
                     </button>
                 </div>

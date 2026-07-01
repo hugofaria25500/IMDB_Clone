@@ -1,7 +1,5 @@
 /*REACT*/
 import { useState } from "react";
-import { useEffect } from "react";
-
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
