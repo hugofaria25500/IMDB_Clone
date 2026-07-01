@@ -1,6 +1,8 @@
+/*REACT*/
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/*HOOKS*/
 import useAuth from "../hooks/useAuth";
 
 function ProfileMenu() {
