@@ -38,7 +38,7 @@ function TrailerModal({ item, onClose }) {
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50" onClick={onClose}>
             <div className="bg-black/90 text-white p-6 rounded-lg w-[120vh] shadow-[0_0_30px_rgba(168,85,247,0.6)] relative" onClick={(e) => e.stopPropagation()}>
                 <button className="absolute top-[-10px] right-[-10px] bg-purple-800 hover:bg-purple-600 hover:scale-110 transform text-white p-3 rounded-full border-2 border-black" onClick={onClose}>
-                    <img src={crossLogo} alt="Close" className="w-4 h-4" />
+                    <img src={crossLogo} alt="Close" className="w-[10px] h-[10px]" />
                 </button>
                 {data ? (
                 <div>
