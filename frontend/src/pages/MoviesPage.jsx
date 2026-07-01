@@ -26,8 +26,16 @@ function MoviesPage() {
     const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
     const { randomMovie, randomMovieLoading } = useRandomMovie();
 
-    const [selectedItem, setSelectedItem] = useState(null);
     const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    function openTrailerModal(item) {
+        setSelectedTrailerItem(item);
+    }
+
+    function closeTrailerModal() {
+        setSelectedTrailerItem(null);
+    }
 
     function openModal(item) {
         setSelectedItem(item);
@@ -35,15 +43,6 @@ function MoviesPage() {
 
     function closeModal() {
         setSelectedItem(null);
-    }
-
-    function openTrailerModal(item) {
-        console.log("Opening trailer modal for item:", item);
-        setSelectedTrailerItem(item);
-    }
-
-    function closeTrailerModal() {
-        setSelectedTrailerItem(null);
     }
 
     return (

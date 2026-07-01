@@ -9,6 +9,7 @@ import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
+import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
@@ -26,7 +27,16 @@ function SeriesPage() {
     const { newSeriesReleases, newSeriesReleasesLoading } = useNewSeriesReleases();
     const { randomSerie, randomSerieLoading } = useRandomSerie();
 
+    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
+
+    function openTrailerModal(item) {
+        setSelectedTrailerItem(item);
+    }
+
+    function closeTrailerModal() {
+        setSelectedTrailerItem(null);
+    }
 
     function openModal(item) {
         setSelectedItem(item);
@@ -43,7 +53,7 @@ function SeriesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* SERIES CAROUSELS */}
-            <SingleItemCarousel movies={newSeriesReleases} loading={newSeriesReleasesLoading} />
+            <SingleItemCarousel movies={newSeriesReleases} onOpenTrailerModal={openTrailerModal} loading={newSeriesReleasesLoading} />
             {/* SERIES FILTERS */}
             <FilterSection catalog={series} onOpenModal={openModal} loading={loading} />
             {/* POPULAR SERIES CAROUSEL */}
@@ -54,6 +64,13 @@ function SeriesPage() {
             <ShuffleSection type={"Serie"} onOpenModal={openModal} loading={randomSerieLoading} />
             {/* FOOTER */}
             <Footer />
+            {/* TRAILER MODAL */}
+            {selectedTrailerItem && (
+                <TrailerModal
+                    item={selectedTrailerItem}
+                    onClose={closeTrailerModal}
+                />
+            )}
             {/* MODAL */}
             {selectedItem && (
                 <MediaModal
