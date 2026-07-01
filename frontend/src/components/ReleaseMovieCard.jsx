@@ -1,4 +1,8 @@
-function ReleaseMovieCard({ movie }) {
+/*REACT*/
+import { useState } from "react";
+
+function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
+
   return (
     <div className="relative h-[calc(100vh-100px)] w-full flex flex-row items-center justify-center">
       
@@ -12,7 +16,9 @@ function ReleaseMovieCard({ movie }) {
 
                 <p className="text-gray-500 text-left text-sm mt-2">{movie.description}</p>
                 
-                <button className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 mt-4 font-bold">Watch Trailer</button>
+                <button className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 mt-4 font-bold" onClick={() => onOpenTrailerModal(movie)}>
+                    Watch Trailer
+                </button>
             
             </div>
             

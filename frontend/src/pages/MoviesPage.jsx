@@ -9,6 +9,7 @@ import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
+import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
@@ -26,6 +27,7 @@ function MoviesPage() {
     const { randomMovie, randomMovieLoading } = useRandomMovie();
 
     const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
 
     function openModal(item) {
         setSelectedItem(item);
@@ -35,6 +37,15 @@ function MoviesPage() {
         setSelectedItem(null);
     }
 
+    function openTrailerModal(item) {
+        console.log("Opening trailer modal for item:", item);
+        setSelectedTrailerItem(item);
+    }
+
+    function closeTrailerModal() {
+        setSelectedTrailerItem(null);
+    }
+
     return (
         <div className="bg-black">
             {/* SPACE */}
@@ -42,7 +53,7 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
+            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE FILTERS */}
             <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} />
             {/* POPULAR MOVIES CAROUSEL */}
@@ -53,6 +64,13 @@ function MoviesPage() {
             <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={randomMovieLoading} />
             {/* FOOTER */}
             <Footer />
+            {/* TRAILER MODAL */}
+            {selectedTrailerItem && (
+                <TrailerModal
+                    item={selectedTrailerItem}
+                    onClose={closeTrailerModal}
+                />
+            )}
             {/* MEDIA MODAL */}
             {selectedItem && (
                 <MediaModal

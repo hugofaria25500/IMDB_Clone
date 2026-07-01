@@ -8,7 +8,7 @@ import ReleaseMovieCard from "./ReleaseMovieCard";
 /*CSS*/
 import "../css/SingleItemCarousel.css";
 
-function SingleItemCarousel( { movies } ) {
+function SingleItemCarousel( { movies, onOpenTrailerModal, loading} ) {
     return (
         <div className="bg-black w-full h-[calc(100vh-100px)] flex items-center justify-center">
 
@@ -20,7 +20,7 @@ function SingleItemCarousel( { movies } ) {
             >
                 {movies.map((movie) => (
                     <SwiperSlide key={movie.id}>
-                        <ReleaseMovieCard movie={movie} />
+                        <ReleaseMovieCard movie={movie} onOpenTrailerModal={onOpenTrailerModal} />
                     </SwiperSlide>
                 ))}
             </Swiper>
