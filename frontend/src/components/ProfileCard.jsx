@@ -44,15 +44,15 @@ function ProfileCard() {
                     <h2 className="text-white text-xl font-semibold">Account Information</h2>
                 </div>
 
-                <div className="w-full flex flex-col space-y-4 ml-6">
+                <div className="w-full flex flex-col space-y-4 px-6">
                     {/*USERNAME*/}
-                    <div className="w-full flex flex-row items-center justify-start">
+                    <div className="w-full flex">
                         <div className="w-[25%] flex flex-row items-center justify-center bg-violet-600/30 rounded-tl-xl rounded-bl-xl px-4 py-3 border border-violet-600/30">
                             <img src={userLogo} alt="User Logo" className="h-[20px] w-[20px] inline-block mr-2 flex "/>
                             <p className="text-white font-semibold">Username</p>
                         </div>
                         <div className="w-[75%] flex flex-row items-center justify-start">
-                            <input type="text" value={user.name} readOnly className="w-[300px] rounded-tr-xl rounded-br-xl border border-violet-600/50 bg-zinc-900/60 px-4 py-3 text-white focus: border-violet-600 focus:outline-none focus:ring-1focus:ring-violet-600"/>                   
+                            <input type="text" value={user.name} readOnly className="w-full rounded-tr-xl rounded-br-xl border border-violet-600/50 bg-zinc-900/60 px-4 py-3 text-white focus: border-violet-600 focus:outline-none focus:ring-1focus:ring-violet-600"/>                   
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@ function ProfileCard() {
                             <p className="text-white font-semibold">Email</p>
                         </div>
                         <div className="w-[75%] flex flex-row items-center justify-start">
-                            <input type="text" value={user.email} readOnly className="w-[300px] rounded-tr-xl rounded-br-xl border border-violet-600/50 bg-zinc-900/60 px-4 py-3 text-white focus: border-violet-600 focus:outline-none focus:ring-1focus:ring-violet-600"/>                   
+                            <input type="text" value={user.email} readOnly className="w-full rounded-tr-xl rounded-br-xl border border-violet-600/50 bg-zinc-900/60 px-4 py-3 text-white focus: border-violet-600 focus:outline-none focus:ring-1focus:ring-violet-600"/>                   
                         </div>
                     </div>
                 </div>
