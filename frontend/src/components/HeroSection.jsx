@@ -1,3 +1,6 @@
+/*REACT*/
+import { useNavigate } from "react-router-dom";
+
 /*COMPONENTS*/
 import Navbar from "./Navbar";
 
@@ -5,6 +8,8 @@ import Navbar from "./Navbar";
 import heroSectionImage from "../assets/hero_section_background.png"
 
 function HeroSection() {
+    const navigate = useNavigate();
+
     return (
         <>
             {/* HERO SECTION */}
@@ -14,7 +19,9 @@ function HeroSection() {
                 <div className="absolute h-[250px] w-[400px] top-[275px] left-[200px] right-0 bottom-0 z-20 flex flex-col items-center justify-center">
                     <h1 className="text-5xl font-bold text-white text-center">Unlimited Movies, TV Shows and More</h1>
                     <span className="block text-lg text-gray-300 mt-4 text-center">Explore ratings, reviews, and trending content. Build your personal watchlist.</span>
-                    <button className="bg-violet-600 text-white px-6 py-3 rounded-full hover:bg-violet-700 mt-4 font-bold">Explore Now</button>
+                    <button className="bg-violet-600 text-white px-6 py-3 rounded-full hover:bg-violet-700 mt-4 font-bold" onClick={() => navigate("/movies")}>
+                        Explore Now
+                    </button>
                 </div>
 
             </div>
