@@ -1,5 +1,5 @@
 /*REACT*/
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 /*COMPONENTS*/
 import SearchBar from "./SearchBar";
@@ -16,13 +16,28 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
   const [isPageLoading, setIsPageLoading] = useState(false);
   const resultsRef = useRef(null);
 
+  const [filters, setFilters] = useState({
+    search: "",
+    genre: null,
+    yearFrom: "",
+    yearTo: "",
+    rating: "all",
+    sortBy: "popular",
+  });
+
+  const filteredCatalog = useMemo(() => {
+    return catalog.filter(movie =>
+      movie.title.toLowerCase().includes(filters.search.toLowerCase())
+    );
+  }, [catalog, filters.search]);
+
   /* Keep at least one page available while the catalog is still loading. */
-  const totalPages = Math.max(Math.ceil(catalog.length / pageSize), 1);
+  const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);
 
   /* The current page decides which slice of the catalog is shown in the grid. */
   const firstItemIndex = (page - 1) * pageSize;
   const lastItemIndex = firstItemIndex + pageSize;
-  const paginatedCatalog = catalog.slice(firstItemIndex, lastItemIndex);
+  const paginatedCatalog = filteredCatalog.slice(firstItemIndex, lastItemIndex);
 
   /* When the catalog changes, return to page one so the page number never feels stale. */
   useEffect(() => {
@@ -69,7 +84,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
         <p className="text-gray-400 mt-2">Search and discover films you'll love</p>
       </div>
 
-      <SearchBar />
+      <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} />
 
       {/* Fast category shortcuts above the full filter area */}
       <QuickFilters />
