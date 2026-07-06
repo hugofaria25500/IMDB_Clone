@@ -26,10 +26,21 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
   });
 
   const filteredCatalog = useMemo(() => {
-    return catalog.filter(movie =>
-      movie.title.toLowerCase().includes(filters.search.toLowerCase())
-    );
-  }, [catalog, filters.search]);
+
+    let result = catalog;
+
+     if (filters.search) {
+        result = result.filter(movie =>
+            movie.title.toLowerCase().includes(filters.search.toLowerCase())
+        );
+    }
+
+    if (filters.genre) {
+        result = result.filter(movie =>
+            movie.genre === filters.genre
+        );
+    }
+  }, [catalog, filters]);
 
   /* Keep at least one page available while the catalog is still loading. */
   const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);
@@ -87,7 +98,13 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
       <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} />
 
       {/* Fast category shortcuts above the full filter area */}
-      <QuickFilters />
+      <QuickFilters selectedGenre={filters.genre}
+        onSelect={(genre) =>
+            setFilters(prev => ({
+                ...prev,
+                genre: prev.genre === genre ? null : genre,
+            }))
+        } />
 
       <div ref={resultsRef} className="flex gap-8 px-6 mt-10">
         {/* Left column with the detailed filters */}
