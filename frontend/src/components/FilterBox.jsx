@@ -76,21 +76,23 @@ function FilterBox({ filters, onFilterChange }) {
           {/* Rating */}
           <div className="mb-6">
             <label className="text-gray-400 text-sm">Rating</label>
-            <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white">
-              <option>All</option>
-              <option>7+</option>
-              <option>8+</option>
-              <option>9+</option>
+            <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.rating} onChange={(e) => onFilterChange({ rating: e.target.value })}>
+              <option value="all">All</option>
+              <option value={6}>6+</option>
+              <option value={7}>7+</option>
+              <option value={8}>8+</option>
+              <option value={9}>9+</option>
             </select>
           </div>
 
           {/* Sort */}
           <div>
             <label className="text-gray-400 text-sm">Sort By</label>
-            <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white">
-              <option>Popular</option>
-              <option>Latest</option>
-              <option>Top Rated</option>
+            <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.sortBy} onChange={(e) => onFilterChange({ sortBy: e.target.value })}>
+              <option value="alphabetical">Alphabetical</option>
+              <option value="popular">Popular</option>
+              <option value="latest">Latest</option>
+              <option value="top_rated">Top Rated</option>
             </select>
           </div>
         </div>

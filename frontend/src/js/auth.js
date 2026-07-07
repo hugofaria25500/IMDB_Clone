@@ -19,15 +19,11 @@ const users = [
 
 export async function login(email, password) {
 
-    console.log("Attempting login with email:", email, "and password:", password);
-
     const user = users.find(
         user =>
             user.email === email &&
             user.password === password
     );
-
-    console.log("User found:", user);
 
     if (!user) {
         throw new Error("Invalid email or password.");

@@ -22,7 +22,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
     yearFrom: "",
     yearTo: "",
     rating: "all",
-    sortBy: "popular",
+    sortBy: "alphabetical",
   });
 
   const filteredCatalog = useMemo(() => {
@@ -46,18 +46,28 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
     if (filters.yearTo) {
       if (filters.yearFrom) {
         result = result.filter(movie => movie.year >= filters.yearFrom && movie.year <= filters.yearTo);
-        console.log("here");
       } else {
         result = result.filter(movie => movie.year <= filters.yearTo);
-        console.log("here2");
       }
+    }
+
+    if (filters.rating !== "all") {
+        result = result.filter(movie => movie.rating >= Number(filters.rating));
+    }
+
+    if (filters.sortBy === "alphabetical") {
+        result = [...result.sort((a, b) => a.title.localeCompare(b.title))];
+    } else if (filters.sortBy === "popular") {
+        result = [...result.sort((a, b) => b.views - a.views)];
+    } else if (filters.sortBy === "latest") {
+        result = [...result.sort((a, b) => b.year - a.year)];
+    } else if (filters.sortBy === "top_rated") {
+        result = [...result.sort((a, b) => b.rating - a.rating)];
     }
 
     return result;
 
   }, [catalog, filters]);
-
-     console.log("Filtered Catalog:", filters);
 
   /* Keep at least one page available while the catalog is still loading. */
   const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);

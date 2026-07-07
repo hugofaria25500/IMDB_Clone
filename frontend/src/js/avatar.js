@@ -13,6 +13,5 @@ export const avatars = [
 
 export function getAvatarById(id) {
     const avatar = avatars.find(avatar => avatar.id === id);
-    console.log("getAvatarById called with id:", id, "found avatar:", avatar);
     return avatar ? avatar.src : null;
 }
