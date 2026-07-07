@@ -39,9 +39,25 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
         );
     }
 
+    if (filters.yearFrom) {
+        result = result.filter(movie => movie.year >= filters.yearFrom);
+    }
+
+    if (filters.yearTo) {
+      if (filters.yearFrom) {
+        result = result.filter(movie => movie.year >= filters.yearFrom && movie.year <= filters.yearTo);
+        console.log("here");
+      } else {
+        result = result.filter(movie => movie.year <= filters.yearTo);
+        console.log("here2");
+      }
+    }
+
     return result;
 
   }, [catalog, filters]);
+
+     console.log("Filtered Catalog:", filters);
 
   /* Keep at least one page available while the catalog is still loading. */
   const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);
@@ -113,7 +129,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
 
       <div ref={resultsRef} className="flex gap-8 px-6 mt-10">
         {/* Left column with the detailed filters */}
-        <FilterBox />
+        <FilterBox filters={filters} onFilterChange={(newFilters) => setFilters(prev => ({...prev, ...newFilters}))} />
 
         <div className="flex-1">
           {/* Only the items for the selected page reach the grid */}
