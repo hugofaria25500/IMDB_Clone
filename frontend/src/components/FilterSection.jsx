@@ -30,16 +30,17 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
     let result = catalog;
 
      if (filters.search) {
-        result = result.filter(movie =>
-            movie.title.toLowerCase().includes(filters.search.toLowerCase())
-        );
+        result = result.filter(movie => movie.title.toLowerCase().includes(filters.search.toLowerCase()));
     }
 
     if (filters.genre) {
         result = result.filter(movie =>
-            movie.genre === filters.genre
+            movie.genres.includes(filters.genre)
         );
     }
+
+    return result;
+
   }, [catalog, filters]);
 
   /* Keep at least one page available while the catalog is still loading. */
@@ -54,6 +55,10 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
   useEffect(() => {
     setPage(1);
   }, [catalog]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filters.search, filters.genre, filters.yearFrom, filters.yearTo, filters.rating, filters.sortBy]);
 
   const scrollToResults = () => {
     if (!resultsRef.current) return;

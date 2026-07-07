@@ -3,7 +3,7 @@ function QuickFilters({ selectedGenre, onSelect }) {
          
       <div className="w-full flex justify-center mt-6 px-4">
         <div className="flex gap-3 overflow-x-auto max-w-[800px]">
-          {["Action", "Comedy", "Drama", "Horror", "Sci-Fi"].map((genre) => (
+          {["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Crime"].map((genre) => (
             <button
               key={genre}
               className={`px-4 py-2 rounded-full transition-all duration-300 whitespace-nowrap ${
