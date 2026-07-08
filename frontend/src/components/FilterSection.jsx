@@ -8,7 +8,7 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function FilterSection({ catalog = [], onOpenModal, loading = false }) {
+function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   const pageSize = 24;
   const scrollOffset = 300;
 
@@ -122,11 +122,17 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
     <div className="min-h-screen bg-black text-white px-[25px]">
       {/* Hero section */}
       <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
-        <h1 className="text-5xl font-bold text-violet-500">Your Movie Journey Starts Here</h1>
-        <p className="text-gray-400 mt-2">Search and discover films you'll love</p>
+        <h1 className="text-5xl font-bold text-violet-500">
+          {label === "movie" && "Your Movie Journey Starts Here"}
+          {label === "series" && "Discover Your Next Favorite Series"}
+        </h1>
+        <p className="text-gray-400 mt-2">
+          {label === "movie" && "Search and discover films you'll love"}
+          {label === "series" && "Explore unforgettable stories, one episode at a time."}
+        </p>
       </div>
 
-      <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} />
+      <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} label={label} />
 
       {/* Fast category shortcuts above the full filter area */}
       <QuickFilters selectedGenre={filters.genre}
@@ -135,7 +141,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false }) {
                 ...prev,
                 genre: prev.genre === genre ? null : genre,
             }))
-        } />
+        }/>
 
       <div ref={resultsRef} className="flex gap-8 px-6 mt-10">
         {/* Left column with the detailed filters */}

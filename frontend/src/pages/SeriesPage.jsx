@@ -55,7 +55,7 @@ function SeriesPage() {
             {/* SERIES CAROUSELS */}
             <SingleItemCarousel movies={newSeriesReleases} onOpenTrailerModal={openTrailerModal} loading={newSeriesReleasesLoading} />
             {/* SERIES FILTERS */}
-            <FilterSection catalog={series} onOpenModal={openModal} loading={loading} />
+            <FilterSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
             {/* POPULAR SERIES CAROUSEL */}
             <MultiItemCarousel title="Popular Series" catalog={popularSeries} onOpenModal={openModal} loading={popularSeriesLoading} />
             {/* TRENDING SERIES CAROUSEL */}

@@ -54,7 +54,7 @@ function MoviesPage() {
             {/* MOVIE CAROUSELS */}
             <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} />
+            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movie"}/>
             {/* POPULAR MOVIES CAROUSEL */}
             <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
             {/* TRENDING MOVIES CAROUSEL */}
