@@ -1,11 +1,38 @@
+/*REACT*/
+import { useState } from "react";
+import { useEffect } from "react";
+
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
+import FilterSection from '../components/FilterSection';
+import Footer from "../components/Footer";
+
+/*JS*/
+import { useMovies } from "../hooks/useMovies";
 
 function FavouritesPage() {
+
+    const { movies, loading } = useMovies();
+
+    function openModal(item) {
+        setSelectedItem(item);
+    }
+
+    function closeModal() {
+        setSelectedItem(null);
+    }
+
+
     return (
-        <div>
+         <div className="bg-black">
+            {/* SPACE */}
+            <div className="h-[100px] bg-black"></div>
+            {/* NAVBAR */}
             <Navbar />
-            <h1 className="mt-[100px]">Favourites Page</h1>
+            {/* MOVIE FILTERS */}
+            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movie"}/>
+            {/* FOOTER */}
+            <Footer />
         </div>
     );
 }
