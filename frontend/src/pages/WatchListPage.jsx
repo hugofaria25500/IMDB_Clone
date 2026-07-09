@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
+import MediaStatsHeader from "../components/MediaStatsHeader"
 import FilterSection from '../components/FilterSection';
 import Footer from "../components/Footer";
 
@@ -28,6 +29,8 @@ function WatchListPage() {
             <div className="h-[100px] bg-black"></div>
             {/* NAVBAR */}
             <Navbar />
+            {/* WATCHLIST HEADER */}
+            <MediaStatsHeader type={"watchlist"}/>
             {/* MOVIE FILTERS */}
             <FilterSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
             {/* FOOTER */}

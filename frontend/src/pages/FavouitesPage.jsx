@@ -4,15 +4,26 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
+import MediaStatsHeader from "../components/MediaStatsHeader"
 import FilterSection from '../components/FilterSection';
 import Footer from "../components/Footer";
 
 /*JS*/
+import { useSeries } from "../hooks/useSeries";
 import { useMovies } from "../hooks/useMovies";
 
 function FavouritesPage() {
+    const { movies, loadingMovies } = useMovies();
+    const { series, loadingSeries } = useSeries();
 
-    const { movies, loading } = useMovies();
+    const [selectedType, setSelectedType] = useState("movies");
+    const [catalog, setCatalog] = useState([]);
+
+    useEffect(() => {
+        setCatalog(selectedType === "movies" ? movies : series);
+    }, [selectedType, movies, series]);
+
+    const loading = selectedType === "movies" ? loadingMovies : loadingSeries;
 
     function openModal(item) {
         setSelectedItem(item);
@@ -22,15 +33,16 @@ function FavouritesPage() {
         setSelectedItem(null);
     }
 
-
     return (
-         <div className="bg-black">
+        <div className="bg-black">
             {/* SPACE */}
-            <div className="h-[100px] bg-black"></div>
+            <div className="h-[100px] bg-black" />
             {/* NAVBAR */}
             <Navbar />
-            {/* MOVIE FILTERS */}
-            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movie"}/>
+            {/* FAVOURITES HEADER */}
+            <MediaStatsHeader type={"favourites"}/>
+            {/* FILTER SECTION */}
+            <FilterSection catalog={catalog} loading={loading} onOpenModal={openModal} label={selectedType} />
             {/* FOOTER */}
             <Footer />
         </div>
