@@ -10,21 +10,37 @@ import dataLogo from "../assets/data_logo.png";
 
 function PromoSection() {
     return (
-        <div className="w-full h-auto md:h-[500px] flex flex-col md:flex-row items-center justify-center mt-20 relative bg-[center_60%] bg-cover p-8 px-6 md:pl-[80px] md:pr-[80px]" style={{ backgroundImage: `url(${promoSectionImage})`}}>
-            {/* GRADIENT OVERLAY */} 
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10 " />
-            <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-black/70 to-transparent z-0" />
+        <div
+            className="relative w-full py-24 bg-cover bg-center"
+            style={{ backgroundImage: `url(${promoSectionImage})` }}
+        >
+            {/* Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/75 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
 
-            <div className="hidden md:block relative w-3/5 h-full" />
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center px-6 md:px-16">
 
-            <div className="relative w-full md:w-2/5 h-full flex flex-col justify-center z-20">
-                <h1 className="text-3xl font-bold text-white text-center">What You Can Do</h1>
-                <div className="mt-6 grid grid-cols-2 gap-5 pl-[20px] pr-[20px]">
-                    <PromoCardDetails icon={discoverLogo} description={"Browse thousands of movies"}  />
-                    <PromoCardDetails icon={rateLogo} description="Share your opinion" />
-                    <PromoCardDetails icon={watchListLogo} description="Keep your watchlist updated" />
-                    <PromoCardDetails icon={dataLogo} description="Dive into cast & details" />    
+                {/* Header */}
+                <span className="text-violet-400 text-xs font-bold uppercase tracking-[0.2em] mb-3">
+                    Features
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+                    What You Can Do
+                </h2>
+                <p className="text-gray-400 mt-3 text-center max-w-md text-sm">
+                    Everything you need to explore, track, and enjoy your favourite movies and series.
+                </p>
 
+                {/* Divider */}
+                <div className="mt-6 w-16 h-[2px] bg-violet-500 rounded-full" />
+
+                {/* Cards */}
+                <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl">
+                    <PromoCardDetails icon={discoverLogo} title="Discover" description="Browse thousands of movies and series" />
+                    <PromoCardDetails icon={rateLogo} title="Rate" description="Share your opinion with the community" />
+                    <PromoCardDetails icon={watchListLogo} title="Watchlist" description="Keep your watchlist always updated" />
+                    <PromoCardDetails icon={dataLogo} title="Details" description="Dive into cast, crew and rich metadata" />
                 </div>
             </div>
         </div>
