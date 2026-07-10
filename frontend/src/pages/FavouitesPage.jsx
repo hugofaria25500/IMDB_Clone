@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import MediaStatsHeader from "../components/MediaStatsHeader"
 import FilterSection from '../components/FilterSection';
 import Footer from "../components/Footer";
+import MediaModal from "../components/MediaModal";
 
 /*JS*/
 import { useFavouriteMovies } from "../hooks/useFavouriteMovies";
@@ -18,6 +19,7 @@ function FavouritesPage() {
 
     const [selectedType, setSelectedType] = useState("movies");
     const [catalog, setCatalog] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
         setCatalog(selectedType === "movies" ? movies : series);
@@ -51,6 +53,13 @@ function FavouritesPage() {
             <FilterSection catalog={catalog} loading={loading} onOpenModal={openModal} label={selectedType} />
             {/* FOOTER */}
             <Footer />
+            {/* MODAL */}
+            {selectedItem && (
+                <MediaModal
+                    item={selectedItem}
+                    onClose={closeModal}
+                />
+            )}
         </div>
     );
 }
