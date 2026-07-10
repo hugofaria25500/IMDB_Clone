@@ -9,12 +9,12 @@ import FilterSection from '../components/FilterSection';
 import Footer from "../components/Footer";
 
 /*JS*/
-import { useSeries } from "../hooks/useSeries";
-import { useMovies } from "../hooks/useMovies";
+import { useFavouriteMovies } from "../hooks/useFavouriteMovies";
+import { useFavouriteSeries } from "../hooks/useFavouriteSeries";
 
 function FavouritesPage() {
-    const { movies, loadingMovies } = useMovies();
-    const { series, loadingSeries } = useSeries();
+    const { movies, loading: loadingMovies } = useFavouriteMovies();
+    const { series, loading: loadingSeries } = useFavouriteSeries();
 
     const [selectedType, setSelectedType] = useState("movies");
     const [catalog, setCatalog] = useState([]);

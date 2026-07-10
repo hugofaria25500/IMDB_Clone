@@ -8,13 +8,13 @@ import FilterSection from '../components/FilterSection';
 import Footer from "../components/Footer";
 
 /*JS*/
-import { useSeries } from "../hooks/useSeries";
-import { useMovies } from "../hooks/useMovies";
+import { useWatchlistMovies } from "../hooks/useWatchlistMovies";
+import { useWatchlistSeries } from "../hooks/useWatchlistSeries";
 
 function WatchListPage() {
 
-    const { movies, loadingMovies } = useMovies();
-    const { series, loadingSeries } = useSeries();
+    const { movies, loading: loadingMovies } = useWatchlistMovies();
+    const { series, loading: loadingSeries } = useWatchlistSeries();
 
     const [selectedType, setSelectedType] = useState("movies");
     const [catalog, setCatalog] = useState([]);

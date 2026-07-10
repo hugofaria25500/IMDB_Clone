@@ -156,7 +156,7 @@ export const moviesDetailedMock = [
     recommendations: [1, 14, 29, 12]
   },
 
-  // ? Para não ficar gigante, mantenho o mesmo padrão para os restantes:
+  // ? Para nï¿½o ficar gigante, mantenho o mesmo padrï¿½o para os restantes:
 
   {
     id: 5,
@@ -380,6 +380,32 @@ export const newSeriesReleases = [
 ];
 
 export const randomSerie = seriesMock[Math.floor(Math.random() * seriesMock.length)];
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// 
+//                         FAVOURITES MOCK DATA                                 //
+// 
+//////////////////////////////////////////////////////////////////////////////////  
+
+export const favouriteMoviesMock = moviesMock.filter(m => [1, 2, 5, 8, 19].includes(m.id));
+// Inception, The Dark Knight, The Matrix, The Godfather, Parasite
+
+export const favouriteSeriesMock = seriesMock.filter(s => [101, 102, 103, 109, 128].includes(s.id));
+// Breaking Bad, Game of Thrones, Stranger Things, Peaky Blinders, Better Call Saul
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// 
+//                          WATCHLIST MOCK DATA                                 //
+// 
+//////////////////////////////////////////////////////////////////////////////////  
+
+export const watchlistMoviesMock = moviesMock.filter(m => [3, 7, 14, 17, 21].includes(m.id));
+// Interstellar, Pulp Fiction, Dune, Whiplash, Shutter Island
+
+export const watchlistSeriesMock = seriesMock.filter(s => [104, 106, 111, 115, 127].includes(s.id));
+// The Office, The Mandalorian, Sherlock, Narcos, Suits
 
 export const seriesDetailedMock = [
   {

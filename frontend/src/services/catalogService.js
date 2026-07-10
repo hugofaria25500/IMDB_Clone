@@ -1,7 +1,7 @@
 /*MOVIES*/
-import { moviesMock, popularMovies, trendingMovies, newMoviesReleases, randomMovie, moviesDetailedMock} from "../js/data";
+import { moviesMock, popularMovies, trendingMovies, newMoviesReleases, randomMovie, moviesDetailedMock, favouriteMoviesMock, watchlistMoviesMock } from "../js/data";
 /*SERIES*/
-import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSerie, seriesDetailedMock} from "../js/data";
+import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSerie, seriesDetailedMock, favouriteSeriesMock, watchlistSeriesMock } from "../js/data";
 
 /*MOVIES*/
 export async function getMovies() {
@@ -57,6 +57,24 @@ export async function getRandomSerie() {
 
 export async function getSeriesDetails() {
   return seriesDetailedMock;
+}
+
+/*FAVOURITES*/
+export async function getFavouriteMovies() {
+  return favouriteMoviesMock;
+}
+
+export async function getFavouriteSeries() {
+  return favouriteSeriesMock;
+}
+
+/*WATCHLIST*/
+export async function getWatchlistMovies() {
+  return watchlistMoviesMock;
+}
+
+export async function getWatchlistSeries() {
+  return watchlistSeriesMock;
 }
 
 /*MEDIA DETAILS*/
