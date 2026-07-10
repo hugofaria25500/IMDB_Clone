@@ -5,15 +5,15 @@ import Footer from "../components/Footer";
 
 function ProfilePage() {
     return (
-        <div>
-            <div className="w-full flex flex-col justify-center bg-black srt">
+        <div className="min-h-screen bg-black">
+            <div className="w-full flex flex-col bg-black">
                 {/* SPACE */}
                 <div className="h-[100px] bg-black"></div>
                 {/*NAVBAR*/}
                 <Navbar />
 
                 {/*PROFILE CARD*/}
-                <div className="h-[auto] flex flex-col items-end justify-center">
+                <div className="flex-1 flex flex-col items-center justify-start py-10 px-4">
                     <ProfileCard />
                 </div>
 

@@ -5,7 +5,7 @@ function MediaCard({ item, onClick }) {
             onClick={() => {onClick && onClick(item);}}
             className="group bg-zinc-900 rounded-xl overflow-hidden cursor-pointer"
         >
-            <div className="relative h-[250px] w-[200px] overflow-hidden">
+            <div className="relative h-[250px] w-full overflow-hidden">
                 <img
                     src={item.image}
                     alt={item.title}

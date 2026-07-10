@@ -51,7 +51,7 @@ function ShuffleSection( { type, onOpenModal, loading } ) {
 
             {/* HERO */}
             <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
-                <h1 className="text-5xl font-bold text-violet-500">Not Sure What to Watch?</h1>
+                <h1 className="text-2xl sm:text-5xl font-bold text-violet-500">Not Sure What to Watch?</h1>
                 <p className="text-gray-400 mt-2">Get a random {type} in one click</p>
             </div>
 

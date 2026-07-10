@@ -121,8 +121,8 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   return (
     <div className="min-h-screen bg-black text-white px-[25px]">
       {/* Hero section */}
-      <div className="w-full h-[100px] mt-[20px] flex flex-col items-center justify-center">
-        <h1 className="text-5xl font-bold text-violet-500">
+      <div className="w-full h-auto min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center px-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
           {label === "movies" && "Your Movie Journey Starts Here"}
           {label === "series" && "Discover Your Next Favorite Series"}
         </h1>
@@ -143,7 +143,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
             }))
         }/>
 
-      <div ref={resultsRef} className="flex gap-8 px-6 mt-10">
+      <div ref={resultsRef} className="flex flex-col lg:flex-row gap-8 px-4 lg:px-6 mt-10">
         {/* Left column with the detailed filters */}
         <FilterBox filters={filters} onFilterChange={(newFilters) => setFilters(prev => ({...prev, ...newFilters}))} />
 

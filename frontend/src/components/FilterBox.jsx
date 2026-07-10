@@ -1,10 +1,23 @@
+import { useState } from "react";
+
 function FilterBox({ filters, onFilterChange }) {
 
   const currentYear = new Date().getFullYear();
-
+  const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="hidden lg:block w-[250px] bg-zinc-900/70 backdrop-blur-md p-5 rounded-xl h-fit sticky">
+        <div className="w-full lg:w-[250px] shrink-0">
+
+          {/* Toggle button — visible only on mobile */}
+          <button
+            className="lg:hidden w-full flex items-center justify-between bg-zinc-900/70 text-white px-4 py-3 rounded-xl mb-2"
+            onClick={() => setIsOpen(prev => !prev)}
+          >
+            <span className="font-semibold text-sm">Filters</span>
+            <span className="text-violet-400 text-xs">{isOpen ? '▲ Hide' : '▼ Show'}</span>
+          </button>
+
+          <div className={`${isOpen ? 'block' : 'hidden'} lg:block bg-zinc-900/70 backdrop-blur-md p-5 rounded-xl h-fit lg:sticky`}>
           <h2 className="text-white text-lg font-semibold mb-4">Filters</h2>
 
           {/* Year FROM - TO */}
@@ -95,6 +108,7 @@ function FilterBox({ filters, onFilterChange }) {
               <option value="top_rated">Top Rated</option>
             </select>
           </div>
+        </div>
         </div>
     );
 }

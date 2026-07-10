@@ -2,7 +2,7 @@ function QuickFilters({ selectedGenre, onSelect }) {
     return (
          
       <div className="w-full flex justify-center mt-6 px-4">
-        <div className="flex gap-3 overflow-x-auto max-w-[800px]">
+        <div className="flex flex-wrap gap-3 justify-center max-w-[800px]">
           {["Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Animation", "Crime"].map((genre) => (
             <button
               key={genre}

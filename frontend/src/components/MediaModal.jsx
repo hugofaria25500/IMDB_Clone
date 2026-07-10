@@ -42,7 +42,7 @@ function MediaModal({ item, onClose }) {
             onClick={onClose}
         >
             <div
-                className="bg-black/90 text-white p-6 rounded-lg w-[40%] h-[80%] shadow-[0_0_30px_rgba(168,85,247,0.6)] relative"
+                className="bg-black/90 text-white p-6 rounded-lg w-[90%] md:w-[40%] max-h-[85vh] shadow-[0_0_30px_rgba(168,85,247,0.6)] relative"
                 onClick={(e) => e.stopPropagation()}
             >
                 <button className="absolute top-[-10px] right-[-10px] bg-purple-800 hover:bg-purple-600 hover:scale-110 transform text-white p-3 rounded-full border-2 border-black" onClick={onClose}>
