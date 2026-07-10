@@ -40,7 +40,13 @@ function FavouritesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* FAVOURITES HEADER */}
-            <MediaStatsHeader type={"favourites"}/>
+            <MediaStatsHeader
+                type={"favourites"}
+                selectedType={selectedType}
+                onTypeChange={setSelectedType}
+                movieCount={movies.length}
+                seriesCount={series.length}
+            />
             {/* FILTER SECTION */}
             <FilterSection catalog={catalog} loading={loading} onOpenModal={openModal} label={selectedType} />
             {/* FOOTER */}

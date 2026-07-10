@@ -7,7 +7,7 @@ function SearchBar({ value, onChange, label }) {
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder={
-                  (label === "movie" && "Search for movies..") ||
+                  (label === "movies" && "Search for movies..") ||
                   (label === "series" && "Search for series..")
             }
             className="w-full p-4 pl-12 rounded-xl bg-zinc-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"

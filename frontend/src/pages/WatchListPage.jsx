@@ -1,6 +1,5 @@
 /*REACT*/
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
@@ -10,10 +9,21 @@ import Footer from "../components/Footer";
 
 /*JS*/
 import { useSeries } from "../hooks/useSeries";
+import { useMovies } from "../hooks/useMovies";
 
 function WatchListPage() {
 
-    const { series, loading } = useSeries();
+    const { movies, loadingMovies } = useMovies();
+    const { series, loadingSeries } = useSeries();
+
+    const [selectedType, setSelectedType] = useState("movies");
+    const [catalog, setCatalog] = useState([]);
+
+    useEffect(() => {
+        setCatalog(selectedType === "movies" ? movies : series);
+    }, [selectedType, movies, series]);
+
+    const loading = selectedType === "movies" ? loadingMovies : loadingSeries;
 
     function openModal(item) {
         setSelectedItem(item);
@@ -24,15 +34,21 @@ function WatchListPage() {
     }
 
     return (
-         <div className="bg-black">
+        <div className="bg-black">
             {/* SPACE */}
             <div className="h-[100px] bg-black"></div>
             {/* NAVBAR */}
             <Navbar />
             {/* WATCHLIST HEADER */}
-            <MediaStatsHeader type={"watchlist"}/>
+            <MediaStatsHeader
+                type={"watchlist"}
+                selectedType={selectedType}
+                onTypeChange={setSelectedType}
+                movieCount={movies.length}
+                seriesCount={series.length}
+            />
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
+            <FilterSection catalog={catalog} onOpenModal={openModal} loading={loading} label={selectedType} />
             {/* FOOTER */}
             <Footer />
         </div>

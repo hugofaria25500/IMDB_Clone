@@ -121,13 +121,13 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   return (
     <div className="min-h-screen bg-black text-white px-[25px]">
       {/* Hero section */}
-      <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
+      <div className="w-full h-[100px] mt-[20px] flex flex-col items-center justify-center">
         <h1 className="text-5xl font-bold text-violet-500">
-          {label === "movie" && "Your Movie Journey Starts Here"}
+          {label === "movies" && "Your Movie Journey Starts Here"}
           {label === "series" && "Discover Your Next Favorite Series"}
         </h1>
         <p className="text-gray-400 mt-2">
-          {label === "movie" && "Search and discover films you'll love"}
+          {label === "movies" && "Search and discover films you'll love"}
           {label === "series" && "Explore unforgettable stories, one episode at a time."}
         </p>
       </div>
