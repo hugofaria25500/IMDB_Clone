@@ -79,42 +79,33 @@ export async function getWatchlistSeries() {
 
 /*MEDIA DETAILS*/
 export async function getMediaDetails(id) {
+  // Try to find real detailed data first
+  const moviesDetails = await getMoviesDetails();
+  const seriesDetails = await getSeriesDetails();
+  const found = [...moviesDetails, ...seriesDetails].find(item => item.id === id);
+  if (found) return found;
 
+  // Generic fallback for items not yet in detailed mocks
   return {
     id: id,
-    title: "Mock Media Title",
-    year: 2023,
-    views: 123456,
-    seasons: 5, // Only for series
-    runtime: 120, // Only for movies
-    genres: ["Action", "Adventure", "Sci-Fi"],
-    language: "English",
-    rating: "8.5",
-    ageRating: "PG-13",
-    overview: "This is a mock overview of the media item. It provides a brief description of the plot and key elements of the story.",
-    poster: "https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg",
-    backdrop: "https://image.tmdb.org/t/p/w1280/9ijMGlJKqcslswWUzTEwScm82G.jpg",
-    trailer: {
-      url: "https://www.youtube.com/watch?v=Xt4X4FvXk2A"
-    },
-    cast: [
-      { name: "Bryan Cranston", character: "Walter White", photo: "https://image.tmdb.org/t/p/w200/7Jahy5LZX2Fo8fGJltMreAI49hC.jpg" },
-      { name: "Aaron Paul", character: "Jesse Pinkman", photo: "https://image.tmdb.org/t/p/w200/9PrED3MCHsBam1a8h1V6W0yK8w.jpg" },
-      { name: "Anna Gunn", character: "Skyler White", photo: "https://image.tmdb.org/t/p/w200/7lZ0b4p6Z9z1zH3kZ9XcY3k1.jpg" },
-      { name: "Dean Norris", character: "Hank Schrader", photo: "https://image.tmdb.org/t/p/w200/6n5F9ZkL6sFQ3rF7z5z2G3z.jpg" },
-      { name: "Bob Odenkirk", character: "Saul Goodman", photo: "https://image.tmdb.org/t/p/w200/7F2x0yFh1v1u3c7k7.jpg" }
-    ],
-    director: "Vince Gilligan",
-    tags: ["Drugs", "Crime", "Transformation"],
-    recommendations: [
-      { id: 101, title: "Breaking Bad", year: 2008, rating: 9.5, views: 2000000, genres: ["Drama"], image: "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg" },
-      { id: 102, title: "Game of Thrones", year: 2011, rating: 9.2, views: 2100000, genres: ["Fantasy","Drama"], image: "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg" },
-      { id: 103, title: "Stranger Things", year: 2016, rating: 8.7, views: 1800000, genres: ["Sci-Fi","Horror"], image: "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg" },
-      { id: 104, title: "The Office", year: 2005, rating: 8.9, views: 1700000, genres: ["Comedy"], image: "https://image.tmdb.org/t/p/w500/qWnJzyZhyy74gjpSjIXWmuk0ifX.jpg" }
-    ]
-  }
-
-  return media;
+    title: null,
+    year: null,
+    views: null,
+    seasons: null,
+    runtime: null,
+    genres: [],
+    language: null,
+    rating: null,
+    ageRating: null,
+    overview: null,
+    poster: null,
+    backdrop: null,
+    trailer: null,
+    cast: [],
+    director: null,
+    tags: [],
+    recommendations: []
+  };
 }
 
 export async function getMediaDetails2(id) {
