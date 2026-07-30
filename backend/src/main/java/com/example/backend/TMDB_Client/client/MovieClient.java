@@ -1,6 +1,7 @@
 package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
+import com.example.backend.TMDB_Client.dto.PopularMoviesListResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -17,7 +18,7 @@ public class MovieClient {
         this.properties = properties;
     }
 
-    public String getPopularMovies() {
+    public PopularMoviesListResponse getPopularMovies() {
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -25,7 +26,7 @@ public class MovieClient {
                         .queryParam("api_key", properties.getApiKey())
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(PopularMoviesListResponse.class)
                 .block();
     }
     public String getTrendingMovies() {
