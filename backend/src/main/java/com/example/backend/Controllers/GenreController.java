@@ -1,22 +1,28 @@
 package com.example.backend.Controllers;
 
 import com.example.backend.Services.GenreService;
-import com.example.backend.TMDB_Client.dto.GenreResponse;
+import com.example.backend.TMDB_Client.response.GenreResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/genres")
 public class GenreController {
 
     private final GenreService genreService;
 
-    @GetMapping("/all")
-    public ResponseEntity<GenreResponse> getPopularMovies() {
+    @GetMapping("/movies")
+    public ResponseEntity<GenreResponse> getMovieGenres() {
         return ResponseEntity.ok(genreService.getMovieGenres());
+    }
+
+    @GetMapping("/series")
+    public ResponseEntity<GenreResponse> getSeriesGenres() {
+        return ResponseEntity.ok(genreService.getSeriesGenres());
     }
 }

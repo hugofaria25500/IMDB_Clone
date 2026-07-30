@@ -1,33 +1,30 @@
 package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
-import com.example.backend.TMDB_Client.dto.PopularMoviesListResponse;
+import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
+@RequiredArgsConstructor
 public class MovieClient {
 
     private final WebClient webClient;
     private final TMDBProperties properties;
 
-    public MovieClient(WebClient tmdbWebClient,
-                       TMDBProperties properties) {
-
-        this.webClient = tmdbWebClient;
-        this.properties = properties;
-    }
-
+    @Cacheable("popularMovies")
     public PopularMoviesListResponse getPopularMovies() {
 
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/movie/popular")
-                        .queryParam("api_key", properties.getApiKey())
-                        .build())
-                .retrieve()
-                .bodyToMono(PopularMoviesListResponse.class)
-                .block();
+            .uri(uriBuilder -> uriBuilder
+                    .path("/movie/popular")
+                    .queryParam("api_key", properties.getApiKey())
+                    .build())
+            .retrieve()
+            .bodyToMono(PopularMoviesListResponse.class)
+            .block();
     }
     public String getTrendingMovies() {
         return null;
