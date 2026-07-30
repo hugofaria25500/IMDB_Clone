@@ -1,12 +1,12 @@
 package com.example.backend.TMDB_Client.response;
 
+import com.example.backend.TMDB_Client.dto.GenreDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class GenreResponse {
 
-    @JsonProperty("id")
-    private int id;
-
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("genres")
+    private List<GenreDTO> genres;
 }
