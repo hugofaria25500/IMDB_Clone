@@ -1,4 +1,9 @@
+//JS
+import { posterPathBase } from "../js/constants";
+
 function MediaCard({ item, onClick }) {
+
+    console.log(typeof item.release_date);
 
     return (
         <div
@@ -7,7 +12,7 @@ function MediaCard({ item, onClick }) {
         >
             <div className="relative h-[250px] w-full overflow-hidden">
                 <img
-                    src={item.image}
+                    src={posterPathBase+item.poster_path}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
@@ -24,7 +29,7 @@ function MediaCard({ item, onClick }) {
                     {item.title}
                 </h3>
                 <p className="text-xs text-gray-400">
-                    {item.year} • ⭐ {item.rating}
+                    {item?.release_date?.substring(0,4)} • ⭐ {item?.vote_average?.substring(0,3)}
                 </p>
             </div>
         </div>

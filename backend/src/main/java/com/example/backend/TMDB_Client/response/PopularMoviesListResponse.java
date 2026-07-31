@@ -9,15 +9,6 @@ import java.util.List;
 @Data
 public class PopularMoviesListResponse {
 
-    @JsonProperty("page")
-    private int page;
-
     @JsonProperty("results")
     private List<BasicMovieDTO> results;
-
-    @JsonProperty("total_pages")
-    private int totalPages;
-
-    @JsonProperty("total_results")
-    private int totalResults;
 }

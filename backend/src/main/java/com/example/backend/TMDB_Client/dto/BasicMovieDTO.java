@@ -19,4 +19,10 @@ public class BasicMovieDTO {
 
     @JsonProperty("genre_ids")
     private List<Integer> genreIds;
+
+    @JsonProperty("release_date")
+    private String releaseDate;
+
+    @JsonProperty("vote_average")
+    private String rating;
 }

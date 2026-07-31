@@ -9,6 +9,7 @@ import "../css/MultiItemCarousel.css";
 import MediaCard from "./MediaCard";
 
 function MultiItemCarouselSwiper({ title, catalog, onOpenModal, loading }) {
+
     return (
         <div className="w-full px-[50px] py-6 bg-black">
             
@@ -34,10 +35,10 @@ function MultiItemCarouselSwiper({ title, catalog, onOpenModal, loading }) {
                     1280: { slidesPerView: 7 },
                     1500: { slidesPerView: 8 },
                 }}>
-                {catalog.map((catalog, index) => (
+                {catalog.map((movie, index) => (
                     <SwiperSlide key={index}>
                     <div className="rounded-xl my-[10px]">
-                            <MediaCard item={catalog} onClick={onOpenModal} />
+                            <MediaCard item={movie} onClick={onOpenModal} />
                         </div>
                     </SwiperSlide>
                 ))}
