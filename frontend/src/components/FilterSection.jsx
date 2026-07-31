@@ -1,5 +1,5 @@
 /*REACT*/
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 /*COMPONENTS*/
 import SearchBar from "./SearchBar";
@@ -8,107 +8,159 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-/*JS*/
-import { moviesMock } from "../js/data";
-
-function FilterSection() {
+function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   const pageSize = 24;
+  const scrollOffset = 300;
 
   const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(moviesMock.length / pageSize);
+  const [isPageLoading, setIsPageLoading] = useState(false);
+  const resultsRef = useRef(null);
 
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [filters, setFilters] = useState({
+    search: "",
+    genre: null,
+    yearFrom: "",
+    yearTo: "",
+    rating: "all",
+    sortBy: "alphabetical",
+  });
 
-  const cache = useRef({});
+  const filteredCatalog = useMemo(() => {
 
-  useEffect(() => {
-    let isMounted = true;
+    let result = catalog;
 
-    const load = async () => {
-      if (cache.current[page]) {
-        setMovies(cache.current[page]);
-        return;
-      }
-
-      setLoading(true);
-      const data = await fetchMovies(page);
-
-      if (!isMounted) return;
-
-      cache.current[page] = data;
-      setMovies(data);
-      setLoading(false);
-
-      if (!cache.current[page + 1] && page < totalPages) {
-        fetchMovies(page + 1).then((nextData) => {
-          cache.current[page + 1] = nextData;
-        });
-      }
-    };
-
-    load();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [page]);
-
-  const getPages = () => {
-    let start = Math.max(page - 2, 1);
-    let end = Math.min(start + 4, totalPages);
-
-    if (end - start < 4) {
-      start = Math.max(end - 4, 1);
+     if (filters.search) {
+        result = result.filter(movie => movie.title.toLowerCase().includes(filters.search.toLowerCase()));
     }
 
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    if (filters.genre) {
+        result = result.filter(movie =>
+            movie.genres.includes(filters.genre)
+        );
+    }
+
+    if (filters.yearFrom) {
+        result = result.filter(movie => movie.year >= filters.yearFrom);
+    }
+
+    if (filters.yearTo) {
+      if (filters.yearFrom) {
+        result = result.filter(movie => movie.year >= filters.yearFrom && movie.year <= filters.yearTo);
+      } else {
+        result = result.filter(movie => movie.year <= filters.yearTo);
+      }
+    }
+
+    if (filters.rating !== "all") {
+        result = result.filter(movie => movie.rating >= Number(filters.rating));
+    }
+
+    if (filters.sortBy === "alphabetical") {
+        result = [...result.sort((a, b) => a.title.localeCompare(b.title))];
+    } else if (filters.sortBy === "popular") {
+        result = [...result.sort((a, b) => b.views - a.views)];
+    } else if (filters.sortBy === "latest") {
+        result = [...result.sort((a, b) => b.year - a.year)];
+    } else if (filters.sortBy === "top_rated") {
+        result = [...result.sort((a, b) => b.rating - a.rating)];
+    }
+
+    return result;
+
+  }, [catalog, filters]);
+
+  /* Keep at least one page available while the catalog is still loading. */
+  const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);
+
+  /* The current page decides which slice of the catalog is shown in the grid. */
+  const firstItemIndex = (page - 1) * pageSize;
+  const lastItemIndex = firstItemIndex + pageSize;
+  const paginatedCatalog = filteredCatalog.slice(firstItemIndex, lastItemIndex);
+
+  /* When the catalog changes, return to page one so the page number never feels stale. */
+  useEffect(() => {
+    setPage(1);
+  }, [catalog]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filters.search, filters.genre, filters.yearFrom, filters.yearTo, filters.rating, filters.sortBy]);
+
+  const scrollToResults = () => {
+    if (!resultsRef.current) return;
+
+    const resultsTop =
+      resultsRef.current.getBoundingClientRect().top +
+      window.scrollY -
+      scrollOffset;
+
+    window.scrollTo({
+      top: resultsTop,
+      behavior: "smooth",
+    });
   };
 
-  const fetchMovies = async (page) => {
-    await new Promise((res) => setTimeout(res, 500));
-
-    const start = (page - 1) * pageSize;
-    const end = start + pageSize;
-
-    return moviesMock.slice(start, end);
+  const getValidPage = (nextPage) => {
+    return Math.min(Math.max(nextPage, 1), totalPages);
   };
+
+ const handlePageChange = async (nextPage) => {
+      const validPage = getValidPage(nextPage);
+
+      if (validPage === page) return;
+
+      setPage(validPage);
+      scrollToResults();
+
+      setIsPageLoading(true);
+      // delay fake
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setIsPageLoading(false);
+  };    
 
   return (
     <div className="min-h-screen bg-black text-white px-[25px]">
-
-      {/* HERO */}
-      <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
-        <h1 className="text-5xl font-bold text-violet-500">Your Movie Journey Starts Here</h1>
-        <p className="text-gray-400 mt-2">Search and discover films you'll love</p>
+      {/* Hero section */}
+      <div className="w-full h-auto min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center px-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
+          {label === "movies" && "Your Movie Journey Starts Here"}
+          {label === "series" && "Discover Your Next Favorite Series"}
+        </h1>
+        <p className="text-gray-400 mt-2">
+          {label === "movies" && "Search and discover films you'll love"}
+          {label === "series" && "Explore unforgettable stories, one episode at a time."}
+        </p>
       </div>
 
-      <SearchBar />
+      <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} label={label} />
 
-      {/* QUICK FILTERS */}
-      <QuickFilters />
+      {/* Fast category shortcuts above the full filter area */}
+      <QuickFilters selectedGenre={filters.genre}
+        onSelect={(genre) =>
+            setFilters(prev => ({
+                ...prev,
+                genre: prev.genre === genre ? null : genre,
+            }))
+        }/>
 
-      <div className="flex gap-8 px-6 mt-10">
+      <div ref={resultsRef} className="flex flex-col lg:flex-row gap-8 px-4 lg:px-6 mt-10">
+        {/* Left column with the detailed filters */}
+        <FilterBox filters={filters} onFilterChange={(newFilters) => setFilters(prev => ({...prev, ...newFilters}))} />
 
-        {/* FILTER BOX */}
-        <FilterBox />
-   
         <div className="flex-1">
-          {/* MOVIES GRID */}
-          <Grid movies={movies} loading={loading} />
+          {/* Only the items for the selected page reach the grid */}
+          <Grid catalog={paginatedCatalog} onOpenModal={onOpenModal} loading={loading || isPageLoading} />
 
-          {/* PAGINATION */}
+          {/* Page controls send the next page request back to this component */}
           <GridPagination
             currentPage={page}
             totalPages={totalPages}
-            onPageChange={(p) => setPage(p)}
-          />  
+            onPageChange={handlePageChange}
+          />
         </div>
-
       </div>
     </div>
   );
 }
-
 
 export default FilterSection;

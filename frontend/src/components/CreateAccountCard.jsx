@@ -1,7 +1,47 @@
+/*REACT*/
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+/*HOOKS*/
+import useAuth from "../hooks/useAuth";
+
 /*IMAGES*/
 import mainLogo from "../assets/main_logo.png"
 
 function CreateAccountCard() {
+
+    const navigate = useNavigate();
+
+    const auth = useAuth();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    async function handleSubmit(e) {
+
+        e.preventDefault();
+        setError("");
+
+        if (!name || !email || !password) {
+            setError("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            setLoading(true);
+            await auth.register(name, email, password);
+            navigate("/");
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <div className="relative h-[500px] w-[400px] mt-[100px] p-[2px] rounded-xl bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-700 shadow-[0_0_30px_rgba(168,85,247,0.6)] z-20">
     
@@ -17,23 +57,29 @@ function CreateAccountCard() {
                 Create your CineFlix account
             </p>
     
-            <form className="flex flex-col gap-4">
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 
                 <input
                     type="text"
                     placeholder="Username"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />
     
                 <input
                     type="email"
                     placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />
     
                 <input
                     type="password"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />
     
@@ -44,9 +90,8 @@ function CreateAccountCard() {
                     Create Account
                 </button>
             </form>
-
-          </div>
-          
+            
+            </div>
         </div>
     );
 }

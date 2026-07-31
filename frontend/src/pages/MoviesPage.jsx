@@ -1,3 +1,7 @@
+/*REACT*/
+import { useState } from "react";
+import { useEffect } from "react";
+
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
 import FilterSection from '../components/FilterSection';
@@ -5,11 +9,42 @@ import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
+import TrailerModal from "../components/TrailerModal";
+import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { newMovieReleases, popularMovies, trendingMovies} from "../js/data";
+import { useMovies } from "../hooks/useMovies";
+import { usePopularMovies } from "../hooks/usePopularMovies";
+import { useTrendingMovies } from "../hooks/useTrendingMovies";
+import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
+import { useRandomMovie } from "../hooks/useRandomMovie";
 
 function MoviesPage() {
+    const { movies, loading } = useMovies();
+    const { popularMovies, popularMoviesLoading } = usePopularMovies();
+    const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
+    const { randomMovie, randomMovieLoading } = useRandomMovie();
+
+    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    function openTrailerModal(item) {
+        setSelectedTrailerItem(item);
+    }
+
+    function closeTrailerModal() {
+        setSelectedTrailerItem(null);
+    }
+
+    function openModal(item) {
+        setSelectedItem(item);
+    }
+
+    function closeModal() {
+        setSelectedItem(null);
+    }
+
     return (
         <div className="bg-black">
             {/* SPACE */}
@@ -17,17 +52,31 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel movies={newMovieReleases} />
+            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE FILTERS */}
-            <FilterSection />
+            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movies"}/>
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" movies={popularMovies} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" movies={trendingMovies} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection />
+            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={randomMovieLoading} />
             {/* FOOTER */}
             <Footer />
+            {/* TRAILER MODAL */}
+            {selectedTrailerItem && (
+                <TrailerModal
+                    item={selectedTrailerItem}
+                    onClose={closeTrailerModal}
+                />
+            )}
+            {/* MEDIA MODAL */}
+            {selectedItem && (
+                <MediaModal
+                    item={selectedItem}
+                    onClose={closeModal}
+                />
+            )}
         </div>
     );
 }   

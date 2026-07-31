@@ -1,0 +1,116 @@
+/*MOVIES*/
+import { moviesMock, popularMovies, trendingMovies, newMoviesReleases, randomMovie, moviesDetailedMock, favouriteMoviesMock, watchlistMoviesMock } from "../js/data";
+/*SERIES*/
+import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSerie, seriesDetailedMock, favouriteSeriesMock, watchlistSeriesMock } from "../js/data";
+
+/*MOVIES*/
+export async function getMovies() {
+  return moviesMock;
+}
+
+export async function getPopularMovies() {
+  return popularMovies;
+}
+
+export async function getTrendingMovies() {
+  return trendingMovies;
+}
+
+export async function getNewMoviesReleases() {
+  return newMoviesReleases;
+}
+
+export async function getRandomMovie() {
+  return getMovies().then(movies => {
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    return movies[randomIndex];
+  });
+}
+
+export async function getMoviesDetails() {
+  return moviesDetailedMock;
+}
+
+/*SERIES*/
+export async function getSeries() {
+  return seriesMock;
+}
+
+export async function getPopularSeries() {
+  return popularSeries;
+}
+
+export async function getTrendingSeries() {
+  return trendingSeries;
+}
+
+export async function getNewSeriesReleases() {
+  return newSeriesReleases;
+}
+
+export async function getRandomSerie() {
+  return getSeries().then(series => {
+    const randomIndex = Math.floor(Math.random() * series.length);
+    return series[randomIndex];
+  });
+}
+
+export async function getSeriesDetails() {
+  return seriesDetailedMock;
+}
+
+/*FAVOURITES*/
+export async function getFavouriteMovies() {
+  return favouriteMoviesMock;
+}
+
+export async function getFavouriteSeries() {
+  return favouriteSeriesMock;
+}
+
+/*WATCHLIST*/
+export async function getWatchlistMovies() {
+  return watchlistMoviesMock;
+}
+
+export async function getWatchlistSeries() {
+  return watchlistSeriesMock;
+}
+
+/*MEDIA DETAILS*/
+export async function getMediaDetails(id) {
+  // Try to find real detailed data first
+  const moviesDetails = await getMoviesDetails();
+  const seriesDetails = await getSeriesDetails();
+  const found = [...moviesDetails, ...seriesDetails].find(item => item.id === id);
+  if (found) return found;
+
+  // Generic fallback for items not yet in detailed mocks
+  return {
+    id: id,
+    title: null,
+    year: null,
+    views: null,
+    seasons: null,
+    runtime: null,
+    genres: [],
+    language: null,
+    rating: null,
+    ageRating: null,
+    overview: null,
+    poster: null,
+    backdrop: null,
+    trailer: null,
+    cast: [],
+    director: null,
+    tags: [],
+    recommendations: []
+  };
+}
+
+export async function getMediaDetails2(id) {
+  const moviesDetails = await getMoviesDetails();
+  const seriesDetails = await getSeriesDetails();
+  const media =  [...moviesDetails, ...seriesDetails].find(item => item.id === id); 
+  return media;
+}
