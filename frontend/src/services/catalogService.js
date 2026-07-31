@@ -15,12 +15,12 @@ export async function getMovies() {
 
 export async function getPopularMovies() {
   const response = await api.get("/movies/popular");
-  console.log(response.data.results)
   return response.data.results;
 }
 
 export async function getTrendingMovies() {
-  return trendingMovies;
+  const response = await api.get("/movies/trending");
+  return response.data.results;
 }
 
 export async function getNewMoviesReleases() {

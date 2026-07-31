@@ -28,4 +28,10 @@ public class MovieController {
     public ResponseEntity<TrendingMoviesListResponse> getTrendingMovies() {
         return ResponseEntity.ok(movieService.getTrendingMovies());
     }
+
+    @GetMapping("/random")
+    public ResponseEntity<TrendingMoviesListResponse> getRandomMovie() {
+        //TO DO: substituir
+        return ResponseEntity.ok(null);
+    }
 }
