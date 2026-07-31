@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
+import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +24,8 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getPopularMovies());
     }
 
-
+    @GetMapping("/trending")
+    public ResponseEntity<TrendingMoviesListResponse> getTrendingMovies() {
+        return ResponseEntity.ok(movieService.getTrendingMovies());
+    }
 }

@@ -2,6 +2,7 @@ package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.MovieClient;
 import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
+import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,7 @@ public class MovieService {
     public PopularMoviesListResponse getPopularMovies() {
         return movieClient.getPopularMovies();
     }
+
+    public TrendingMoviesListResponse getTrendingMovies() { return movieClient.getTrendingMovies(); }
 
 }

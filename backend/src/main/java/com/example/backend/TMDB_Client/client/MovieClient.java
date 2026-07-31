@@ -2,6 +2,7 @@ package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
 import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
+import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,17 @@ public class MovieClient {
             .bodyToMono(PopularMoviesListResponse.class)
             .block();
     }
-    public String getTrendingMovies() {
-        return null;
+
+    @Cacheable("trendingMovies")
+    public TrendingMoviesListResponse getTrendingMovies() {
+        return webClient.get()
+            .uri(uriBuilder -> uriBuilder
+                    .path("/trending/movie/week")
+                    .queryParam("api_key", properties.getApiKey())
+                    .build())
+            .retrieve()
+            .bodyToMono(TrendingMoviesListResponse.class)
+            .block();
     }
 
     public String getTopRatedMovies() {

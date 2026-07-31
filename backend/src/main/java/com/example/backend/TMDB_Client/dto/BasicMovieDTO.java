@@ -3,8 +3,10 @@ package com.example.backend.TMDB_Client.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class MovieDTO{
+public class BasicMovieDTO {
 
     @JsonProperty("id")
     private int id;
@@ -15,15 +17,6 @@ public class MovieDTO{
     @JsonProperty("poster_path")
     private String posterPath;
 
-    @JsonProperty("backdrop_path")
-    private String backdropPath;
-
-    @JsonProperty("release_date")
-    private String releaseDate;
-
-    @JsonProperty("vote_average")
-    private double voteAverage;
-
-    @JsonProperty("overview")
-    private String overview;
+    @JsonProperty("genre_ids")
+    private List<Integer> genreIds;
 }
