@@ -1,7 +1,7 @@
 /**/
 
 /*MOVIES*/
-import { moviesMock, trendingMovies, newMoviesReleases, randomMovie, moviesDetailedMock, favouriteMoviesMock, watchlistMoviesMock } from "../js/data";
+import { moviesMock, newMoviesReleases, moviesDetailedMock, favouriteMoviesMock, watchlistMoviesMock } from "../js/data";
 /*SERIES*/
 import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSerie, seriesDetailedMock, favouriteSeriesMock, watchlistSeriesMock } from "../js/data";
 
@@ -28,10 +28,8 @@ export async function getNewMoviesReleases() {
 }
 
 export async function getRandomMovie() {
-  return getMovies().then(movies => {
-    const randomIndex = Math.floor(Math.random() * movies.length);
-    return movies[randomIndex];
-  });
+  const response = await api.get("/movies/random");
+  return response.data;
 }
 
 export async function getMoviesDetails() {
