@@ -3,8 +3,6 @@ import { posterPathBase } from "../js/constants";
 
 function MediaCard({ item, onClick }) {
 
-    console.log(typeof item.release_date);
-
     return (
         <div
             onClick={() => {onClick && onClick(item);}}
@@ -12,8 +10,8 @@ function MediaCard({ item, onClick }) {
         >
             <div className="relative h-[250px] w-full overflow-hidden">
                 <img
-                    src={posterPathBase+item.poster_path}
-                    alt={item.title}
+                    src={posterPathBase+item?.poster_path}
+                    alt={item?.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
 

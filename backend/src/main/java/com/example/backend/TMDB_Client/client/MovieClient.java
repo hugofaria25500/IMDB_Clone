@@ -1,7 +1,9 @@
 package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
+import com.example.backend.TMDB_Client.dto.NewReleaseMovieDTO;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
+import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -42,7 +44,7 @@ public class MovieClient {
     }
 
     @Cacheable("newReleases")
-    public MoviesListResponse getNewReleases() {
+    public NewReleaseMoviesListResponse getNewReleases() {
 
             return webClient.get()
                     .uri(uriBuilder -> uriBuilder
@@ -50,7 +52,7 @@ public class MovieClient {
                             .queryParam("api_key", properties.getApiKey())
                             .build())
                     .retrieve()
-                    .bodyToMono(MoviesListResponse.class)
+                    .bodyToMono(NewReleaseMoviesListResponse.class)
                     .block();
     }
 

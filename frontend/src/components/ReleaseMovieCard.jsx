@@ -1,6 +1,9 @@
 /*REACT*/
 import { useState } from "react";
 
+//JS
+import { backdropPathBase } from "../js/constants";
+
 function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
 
   return (
@@ -10,11 +13,11 @@ function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
 
             <div className="z-20 flex flex-col items-start justify-center md:h-[250px] md:w-[400px] md:ml-[150px]">
                 
-                <h1 className="text-2xl md:text-5xl font-bold text-white">{movie.title}</h1>
+                <h1 className="text-2xl md:text-5xl font-bold text-white">{movie?.title}</h1>
 
-                <span className="block text-xs text-gray-300">{movie.year}</span>
+                <span className="block text-xs text-gray-300">{movie?.release_date?.substring(0,4)}</span>
 
-                <p className="text-gray-500 text-left text-sm mt-2">{movie.description}</p>
+                <p className="text-gray-500 text-left text-sm mt-2">{movie?.overview}</p>
                 
                 <button className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 mt-4 font-bold" onClick={() => onOpenTrailerModal(movie)}>
                     Watch Trailer
@@ -29,7 +32,7 @@ function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
 
-            <img className="w-full h-full object-cover object-[center_50%] border-2 border-black" src={movie.image} alt={movie.title} />
+            <img className="w-full h-full object-cover object-[center_50%] border-2 border-black" src={backdropPathBase+movie?.backdrop_path} alt={movie?.title} />
         </div>
 
     </div>

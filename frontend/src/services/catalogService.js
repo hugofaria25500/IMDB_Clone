@@ -24,7 +24,9 @@ export async function getTrendingMovies() {
 }
 
 export async function getNewMoviesReleases() {
-  return newMoviesReleases;
+  const response = await api.get("/movies/newReleases");
+  console.log(response.data.results);
+  return response.data.results;
 }
 
 export async function getRandomMovie() {

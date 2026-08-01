@@ -3,6 +3,7 @@ package com.example.backend.Controllers;
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
+import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class MovieController {
     }
 
     @GetMapping("/newReleases")
-    public ResponseEntity<MoviesListResponse> getNewReleaseMovies() {
+    public ResponseEntity<NewReleaseMoviesListResponse> getNewReleaseMovies() {
         return ResponseEntity.ok(movieService.getNewReleaseMovies());
     }
 
