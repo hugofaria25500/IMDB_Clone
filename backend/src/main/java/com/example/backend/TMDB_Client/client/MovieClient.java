@@ -1,9 +1,7 @@
 package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
-import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
-import com.example.backend.TMDB_Client.response.RandomMovieResponse;
-import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
+import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,7 @@ public class MovieClient {
     private final TMDBProperties properties;
 
     @Cacheable("popularMovies")
-    public PopularMoviesListResponse getPopularMovies() {
+    public MoviesListResponse getPopularMovies() {
 
         return webClient.get()
             .uri(uriBuilder -> uriBuilder
@@ -27,34 +25,47 @@ public class MovieClient {
                     .queryParam("api_key", properties.getApiKey())
                     .build())
             .retrieve()
-            .bodyToMono(PopularMoviesListResponse.class)
+            .bodyToMono(MoviesListResponse.class)
             .block();
     }
 
     @Cacheable("trendingMovies")
-    public TrendingMoviesListResponse getTrendingMovies() {
+    public MoviesListResponse getTrendingMovies() {
         return webClient.get()
             .uri(uriBuilder -> uriBuilder
                     .path("/trending/movie/week")
                     .queryParam("api_key", properties.getApiKey())
                     .build())
             .retrieve()
-            .bodyToMono(TrendingMoviesListResponse.class)
+            .bodyToMono(MoviesListResponse.class)
             .block();
     }
 
-    public RandomMovieResponse getRandomMovie() {
+    @Cacheable("newReleases")
+    public MoviesListResponse getNewReleases() {
 
-        int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 501);
+            return webClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/movie/now_playing")
+                            .queryParam("api_key", properties.getApiKey())
+                            .build())
+                    .retrieve()
+                    .bodyToMono(MoviesListResponse.class)
+                    .block();
+    }
+
+    public MoviesListResponse getRandomMovie() {
+
+        int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 301);
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/trending/movie/week")
                         .queryParam("api_key", properties.getApiKey())
-                        .queryParam("sort_by", "popularity.desc")
+                        .queryParam("sort_by", "popularity.asc")
                         .queryParam("page", randomizePageResult)
                         .build())
                 .retrieve()
-                .bodyToMono(RandomMovieResponse.class)
+                .bodyToMono(MoviesListResponse.class)
                 .block();
     }
 

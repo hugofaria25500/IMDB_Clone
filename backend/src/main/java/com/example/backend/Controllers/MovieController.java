@@ -2,12 +2,10 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
-import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
-import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
+import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +19,18 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping("/popular")
-    public ResponseEntity<PopularMoviesListResponse> getPopularMovies() {
+    public ResponseEntity<MoviesListResponse> getPopularMovies() {
         return ResponseEntity.ok(movieService.getPopularMovies());
     }
 
     @GetMapping("/trending")
-    public ResponseEntity<TrendingMoviesListResponse> getTrendingMovies() {
+    public ResponseEntity<MoviesListResponse> getTrendingMovies() {
         return ResponseEntity.ok(movieService.getTrendingMovies());
+    }
+
+    @GetMapping("/newReleases")
+    public ResponseEntity<MoviesListResponse> getNewReleaseMovies() {
+        return ResponseEntity.ok(movieService.getNewReleaseMovies());
     }
 
     @GetMapping("/random")
