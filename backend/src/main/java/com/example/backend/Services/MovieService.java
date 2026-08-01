@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.MovieClient;
+import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
 import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
 import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,9 @@ public class MovieService {
     }
 
     public TrendingMoviesListResponse getTrendingMovies() { return movieClient.getTrendingMovies(); }
+
+    public BasicMovieDTO getRandomMovie(){
+        return movieClient.getRandomMovie().getResults().get(0);
+    }
 
 }

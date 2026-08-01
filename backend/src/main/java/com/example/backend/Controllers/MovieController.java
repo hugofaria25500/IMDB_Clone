@@ -1,6 +1,7 @@
 package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
+import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
 import com.example.backend.TMDB_Client.response.PopularMoviesListResponse;
 import com.example.backend.TMDB_Client.response.TrendingMoviesListResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,7 @@ public class MovieController {
     }
 
     @GetMapping("/random")
-    public ResponseEntity<TrendingMoviesListResponse> getRandomMovie() {
-        //TO DO: substituir
-        return ResponseEntity.ok(null);
+    public ResponseEntity<BasicMovieDTO> getRandomMovie() {
+        return ResponseEntity.ok(movieService.getRandomMovie());
     }
 }
