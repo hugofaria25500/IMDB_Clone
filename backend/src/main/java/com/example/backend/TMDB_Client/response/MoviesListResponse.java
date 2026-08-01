@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PopularMoviesListResponse {
+public class MoviesListResponse {
 
     @JsonProperty("results")
     private List<BasicMovieDTO> results;
