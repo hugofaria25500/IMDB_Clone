@@ -11,6 +11,7 @@ import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
 import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
+import SearchSection from "../components/SearchSection"
 
 /*JS*/
 import { useMovies } from "../hooks/useMovies";
@@ -53,6 +54,8 @@ function MoviesPage() {
             <Navbar />
             {/* MOVIE CAROUSELS */}
             <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
+            {/* MOVIE SEARCH */}
+            <SearchSection onOpenModal={openModal} label={"movies"}/>
             {/* MOVIE FILTERS */}
             <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movies"}/>
             {/* POPULAR MOVIES CAROUSEL */}

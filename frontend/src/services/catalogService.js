@@ -23,9 +23,18 @@ export async function getTrendingMovies() {
   return response.data.results;
 }
 
+export async function searchMovies(query, page = 1) {
+    const { data } = await api.get("/movies/search", {
+        params: {
+            query,
+            page
+        }
+    });
+    return data;
+}
+
 export async function getNewMoviesReleases() {
   const response = await api.get("/movies/newReleases");
-  console.log(response.data.results);
   return response.data.results;
 }
 

@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 
 /*COMPONENTS*/
-import SearchBar from "./SearchBar";
 import QuickFilters from "./QuickFilters";
 import FilterBox from "./FilterBox";
 import Grid from "./Grid";
@@ -17,7 +16,6 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   const resultsRef = useRef(null);
 
   const [filters, setFilters] = useState({
-    search: "",
     genre: null,
     yearFrom: "",
     yearTo: "",
@@ -28,10 +26,6 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
   const filteredCatalog = useMemo(() => {
 
     let result = catalog;
-
-     if (filters.search) {
-        result = result.filter(movie => movie.title.toLowerCase().includes(filters.search.toLowerCase()));
-    }
 
     if (filters.genre) {
         result = result.filter(movie =>
@@ -84,7 +78,7 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
 
   useEffect(() => {
     setPage(1);
-  }, [filters.search, filters.genre, filters.yearFrom, filters.yearTo, filters.rating, filters.sortBy]);
+  }, [filters.genre, filters.yearFrom, filters.yearTo, filters.rating, filters.sortBy]);
 
   const scrollToResults = () => {
     if (!resultsRef.current) return;
@@ -131,8 +125,6 @@ function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
           {label === "series" && "Explore unforgettable stories, one episode at a time."}
         </p>
       </div>
-
-      <SearchBar value={filters.search} onChange={(value) => setFilters(prev => ({...prev, search: value,}))} label={label} />
 
       {/* Fast category shortcuts above the full filter area */}
       <QuickFilters selectedGenre={filters.genre}
