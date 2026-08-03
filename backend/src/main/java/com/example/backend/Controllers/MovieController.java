@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
+import com.example.backend.TMDB_Client.response.DiscoverMoviesListResponse;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
 import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
@@ -44,5 +45,17 @@ public class MovieController {
     @GetMapping("/search")
     public ResponseEntity<SearchMoviesListResponse> getSearchMoviesResults(@RequestParam(defaultValue = "") String query, @RequestParam(defaultValue = "1") int page) {
         return ResponseEntity.ok(movieService.getSearchMoviesResults(query, page));
+    }
+
+    @GetMapping("/discover")
+    public ResponseEntity<DiscoverMoviesListResponse> discoverMovies(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(required = false) Integer genre,
+            @RequestParam(required = false) Integer yearFrom,
+            @RequestParam(required = false) Integer yearTo,
+            @RequestParam(required = false) Double rating,
+            @RequestParam(defaultValue = "popularity.desc") String sortBy) {
+
+        return ResponseEntity.ok(movieService.discoverMovies(page, genre, yearFrom, yearTo,  rating, sortBy));
     }
 }

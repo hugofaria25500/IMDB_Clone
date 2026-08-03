@@ -2,6 +2,7 @@ package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.MovieClient;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
+import com.example.backend.TMDB_Client.response.DiscoverMoviesListResponse;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
 import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
@@ -27,5 +28,9 @@ public class MovieService {
     }
 
     public SearchMoviesListResponse getSearchMoviesResults(String query, int page) { return movieClient.getSearchMovieResults(query,page); }
+
+    public DiscoverMoviesListResponse discoverMovies(Integer page, Integer genre, Integer yearFrom, Integer yearTo, Double rating, String sortBy) {
+        return movieClient.discoverMovies(page, genre, yearFrom, yearTo, rating, sortBy);
+    }
 
 }
