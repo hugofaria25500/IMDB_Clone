@@ -1,6 +1,6 @@
 package com.example.backend.TMDB_Client.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 import java.util.List;
@@ -8,21 +8,21 @@ import java.util.List;
 @Data
 public class BasicMovieDTO {
 
-    @JsonProperty("id")
+    @JsonAlias("id")
     private int id;
 
-    @JsonProperty("title")
+    @JsonAlias("title")
     private String title;
 
-    @JsonProperty("poster_path")
+    @JsonAlias("poster_path")
     private String posterPath;
 
-    @JsonProperty("genre_ids")
+    @JsonAlias("genre_ids")
     private List<Integer> genreIds;
 
-    @JsonProperty("release_date")
+    @JsonAlias("release_date")
     private String releaseDate;
 
-    @JsonProperty("vote_average")
+    @JsonAlias("vote_average")
     private String rating;
 }
