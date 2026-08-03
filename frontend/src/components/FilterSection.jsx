@@ -6,7 +6,10 @@ import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
+/* JS */
+import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
+
+function FilterSection({onOpenModal, label}) {
 
     const resultsRef = useRef(null);
 
@@ -17,8 +20,15 @@ function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
         yearFrom: "",
         yearTo: "",
         rating: "all",
-        sortBy: "alphabetical",
+        sortBy: "popularity.desc",
     });
+
+    console.log(filters);
+    const {
+        results,
+        totalPages,
+        loading
+    } = useDiscoverMovies(filters, page);
 
     useEffect(() => {
         setPage(1);
@@ -28,20 +38,10 @@ function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
 
         setPage(nextPage);
 
-        if (resultsRef.current) {
-
-            const y =
-                resultsRef.current.getBoundingClientRect().top +
-                window.scrollY -
-                100;
-
-            window.scrollTo({
-                top: y,
-                behavior: "smooth"
-            });
-
-        }
-
+        resultsRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
     };
 
     return (
@@ -49,7 +49,7 @@ function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
         <div className="bg-black text-white">
 
             {/* Hero */}
-            <div className="w-full py-4 mt-5 flex flex-col items-center text-center">
+            <div ref={resultsRef} className="w-full py-4 mt-5 flex flex-col items-center text-center">
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
                     {label === "movies"
@@ -98,15 +98,14 @@ function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
             >
 
                 <Grid
-                    catalog={catalog}
+                    catalog={results}
                     loading={loading}
                     onOpenModal={onOpenModal}
-                    hasSearched={true}
                 />
 
                 <GridPagination
                     currentPage={page}
-                    totalPages={1}
+                    totalPages={totalPages}
                     onPageChange={handlePageChange}
                 />
 

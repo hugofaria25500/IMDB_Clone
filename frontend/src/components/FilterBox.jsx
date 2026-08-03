@@ -78,7 +78,14 @@ function FilterBox({ filters, onFilterChange }) {
             {/* Rating */}
             <div className="w-1/3">
               <label className="text-gray-400 text-sm">Rating</label>
-              <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.rating} onChange={(e) => onFilterChange({ rating: e.target.value })}>
+              <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.rating} onChange={(e) =>
+                  onFilterChange({
+                      rating:
+                          e.target.value === "all"
+                              ? "all"
+                              : parseFloat(e.target.value),
+                  })
+              }>
                 <option value="all">All</option>
                 <option value={6}>6+</option>
                 <option value={7}>7+</option>
@@ -88,15 +95,15 @@ function FilterBox({ filters, onFilterChange }) {
             </div>
 
             {/* Sort */}
-          <div className="w-1/3">
-            <label className="text-gray-400 text-sm">Sort By</label>
-            <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.sortBy} onChange={(e) => onFilterChange({ sortBy: e.target.value })}>
-              <option value="alphabetical">Alphabetical</option>
-              <option value="popular">Popular</option>
-              <option value="latest">Latest</option>
-              <option value="top_rated">Top Rated</option>
-            </select>
-          </div>
+            <div className="w-1/3">
+              <label className="text-gray-400 text-sm">Sort By</label>
+              <select className="w-full mt-2 bg-zinc-800 p-2 rounded-md text-white" value={filters.sortBy} onChange={(e) => onFilterChange({ sortBy: e.target.value })}>
+                <option value="popularity.desc">Most Popular</option>
+                <option value="release_date.desc">Latest Releases</option>
+                <option value="vote_average.desc">Top Rated</option>
+                <option value="title.asc">Alphabetical</option>
+              </select>
+            </div>
 
           </div>
 

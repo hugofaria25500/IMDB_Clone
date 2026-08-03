@@ -43,6 +43,27 @@ export async function getRandomMovie() {
   return response.data;
 }
 
+export async function getMovieGenres() {
+  const response = await api.get("/genres/movies");  
+  return response.data;  
+}
+
+export async function discoverMovies(filters, page) {
+
+    const { data } = await api.get("/movies/discover", {
+        params: {
+            page,
+            genre: filters.genre || undefined,
+            yearFrom: filters.yearFrom || undefined,
+            yearTo: filters.yearTo || undefined,
+            rating: filters.rating !== "all" ? filters.rating : undefined,
+            sortBy: filters.sortBy || undefined,
+        },
+    });
+
+    return data;
+}
+
 export async function getMoviesDetails() {
   return moviesDetailedMock;
 }

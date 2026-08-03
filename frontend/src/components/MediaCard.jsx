@@ -27,7 +27,7 @@ function MediaCard({ item, onClick }) {
                     {item.title}
                 </h3>
                 <p className="text-xs text-gray-400">
-                    {item?.releaseDate?.substring(0,4)} • ⭐ {item?.voteAverage?.substring(0,3)}
+                    {item?.releaseDate?.substring(0,4)} • ⭐ {item?.rating?.substring(0,3)}
                 </p>
             </div>
         </div>
