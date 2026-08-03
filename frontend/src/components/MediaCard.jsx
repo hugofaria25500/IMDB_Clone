@@ -10,7 +10,7 @@ function MediaCard({ item, onClick }) {
         >
             <div className="relative h-[250px] w-full overflow-hidden">
                 <img
-                    src={posterPathBase+item?.poster_path}
+                    src={posterPathBase+item?.posterPath}
                     alt={item?.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
@@ -27,7 +27,7 @@ function MediaCard({ item, onClick }) {
                     {item.title}
                 </h3>
                 <p className="text-xs text-gray-400">
-                    {item?.release_date?.substring(0,4)} • ⭐ {item?.vote_average?.substring(0,3)}
+                    {item?.releaseDate?.substring(0,4)} • ⭐ {item?.voteAverage?.substring(0,3)}
                 </p>
             </div>
         </div>

@@ -24,7 +24,7 @@ export function useSearchMovies(query, page) {
                 const data = await searchMovies(query, page);
 
                 setResults(data.results);
-                setTotalPages(data.results.length === 0? 0: data.total_pages);
+                setTotalPages(data.results.length === 0? 0: data.totalPages);
 
             } catch (error) {
                 console.error("Error searching movies:", error);
