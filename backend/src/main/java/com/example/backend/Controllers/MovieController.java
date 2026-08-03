@@ -4,11 +4,13 @@ import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
+import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,5 +39,10 @@ public class MovieController {
     @GetMapping("/random")
     public ResponseEntity<BasicMovieDTO> getRandomMovie() {
         return ResponseEntity.ok(movieService.getRandomMovie());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<SearchMoviesListResponse> getSearchMoviesResults(@RequestParam(defaultValue = "") String query, @RequestParam(defaultValue = "1") int page) {
+        return ResponseEntity.ok(movieService.getSearchMoviesResults(query, page));
     }
 }

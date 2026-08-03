@@ -4,6 +4,7 @@ import com.example.backend.TMDB_Client.client.MovieClient;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
+import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,7 @@ public class MovieService {
     public BasicMovieDTO getRandomMovie(){
         return movieClient.getRandomMovie().getResults().get(0);
     }
+
+    public SearchMoviesListResponse getSearchMoviesResults(String query, int page) { return movieClient.getSearchMovieResults(query,page); }
 
 }

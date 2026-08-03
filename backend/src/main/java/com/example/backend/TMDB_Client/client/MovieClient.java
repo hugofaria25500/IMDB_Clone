@@ -4,6 +4,7 @@ import com.example.backend.TMDB_Client.config.TMDBProperties;
 import com.example.backend.TMDB_Client.dto.NewReleaseMovieDTO;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
+import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -71,19 +72,19 @@ public class MovieClient {
                 .block();
     }
 
-    public String getUpcomingMovies() {
-        return null;
+    public SearchMoviesListResponse getSearchMovieResults(String query, int page) {
+
+        int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 301);
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/search/movie")
+                        .queryParam("api_key", properties.getApiKey())
+                        .queryParam("query", query)
+                        .queryParam("page", page)
+                        .build())
+                .retrieve()
+                .bodyToMono(SearchMoviesListResponse.class)
+                .block();
     }
 
-    public String getMovieById(int movieId) {
-        return null;
-    }
-
-    public String searchMovies(String query) {
-        return null;
-    }
-
-    public String discoverMovies() {
-        return null;
-    }
 }
