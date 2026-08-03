@@ -1,158 +1,121 @@
-/*REACT*/
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
-/*COMPONENTS*/
+/* COMPONENTS */
 import QuickFilters from "./QuickFilters";
 import FilterBox from "./FilterBox";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function FilterSection({ catalog = [], onOpenModal, loading = false, label}) {
-  const pageSize = 24;
-  const scrollOffset = 300;
+function FilterSection({ catalog = [], loading = false, onOpenModal, label}) {
 
-  const [page, setPage] = useState(1);
-  const [isPageLoading, setIsPageLoading] = useState(false);
-  const resultsRef = useRef(null);
+    const resultsRef = useRef(null);
 
-  const [filters, setFilters] = useState({
-    genre: null,
-    yearFrom: "",
-    yearTo: "",
-    rating: "all",
-    sortBy: "alphabetical",
-  });
+    const [page, setPage] = useState(1);
 
-  const filteredCatalog = useMemo(() => {
-
-    let result = catalog;
-
-    if (filters.genre) {
-        result = result.filter(movie =>
-            movie.genres.includes(filters.genre)
-        );
-    }
-
-    if (filters.yearFrom) {
-        result = result.filter(movie => movie.year >= filters.yearFrom);
-    }
-
-    if (filters.yearTo) {
-      if (filters.yearFrom) {
-        result = result.filter(movie => movie.year >= filters.yearFrom && movie.year <= filters.yearTo);
-      } else {
-        result = result.filter(movie => movie.year <= filters.yearTo);
-      }
-    }
-
-    if (filters.rating !== "all") {
-        result = result.filter(movie => movie.rating >= Number(filters.rating));
-    }
-
-    if (filters.sortBy === "alphabetical") {
-        result = [...result.sort((a, b) => a.title.localeCompare(b.title))];
-    } else if (filters.sortBy === "popular") {
-        result = [...result.sort((a, b) => b.views - a.views)];
-    } else if (filters.sortBy === "latest") {
-        result = [...result.sort((a, b) => b.year - a.year)];
-    } else if (filters.sortBy === "top_rated") {
-        result = [...result.sort((a, b) => b.rating - a.rating)];
-    }
-
-    return result;
-
-  }, [catalog, filters]);
-
-  /* Keep at least one page available while the catalog is still loading. */
-  const totalPages = Math.max(Math.ceil(filteredCatalog.length / pageSize), 1);
-
-  /* The current page decides which slice of the catalog is shown in the grid. */
-  const firstItemIndex = (page - 1) * pageSize;
-  const lastItemIndex = firstItemIndex + pageSize;
-  const paginatedCatalog = filteredCatalog.slice(firstItemIndex, lastItemIndex);
-
-  /* When the catalog changes, return to page one so the page number never feels stale. */
-  useEffect(() => {
-    setPage(1);
-  }, [catalog]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [filters.genre, filters.yearFrom, filters.yearTo, filters.rating, filters.sortBy]);
-
-  const scrollToResults = () => {
-    if (!resultsRef.current) return;
-
-    const resultsTop =
-      resultsRef.current.getBoundingClientRect().top +
-      window.scrollY -
-      scrollOffset;
-
-    window.scrollTo({
-      top: resultsTop,
-      behavior: "smooth",
+    const [filters, setFilters] = useState({
+        genre: null,
+        yearFrom: "",
+        yearTo: "",
+        rating: "all",
+        sortBy: "alphabetical",
     });
-  };
 
-  const getValidPage = (nextPage) => {
-    return Math.min(Math.max(nextPage, 1), totalPages);
-  };
+    useEffect(() => {
+        setPage(1);
+    }, [filters]);
 
- const handlePageChange = async (nextPage) => {
-      const validPage = getValidPage(nextPage);
+    const handlePageChange = (nextPage) => {
 
-      if (validPage === page) return;
+        setPage(nextPage);
 
-      setPage(validPage);
-      scrollToResults();
+        if (resultsRef.current) {
 
-      setIsPageLoading(true);
-      // delay fake
-      await new Promise(resolve => setTimeout(resolve, 800));
-      setIsPageLoading(false);
-  };    
+            const y =
+                resultsRef.current.getBoundingClientRect().top +
+                window.scrollY -
+                100;
 
-  return (
-    <div className="min-h-screen bg-black text-white px-[25px]">
-      {/* Hero section */}
-      <div className="w-full h-auto min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
-          {label === "movies" && "Your Movie Journey Starts Here"}
-          {label === "series" && "Discover Your Next Favorite Series"}
-        </h1>
-        <p className="text-gray-400 mt-2">
-          {label === "movies" && "Search and discover films you'll love"}
-          {label === "series" && "Explore unforgettable stories, one episode at a time."}
-        </p>
-      </div>
+            window.scrollTo({
+                top: y,
+                behavior: "smooth"
+            });
 
-      {/* Fast category shortcuts above the full filter area */}
-      <QuickFilters selectedGenre={filters.genre}
-        onSelect={(genre) =>
-            setFilters(prev => ({
-                ...prev,
-                genre: prev.genre === genre ? null : genre,
-            }))
-        }/>
+        }
 
-      <div ref={resultsRef} className="flex flex-col lg:flex-row gap-8 px-4 lg:px-6 mt-10">
-        {/* Left column with the detailed filters */}
-        <FilterBox filters={filters} onFilterChange={(newFilters) => setFilters(prev => ({...prev, ...newFilters}))} />
+    };
 
-        <div className="flex-1">
-          {/* Only the items for the selected page reach the grid */}
-          <Grid catalog={paginatedCatalog} onOpenModal={onOpenModal} loading={loading || isPageLoading} />
+    return (
 
-          {/* Page controls send the next page request back to this component */}
-          <GridPagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+        <div className="bg-black text-white">
+
+            {/* Hero */}
+            <div className="w-full py-4 mt-5 flex flex-col items-center text-center">
+
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
+                    {label === "movies"
+                        ? "Your Movie Journey Starts Here"
+                        : "Discover Your Next Favorite Series"}
+                </h1>
+
+                <p className="text-gray-400 mt-2">
+                    {label === "movies"
+                        ? "Search and discover films you'll love"
+                        : "Explore unforgettable stories, one episode at a time."}
+                </p>
+
+            </div>
+
+            {/* Quick Genres */}
+            <QuickFilters
+                selectedGenre={filters.genre}
+                onSelect={(genre) =>
+                    setFilters(prev => ({
+                        ...prev,
+                        genre: prev.genre === genre ? null : genre
+                    }))
+                }
+            />
+
+            {/* Filters */}
+            <div className="mt-8 flex justify-center">
+
+                <FilterBox
+                    filters={filters}
+                    onFilterChange={(newFilters) =>
+                        setFilters(prev => ({
+                            ...prev,
+                            ...newFilters
+                        }))
+                    }
+                />
+
+            </div>
+
+            {/* Results */}
+            <div
+                ref={resultsRef}
+                className="mt-10 px-[15%]"
+            >
+
+                <Grid
+                    catalog={catalog}
+                    loading={loading}
+                    onOpenModal={onOpenModal}
+                    hasSearched={true}
+                />
+
+                <GridPagination
+                    currentPage={page}
+                    totalPages={1}
+                    onPageChange={handlePageChange}
+                />
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  );
+
+    );
+
 }
 
 export default FilterSection;
