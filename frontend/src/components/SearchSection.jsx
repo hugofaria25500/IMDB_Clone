@@ -77,8 +77,7 @@ function SearchSection({ label, onOpenModal }) {
                         catalog={results}
                         loading={loading}
                         onOpenModal={onOpenModal}
-                        emptyTitle={"No Movies Found"}
-                        emptyDescription={"Try to Search For a Different Movie."}
+                        hasSearched={query.trim().length > 0}
                     />
 
                     <GridPagination

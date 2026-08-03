@@ -15,7 +15,7 @@ function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
                 
                 <h1 className="text-2xl md:text-5xl font-bold text-white">{movie?.title}</h1>
 
-                <span className="block text-xs text-gray-300">{movie?.release_date?.substring(0,4)}</span>
+                <span className="block text-xs text-gray-300">{movie?.releaseDate?.substring(0,4)}</span>
 
                 <p className="text-gray-500 text-left text-sm mt-2">{movie?.overview}</p>
                 
@@ -32,7 +32,7 @@ function ReleaseMovieCard({ movie, onOpenTrailerModal }) {
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
             <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
 
-            <img className="w-full h-full object-cover object-[center_50%] border-2 border-black" src={backdropPathBase+movie?.backdrop_path} alt={movie?.title} />
+            <img className="w-full h-full object-cover object-[center_50%] border-2 border-black" src={backdropPathBase+movie?.backdropPath} alt={movie?.title} />
         </div>
 
     </div>

@@ -1,7 +1,7 @@
 /*COMPONENTS*/
 import MediaCard from "../components/MediaCard";
 
-function Grid({ catalog = [], onOpenModal, loading, emptyTitle, emptyDescription }) {
+function Grid({ catalog = [], onOpenModal, loading, hasSearched }) {
     if (loading) {
         return (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -21,16 +21,32 @@ function Grid({ catalog = [], onOpenModal, loading, emptyTitle, emptyDescription
         );
     }
 
+    if (!hasSearched) {
+        return (
+            <div className="flex flex-col items-center justify-center">
+
+                <h2 className="text-2xl font-semibold text-white">
+                    Lights, Camera... Search!
+                </h2>
+
+                <p className="text-gray-400 mt-3">
+                    Start typing a movie title above and we'll help you find your next favorite film.
+                </p>
+
+            </div>
+        );
+    }
+
     if (catalog.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center">
 
                 <h2 className="text-2xl font-semibold">
-                    {emptyTitle}
+                    No Movies Found
                 </h2>
 
                 <p className="text-gray-400 mt-3">
-                    {emptyDescription}
+                    We couldn't find any matches. Try another title, check the spelling, or search using fewer words.
                 </p>
 
             </div>
