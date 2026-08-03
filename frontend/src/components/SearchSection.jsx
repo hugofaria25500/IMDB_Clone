@@ -53,14 +53,14 @@ function SearchSection({ label, onOpenModal }) {
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
                     {label === "movies"
-                        ? "Search Movies"
-                        : "Search Series"}
+                        ? "Find Your Next Favorite Movie"
+                        : "Find Your Next Favorite Series"}
                 </h1>
 
                 <p className="text-gray-400 mt-2">
                     {label === "movies"
-                        ? "Search by movie title."
-                        : "Search by series title."}
+                        ? "From timeless classics to the latest blockbusters, discover movies you'll love."
+                        : "Explore unforgettable stories, one episode at a time."}
                 </p>
             </div>
 

@@ -40,8 +40,6 @@ function ShuffleSection( { type, onOpenModal, loading } ) {
             result = await getRandomSerie();
         }
 
-        await new Promise(resolve => setTimeout(resolve, 800));
-
         setSelectedItem(result);
         setIsShuffling(false);        
     }

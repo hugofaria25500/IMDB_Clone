@@ -10,7 +10,7 @@ function Grid({ catalog = [], onOpenModal, loading, hasSearched }) {
                         key={i}
                         className="rounded-xl overflow-hidden"
                     >
-                        <div className="h-[250px] bg-zinc-800 rounded-xl animate-pulse" />
+                        <div className="h-[250px] w-[200px] bg-zinc-800 rounded-xl animate-pulse" />
 
                         <div className="mt-3 h-4 rounded bg-zinc-800 animate-pulse" />
 
