@@ -1,54 +1,40 @@
 /*REACT*/
 import React from "react";
 
-function GridPagination({ currentPage, totalPages, onPageChange }) {
+function GridPagination({
+    currentPage,
+    totalPages,
+    onPageChange
+}) {
 
-    const page = currentPage;
-    
-    const getPages = () => {
-        let start = Math.max(page - 2, 1);
-        let end = Math.min(start + 4, totalPages);
-        if (end - start < 4) {
-            start = Math.max(end - 4, 1);
-        }   
-        return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-    };
+    if (totalPages <= 1) return null;
 
-    {/* PAGINATION */}
     return (
-          <div className="flex justify-center mt-10 gap-2 flex-wrap">
+
+        <div className="flex items-center justify-center gap-8 mt-12">
 
             <button
-              onClick={() => onPageChange(page - 1)}
-              disabled={page === 1}
-              className="px-4 py-2 rounded-md bg-zinc-800 disabled:opacity-50 hover:bg-purple-600 transition"
+                disabled={currentPage === 1}
+                onClick={() => onPageChange(currentPage - 1)}
+                className="px-5 py-2 rounded-lg bg-zinc-800 hover:bg-violet-600 disabled:opacity-40 disabled:hover:bg-zinc-800 transition"
             >
-              Prev
+                Previous
             </button>
 
-            {getPages().map((p) => (
-              <button
-                key={p}
-                onClick={() => onPageChange(p)}
-                className={`px-4 py-2 rounded-md transition-all duration-300 ${
-                  page === p
-                    ? "bg-purple-600 text-white"
-                    : "bg-zinc-800 hover:bg-purple-600"
-                }`}
-              >
-                {p}
-              </button>
-            ))}
+            <span className="text-gray-300">
+                Page <span className="font-semibold text-white">{currentPage}</span> of {totalPages}
+            </span>
 
             <button
-              onClick={() => onPageChange(page + 1)}
-              disabled={page === totalPages}
-              className="px-4 py-2 rounded-md bg-zinc-800 disabled:opacity-50 hover:bg-purple-600 transition"
+                disabled={currentPage === totalPages}
+                onClick={() => onPageChange(currentPage + 1)}
+                className="px-5 py-2 rounded-lg bg-zinc-800 hover:bg-violet-600 disabled:opacity-40 disabled:hover:bg-zinc-800 transition"
             >
-              Next
+                Next
             </button>
 
         </div>
+
     );
 }
 

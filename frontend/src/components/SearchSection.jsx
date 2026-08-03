@@ -1,5 +1,5 @@
 /* REACT */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* COMPONENTS */
 import SearchBar from "./SearchBar";
@@ -12,23 +12,44 @@ import { useSearchMovies } from "../hooks/useSearchMovies";
 function SearchSection({ label, onOpenModal }) {
 
     const [query, setQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState("");
     const [page, setPage] = useState(1);
 
     const {
         results,
         totalPages,
         loading
-    } = useSearchMovies(query, page);
+    } = useSearchMovies(debouncedQuery, page);
+
+    const resultsRef = useRef(null);
 
     useEffect(() => {
         setPage(1);
     }, [query]);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 400);
+        return () => clearTimeout(timeout);
+    }, [query]);
+
+    const handlePageChange = (nextPage) => {
+
+        setPage(nextPage);
+
+        resultsRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    };
+
     return (
-        <div className="min-h-screen bg-black text-white px-[25px]">
+        <div className="bg-black text-white mb-[100px]">
 
             {/* Hero */}
-            <div className="w-full min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center">
+            <div ref={resultsRef} className="w-full min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center">
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
                     {label === "movies"
@@ -41,10 +62,9 @@ function SearchSection({ label, onOpenModal }) {
                         ? "Search by movie title."
                         : "Search by series title."}
                 </p>
-
             </div>
 
-            <SearchBar
+            <SearchBar 
                 value={query}
                 onChange={setQuery}
                 label={label}
@@ -52,17 +72,21 @@ function SearchSection({ label, onOpenModal }) {
 
             <div className="mt-10">
 
-                <Grid
-                    catalog={results}
-                    loading={loading}
-                    onOpenModal={onOpenModal}
-                />
+                <div className="px-[15%]">
+                    <Grid
+                        catalog={results}
+                        loading={loading}
+                        onOpenModal={onOpenModal}
+                        emptyTitle={"No Movies Found"}
+                        emptyDescription={"Try to Search For a Different Movie."}
+                    />
 
-                <GridPagination
-                    currentPage={page}
-                    totalPages={totalPages}
-                    onPageChange={setPage}
-                />
+                    <GridPagination
+                        currentPage={page}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
+                </div>
 
             </div>
 

@@ -24,16 +24,14 @@ export function useSearchMovies(query, page) {
                 const data = await searchMovies(query, page);
 
                 setResults(data.results);
-                setTotalPages(data.totalPages);
+                setTotalPages(data.results.length === 0? 0: data.total_pages);
 
             } catch (error) {
-
                 console.error("Error searching movies:", error);
-
+                setResults([]);
+                setTotalPages(0);
             } finally {
-
                 setLoading(false);
-
             }
         }
 
