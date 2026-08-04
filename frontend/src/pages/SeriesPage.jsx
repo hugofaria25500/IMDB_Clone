@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import FilterSection from '../components/FilterSection';
+import DiscoverSection from '../components/DiscoverSection';
 import SingleItemCarousel from "../components/SingleItemCarousel";
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
@@ -55,7 +55,7 @@ function SeriesPage() {
             {/* SERIES CAROUSELS */}
             <SingleItemCarousel movies={newSeriesReleases} onOpenTrailerModal={openTrailerModal} loading={newSeriesReleasesLoading} />
             {/* SERIES FILTERS */}
-            <FilterSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
+            <DiscoverSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
             {/* POPULAR SERIES CAROUSEL */}
             <MultiItemCarousel title="Popular Series" catalog={popularSeries} onOpenModal={openModal} loading={popularSeriesLoading} />
             {/* TRENDING SERIES CAROUSEL */}

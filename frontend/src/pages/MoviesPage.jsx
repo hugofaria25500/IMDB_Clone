@@ -4,27 +4,43 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import FilterSection from '../components/FilterSection';
 import SingleItemCarousel from "../components/SingleItemCarousel";
+import SearchSection from "../components/SearchSection"
+import DiscoverSection from '../components/DiscoverSection';
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
 import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
-import SearchSection from "../components/SearchSection"
 
 /*JS*/
-import { useMovies } from "../hooks/useMovies";
+import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
+import { useSearchMovies } from "../hooks/useSearchMovies";
+import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
 import { usePopularMovies } from "../hooks/usePopularMovies";
 import { useTrendingMovies } from "../hooks/useTrendingMovies";
-import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
 import { useRandomMovie } from "../hooks/useRandomMovie";
 
 function MoviesPage() {
-    const { movies, loading } = useMovies();
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchPage, setSearchPage] = useState(1);
+
+    const [discoverPage, setDiscoverPage] = useState(1);
+
+    const [filters, setFilters] = useState({
+        genre: null,
+        yearFrom: "",
+        yearTo: "",
+        rating: "all",
+        sortBy: "popularity.desc",
+    });
+
+    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
+    const { results: searchMovies, totalPages: searchTotalPages, loading: searchLoading} = useSearchMovies(searchQuery, searchPage);
+    const { results: discoverMovies,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverMovies(filters, discoverPage);
     const { popularMovies, popularMoviesLoading } = usePopularMovies();
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
-    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
     const { randomMovie, randomMovieLoading } = useRandomMovie();
 
     const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
@@ -55,9 +71,11 @@ function MoviesPage() {
             {/* MOVIE CAROUSELS */}
             <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE SEARCH */}
-            <SearchSection onOpenModal={openModal} label={"movies"}/>
+            <SearchSection label="movies" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
+            results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openModal}/>
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movies"}/>
+            <DiscoverSection label="movies" filters={filters} setFilters={setFilters} page={discoverPage} setPage={setDiscoverPage} 
+            results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openModal}/>
             {/* POPULAR MOVIES CAROUSEL */}
             <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
             {/* TRENDING MOVIES CAROUSEL */}

@@ -9,26 +9,9 @@ import GridPagination from "./GridPagination";
 /* JS */
 import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
 
-function FilterSection({onOpenModal, label}) {
+function DiscoverSection({ label, onOpenModal, filters, setFilters, page, setPage, results, totalPages, loading }) {
 
     const resultsRef = useRef(null);
-
-    const [page, setPage] = useState(1);
-
-    const [filters, setFilters] = useState({
-        genre: null,
-        yearFrom: "",
-        yearTo: "",
-        rating: "all",
-        sortBy: "popularity.desc",
-    });
-
-    console.log(filters);
-    const {
-        results,
-        totalPages,
-        loading
-    } = useDiscoverMovies(filters, page);
 
     useEffect(() => {
         setPage(1);
@@ -42,6 +25,7 @@ function FilterSection({onOpenModal, label}) {
             behavior: "smooth",
             block: "start"
         });
+
     };
 
     return (
@@ -49,7 +33,10 @@ function FilterSection({onOpenModal, label}) {
         <div className="bg-black text-white">
 
             {/* Hero */}
-            <div ref={resultsRef} className="w-full py-4 mt-5 flex flex-col items-center text-center">
+            <div
+                ref={resultsRef}
+                className="w-full py-4 mt-5 flex flex-col items-center text-center"
+            >
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
                     {label === "movies"
@@ -59,13 +46,12 @@ function FilterSection({onOpenModal, label}) {
 
                 <p className="text-gray-400 mt-2">
                     {label === "movies"
-                        ? "Search and discover films you'll love"
-                        : "Explore unforgettable stories, one episode at a time."}
+                        ? "Browse thousands of movies using powerful filters."
+                        : "Discover series by genre, rating and release year."}
                 </p>
 
             </div>
 
-            {/* Quick Genres */}
             <QuickFilters
                 selectedGenre={filters.genre}
                 onSelect={(genre) =>
@@ -76,7 +62,6 @@ function FilterSection({onOpenModal, label}) {
                 }
             />
 
-            {/* Filters */}
             <div className="mt-8 flex justify-center">
 
                 <FilterBox
@@ -91,7 +76,6 @@ function FilterSection({onOpenModal, label}) {
 
             </div>
 
-            {/* Results */}
             <div
                 ref={resultsRef}
                 className="mt-10 px-[15%]"
@@ -117,4 +101,4 @@ function FilterSection({onOpenModal, label}) {
 
 }
 
-export default FilterSection;
+export default DiscoverSection;

@@ -6,32 +6,12 @@ import SearchBar from "./SearchBar";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-/* HOOKS */
-import { useSearchMovies } from "../hooks/useSearchMovies";
-
-function SearchSection({ label, onOpenModal }) {
-
-    const [query, setQuery] = useState("");
-    const [debouncedQuery, setDebouncedQuery] = useState("");
-    const [page, setPage] = useState(1);
-
-    const {
-        results,
-        totalPages,
-        loading
-    } = useSearchMovies(debouncedQuery, page);
+function SearchSection({ label, onOpenModal, query, setQuery, page, setPage, results, totalPages, loading }) {
 
     const resultsRef = useRef(null);
 
     useEffect(() => {
         setPage(1);
-    }, [query]);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setDebouncedQuery(query);
-        }, 400);
-        return () => clearTimeout(timeout);
     }, [query]);
 
     const handlePageChange = (nextPage) => {
@@ -46,10 +26,14 @@ function SearchSection({ label, onOpenModal }) {
     };
 
     return (
+
         <div className="bg-black text-white mb-[100px]">
 
             {/* Hero */}
-            <div ref={resultsRef} className="w-full min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center">
+            <div
+                ref={resultsRef}
+                className="w-full min-h-[100px] mt-[20px] py-4 flex flex-col items-center justify-center text-center"
+            >
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
                     {label === "movies"
@@ -62,35 +46,36 @@ function SearchSection({ label, onOpenModal }) {
                         ? "From timeless classics to the latest blockbusters, discover movies you'll love."
                         : "Explore unforgettable stories, one episode at a time."}
                 </p>
+
             </div>
 
-            <SearchBar 
+            <SearchBar
                 value={query}
                 onChange={setQuery}
                 label={label}
             />
 
-            <div className="mt-10">
+            <div className="mt-10 px-[15%]">
 
-                <div className="px-[15%]">
-                    <Grid
-                        catalog={results}
-                        loading={loading}
-                        onOpenModal={onOpenModal}
-                        hasSearched={query.trim().length > 0}
-                    />
+                <Grid
+                    catalog={results}
+                    loading={loading}
+                    onOpenModal={onOpenModal}
+                    hasSearched={query.trim().length > 0}
+                />
 
-                    <GridPagination
-                        currentPage={page}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                    />
-                </div>
+                <GridPagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                />
 
             </div>
 
         </div>
+
     );
+
 }
 
 export default SearchSection;

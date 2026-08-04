@@ -1,7 +1,3 @@
-/**/
-
-/*MOVIES*/
-import { moviesMock, newMoviesReleases, moviesDetailedMock, favouriteMoviesMock, watchlistMoviesMock } from "../js/data";
 /*SERIES*/
 import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSerie, seriesDetailedMock, favouriteSeriesMock, watchlistSeriesMock } from "../js/data";
 
@@ -9,10 +5,6 @@ import { seriesMock, popularSeries, trendingSeries, newSeriesReleases, randomSer
 import api from "./api";
 
 /*MOVIES*/
-export async function getMovies() {
-  return moviesMock;
-}
-
 export async function getPopularMovies() {
   const response = await api.get("/movies/popular");
   return response.data.results;
@@ -62,6 +54,11 @@ export async function discoverMovies(filters, page) {
     });
 
     return data;
+}
+
+export async function getMovieTrailer(id) {
+  const { data } = await api.get(`/movies/${id}/trailer`);
+  return data.response;
 }
 
 export async function getMoviesDetails() {
