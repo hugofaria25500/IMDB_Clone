@@ -1,40 +1,31 @@
 import { useEffect, useState } from "react";
-import { getMovieTrailer } from "../services/catalogService";
+import { getTrailer } from "../services/catalogService";
 
-export function useMovieTrailer(movieId) {
+export function useTrailer(mediaId, mediaType) {
 
     const [trailer, setTrailer] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
-        if (!movieId) return;
+        if (!mediaId && !mediaType) return;
 
         async function loadTrailer() {
 
             try {
 
                 setLoading(true);
-
-                const data = await getMovieTrailer(movieId);
-
+                const data = await getTrailer(mediaId, mediaType);
                 setTrailer(data);
 
             } catch (error) {
-
                 console.error("Error loading trailer:", error);
-
             } finally {
-
                 setLoading(false);
-
             }
-
         }
-
         loadTrailer();
-
-    }, [movieId]);
+    }, [mediaId, mediaType]);
 
     return {
         trailer,

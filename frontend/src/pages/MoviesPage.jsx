@@ -43,15 +43,18 @@ function MoviesPage() {
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
     const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
-    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
+    const [selectedTrailer, setSelectedTrailer] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
 
     function openTrailerModal(item) {
-        setSelectedTrailerItem(item);
+        setSelectedTrailer({
+            id: item.id,
+            type: "movies"
+        });
     }
 
     function closeTrailerModal() {
-        setSelectedTrailerItem(null);
+        setSelectedTrailer(null);
     }
 
     function openModal(item) {
@@ -85,9 +88,10 @@ function MoviesPage() {
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
-            {selectedTrailerItem && (
+            {selectedTrailer && (
                 <TrailerModal
-                    item={selectedTrailerItem}
+                    mediaId={selectedTrailer.id}
+                    mediaType={selectedTrailer.type}
                     onClose={closeTrailerModal}
                 />
             )}

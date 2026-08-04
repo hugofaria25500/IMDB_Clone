@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 
 /*COMPONENTS*/
-import { useMovieTrailer } from "../hooks/useMovieTrailer";
+import { useTrailer } from "../hooks/useTrailer";
 
 /*JS*/
 import { youtubePathBase } from "../js/constants";
@@ -10,14 +10,16 @@ import { youtubePathBase } from "../js/constants";
 /*IMAGES*/
 import crossLogo from "../assets/cross_Logo.png";
 
-function TrailerModal({ item, onClose }) { 
+function TrailerModal({ mediaId, mediaType, onClose }) {
 
     const {
         trailer,
         loading
-    } = useMovieTrailer(item?.id);
+    } = useTrailer(mediaId, mediaType);
 
-    if (!item) return null;
+    if (!mediaId && !mediaType) return null;
+
+    console.log(trailer);
 
     return (
         <div
@@ -29,6 +31,7 @@ function TrailerModal({ item, onClose }) {
                 onClick={(e) => e.stopPropagation()}
             >
 
+                {/* Close */}
                 <button
                     className="absolute top-[-10px] right-[-10px] bg-purple-800 hover:bg-purple-600 hover:scale-110 transition text-white p-3 rounded-full border-2 border-black"
                     onClick={onClose}
@@ -40,29 +43,36 @@ function TrailerModal({ item, onClose }) {
                     />
                 </button>
 
-                {loading ? (
+                {/* Loading */}
+                {loading && (
+                    <div className="aspect-video h-[65vh] bg-zinc-800 rounded-lg animate-pulse" />
+                )}
 
-                    <div className="aspect-video h-[65vh] bg-zinc-800 animate-pulse rounded-lg" />
-
-                ) : trailer ? (
-
+                {/* Trailer */}
+                {!loading && trailer && (
                     <iframe
                         className="aspect-video h-[65vh] rounded-lg"
-                        src={`${youtubePathBase}${trailer.key}`}
+                        src={`https://www.youtube.com/embed/${trailer.key}`}
                         title={trailer.name}
                         frameBorder="0"
-                        allow="autoplay; encrypted-media"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     />
+                )}
 
-                ) : (
+                {/* No trailer */}
+                {!loading && !trailer && (
+                    <div className="h-[65vh] flex flex-col items-center justify-center">
 
-                    <div className="flex justify-center items-center h-[65vh]">
-                        <p className="text-gray-400">
-                            Trailer unavailable.
+                        <h2 className="text-2xl font-semibold">
+                            Trailer Unavailable
+                        </h2>
+
+                        <p className="text-gray-400 mt-3">
+                            We couldn't find a trailer for this title.
                         </p>
-                    </div>
 
+                    </div>
                 )}
 
             </div>

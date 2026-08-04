@@ -56,9 +56,9 @@ export async function discoverMovies(filters, page) {
     return data;
 }
 
-export async function getMovieTrailer(id) {
-  const { data } = await api.get(`/movies/${id}/trailer`);
-  return data.response;
+export async function getTrailer(mediaId, mediaType) {
+  const { data } = await api.get(`/${mediaType}/${mediaId}/trailer`);
+  return data;
 }
 
 export async function getMoviesDetails() {
