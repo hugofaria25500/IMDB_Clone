@@ -1,13 +1,14 @@
 package com.example.backend.TMDB_Client.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class GenreDTO {
-    @JsonAlias("id")
+    @JsonProperty("id")
     private int id;
 
-    @JsonAlias("name")
+    @JsonProperty("name")
     private String name;
 }
