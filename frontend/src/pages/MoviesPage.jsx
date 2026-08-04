@@ -69,7 +69,7 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
+            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} catalog={newMoviesReleases} loading={newMoviesReleasesLoading} />
             {/* MOVIE SEARCH */}
             <SearchSection label="movies" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
             results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openModal}/>

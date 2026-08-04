@@ -3,12 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from 'swiper/modules';
 
 /*COMPONENTS*/
-import ReleaseMovieCard from "./ReleaseMovieCard";
+import ReleaseMediaCard from "./ReleaseMediaCard";
 
 /*CSS*/
 import "../css/SingleItemCarousel.css";
 
-function SingleItemCarousel( { movies, onOpenTrailerModal, loading} ) {
+function SingleItemCarousel( { catalog, onOpenTrailerModal, loading} ) {
     return (
         <div className="bg-black w-full h-[calc(100vh-100px)] flex items-center justify-center">
 
@@ -18,9 +18,9 @@ function SingleItemCarousel( { movies, onOpenTrailerModal, loading} ) {
                 loop={true}
                 className="mySwiper"
             >
-                {movies.map((movie) => (
-                    <SwiperSlide key={movie.id}>
-                        <ReleaseMovieCard movie={movie} onOpenTrailerModal={onOpenTrailerModal} />
+                {catalog.map((item) => (
+                    <SwiperSlide key={item.id}>
+                        <ReleaseMediaCard item={item} onOpenTrailerModal={onOpenTrailerModal} />
                     </SwiperSlide>
                 ))}
             </Swiper>
