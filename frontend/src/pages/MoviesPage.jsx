@@ -41,7 +41,7 @@ function MoviesPage() {
     const { results: discoverMovies,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverMovies(filters, discoverPage);
     const { popularMovies, popularMoviesLoading } = usePopularMovies();
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
-    const { randomMovie, randomMovieLoading } = useRandomMovie();
+    const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
     const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -81,7 +81,7 @@ function MoviesPage() {
             {/* TRENDING MOVIES CAROUSEL */}
             <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading} />
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={randomMovieLoading} />
+            <ShuffleSection type={"Movie"} item={randomMovie} loading={randomMovieLoading} onShuffle={refreshRandomMovie} onOpenModal={openModal}/>
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
