@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
+import com.example.backend.TMDB_Client.dto.MovieTrailerDTO;
 import com.example.backend.TMDB_Client.response.DiscoverMoviesListResponse;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
 import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
@@ -9,10 +10,7 @@ import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,6 +54,11 @@ public class MovieController {
             @RequestParam(required = false) Double rating,
             @RequestParam(defaultValue = "popularity.desc") String sortBy) {
 
-        return ResponseEntity.ok(movieService.discoverMovies(page, genre, yearFrom, yearTo,  rating, sortBy));
+        return ResponseEntity.ok(movieService.discoverMovies(page, genre, yearFrom, yearTo, rating, sortBy));
+    }
+
+    @GetMapping("/{id}/trailer")
+    public ResponseEntity<MovieTrailerDTO> getMovieTrailer(@PathVariable Integer id) {
+        return ResponseEntity.ok(movieService.getMovieTrailer(id));
     }
 }

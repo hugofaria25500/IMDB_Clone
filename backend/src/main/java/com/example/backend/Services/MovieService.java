@@ -2,10 +2,8 @@ package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.MovieClient;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
-import com.example.backend.TMDB_Client.response.DiscoverMoviesListResponse;
-import com.example.backend.TMDB_Client.response.MoviesListResponse;
-import com.example.backend.TMDB_Client.response.NewReleaseMoviesListResponse;
-import com.example.backend.TMDB_Client.response.SearchMoviesListResponse;
+import com.example.backend.TMDB_Client.dto.MovieTrailerDTO;
+import com.example.backend.TMDB_Client.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +29,36 @@ public class MovieService {
 
     public DiscoverMoviesListResponse discoverMovies(Integer page, Integer genre, Integer yearFrom, Integer yearTo, Double rating, String sortBy) {
         return movieClient.discoverMovies(page, genre, yearFrom, yearTo, rating, sortBy);
+    }
+
+    public MovieTrailerDTO getMovieTrailer(Integer movieId) {
+
+        MovieTrailerResponse response = movieClient.getMovieTrailer(movieId);
+
+        if (response == null || response.getResults() == null) {
+            return null;
+        }
+
+        return response.getResults().stream()
+                .filter(video -> "YouTube".equals(video.getSite()))
+                .filter(video -> "Trailer".equals(video.getType()))
+                .filter(video -> Boolean.TRUE.equals(video.getOfficial()))
+                .findFirst()
+
+                .or(() ->
+                        response.getResults().stream()
+                                .filter(video -> "YouTube".equals(video.getSite()))
+                                .filter(video -> "Trailer".equals(video.getType()))
+                                .findFirst()
+                )
+
+                .or(() ->
+                        response.getResults().stream()
+                                .filter(video -> "YouTube".equals(video.getSite()))
+                                .findFirst()
+                )
+
+                .orElse(null);
     }
 
 }
