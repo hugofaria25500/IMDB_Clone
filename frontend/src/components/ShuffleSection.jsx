@@ -4,13 +4,7 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import MediaCard from "./MediaCard";
-
-/*JS*/
-import { useRandomMovie } from "../hooks/useRandomMovie";
-import { useRandomSerie } from "../hooks/useRandomSerie";
-
-import { getRandomMovie } from "../services/catalogService";
-import { getRandomSerie } from "../services/catalogService";
+import SkeletonCard from "./SkeletonCard";
 
 function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
 
@@ -25,8 +19,7 @@ function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
 
             {/* SHUFFLE SECTION */}
             { loading && (
-                <div className="h-[310px] w-[200px] bg-zinc-800 rounded-xl animate-pulse" />
-                
+                <SkeletonCard />
             )}
             
             {item && !loading && (

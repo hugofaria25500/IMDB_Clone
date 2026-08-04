@@ -1,5 +1,6 @@
 /*COMPONENTS*/
 import MediaCard from "../components/MediaCard";
+import SkeletonCard from "./SkeletonCard";
 
 function Grid({ catalog = [], onOpenModal, loading, hasSearched = true }) {
     if (loading) {
@@ -10,11 +11,7 @@ function Grid({ catalog = [], onOpenModal, loading, hasSearched = true }) {
                         key={i}
                         className="rounded-xl overflow-hidden"
                     >
-                        <div className="h-[250px] w-[200px] bg-zinc-800 rounded-xl animate-pulse" />
-
-                        <div className="mt-3 h-4 rounded bg-zinc-800 animate-pulse" />
-
-                        <div className="mt-2 h-3 w-2/3 rounded bg-zinc-800 animate-pulse" />
+                       <SkeletonCard />
                     </div>
                 ))}
             </div>

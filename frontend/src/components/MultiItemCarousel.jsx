@@ -35,13 +35,25 @@ function MultiItemCarouselSwiper({ title, catalog, onOpenModal, loading }) {
                     1280: { slidesPerView: 7 },
                     1500: { slidesPerView: 8 },
                 }}>
-                {catalog.map((item) => (
-                    <SwiperSlide>
-                        <div className="rounded-xl my-[10px]">
-                            <MediaCard item={item} onClick={onOpenModal} />
-                        </div>
-                    </SwiperSlide>
-                ))}
+                {loading
+                    ? Array.from({ length: 8 }).map((_, index) => (
+                        <SwiperSlide key={index}>
+                            <div className="my-[10px]">
+                                <SkeletonCard />
+                            </div>
+                        </SwiperSlide>
+                    ))
+                    : catalog.map((item) => (
+                        <SwiperSlide key={item.id}>
+                            <div className="my-[10px]">
+                                <MediaCard
+                                    item={item}
+                                    onClick={onOpenModal}
+                                />
+                            </div>
+                        </SwiperSlide>
+                    ))
+                }
             </Swiper>
         </div>
     );
