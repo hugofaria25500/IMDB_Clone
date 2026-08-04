@@ -2,6 +2,7 @@ package com.example.backend.Controllers;
 
 import com.example.backend.Services.MovieService;
 import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
+import com.example.backend.TMDB_Client.dto.MovieDetailsDTO;
 import com.example.backend.TMDB_Client.dto.MovieTrailerDTO;
 import com.example.backend.TMDB_Client.response.DiscoverMoviesListResponse;
 import com.example.backend.TMDB_Client.response.MoviesListResponse;
@@ -60,5 +61,10 @@ public class MovieController {
     @GetMapping("/{id}/trailer")
     public ResponseEntity<MovieTrailerDTO> getMovieTrailer(@PathVariable Integer id) {
         return ResponseEntity.ok(movieService.getMovieTrailer(id));
+    }
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<MovieDetailsDTO> getMovieDetails(@PathVariable Integer id) {
+        return ResponseEntity.ok(movieService.getMovieDetails(id));
     }
 }

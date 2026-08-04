@@ -137,4 +137,17 @@ public class MovieClient {
                 .bodyToMono(MovieTrailerResponse.class)
                 .block();
     }
+
+    @Cacheable(value = "movieDetails", key = "#movieId")
+    public MovieDetailsResponse getMovieDetails(Integer movieId) {
+
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/movie/{id}")
+                        .queryParam("api_key", properties.getApiKey())
+                        .build(movieId))
+                .retrieve()
+                .bodyToMono(MovieDetailsResponse.class)
+                .block();
+    }
 }

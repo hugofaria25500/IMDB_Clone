@@ -1,8 +1,7 @@
 package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.MovieClient;
-import com.example.backend.TMDB_Client.dto.BasicMovieDTO;
-import com.example.backend.TMDB_Client.dto.MovieTrailerDTO;
+import com.example.backend.TMDB_Client.dto.*;
 import com.example.backend.TMDB_Client.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,4 +60,27 @@ public class MovieService {
                 .orElse(null);
     }
 
+    public MovieDetailsDTO getMovieDetails(Integer movieId) {
+
+        MovieDetailsResponse response = movieClient.getMovieDetails(movieId);
+
+        return MovieDetailsDTO.builder()
+
+                .id(response.getId())
+                .title(response.getTitle())
+                .overview(response.getOverview())
+                .tagline(response.getTagline())
+                .runtime(response.getRuntime())
+                .releaseDate(response.getReleaseDate())
+                .rating(response.getVoteAverage())
+                .posterPath(response.getPosterPath())
+                .budget(response.getBudget())
+                .revenue(response.getRevenue())
+                .status(response.getStatus())
+                .genres(response.getGenres())
+                .productionCompanies(response.getProductionCompanies())
+                .productionCountries(response.getProductionCountries())
+                .spokenLanguages(response.getSpokenLanguages())
+                .build();
+    }
 }
