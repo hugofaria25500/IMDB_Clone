@@ -19,8 +19,6 @@ function TrailerModal({ mediaId, mediaType, onClose }) {
 
     if (!mediaId && !mediaType) return null;
 
-    console.log(trailer);
-
     return (
         <div
             className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"

@@ -44,7 +44,7 @@ function MoviesPage() {
     const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
     const [selectedTrailer, setSelectedTrailer] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedMedia, setSelectedMedia] = useState(null);
 
     function openTrailerModal(item) {
         setSelectedTrailer({
@@ -57,12 +57,15 @@ function MoviesPage() {
         setSelectedTrailer(null);
     }
 
-    function openModal(item) {
-        setSelectedItem(item);
+    function openMediaModal(item) {
+        setSelectedMedia({
+            id: item.id,
+            type: "movies"
+        });
     }
 
-    function closeModal() {
-        setSelectedItem(null);
+    function closeMediaModal() {
+        setSelectedMedia(null);
     }
 
     return (
@@ -72,19 +75,19 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} catalog={newMoviesReleases} loading={newMoviesReleasesLoading} />
+            <SingleItemCarousel catalog={newMoviesReleases} loading={newMoviesReleasesLoading} onOpenTrailerModal={openTrailerModal}/>
             {/* MOVIE SEARCH */}
             <SearchSection label="movies" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
-            results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openModal}/>
+            results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openMediaModal}/>
             {/* MOVIE FILTERS */}
             <DiscoverSection label="movies" filters={filters} setFilters={setFilters} page={discoverPage} setPage={setDiscoverPage} 
-            results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openModal}/>
+            results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading} onOpenModal={openMediaModal}/>
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} onOpenModal={openMediaModal}/>
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Movie"} item={randomMovie} loading={randomMovieLoading} onShuffle={refreshRandomMovie} onOpenModal={openModal}/>
+            <ShuffleSection type={"Movie"} item={randomMovie} loading={randomMovieLoading} onShuffle={refreshRandomMovie} onOpenModal={openMediaModal}/>
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
@@ -96,10 +99,11 @@ function MoviesPage() {
                 />
             )}
             {/* MEDIA MODAL */}
-            {selectedItem && (
+            {selectedMedia && (
                 <MediaModal
-                    item={selectedItem}
-                    onClose={closeModal}
+                    mediaId={selectedMedia.id}
+                    mediaType={selectedMedia.type}
+                    onClose={closeMediaModal}
                 />
             )}
         </div>

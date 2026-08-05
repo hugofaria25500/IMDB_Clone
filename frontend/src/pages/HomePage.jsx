@@ -14,18 +14,21 @@ import { usePopularMovies } from "../hooks/usePopularMovies";
 import { useTrendingMovies } from "../hooks/useTrendingMovies";
 
 function Homepage() {
-  const { popularMovies, popularMoviesLoading } = usePopularMovies();
-  const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+    const { popularMovies, popularMoviesLoading } = usePopularMovies();
+    const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
 
-  const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedMedia, setSelectedMedia] = useState(null);
   
-  function openModal(item) {
-      setSelectedItem(item);
-  }
+    function openMediaModal(item) {
+        setSelectedMedia({
+            id: item.id,
+            type: "movies"
+        });
+    }
 
-  function closeModal() {
-      setSelectedItem(null);
-  }
+    function closeMediaModal() {
+        setSelectedMedia(null);
+    }
 
   return (
     <div className="w-full flex flex-col justify-center bg-black">
@@ -34,21 +37,21 @@ function Homepage() {
         {/* HERO SECTION */}
         <HeroSection />
         {/* POPULAR MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading}/>
+        <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading}  onOpenModal={openMediaModal}/>
         {/*TRENDING MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading}/>
+        <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} onOpenModal={openMediaModal}/>
         {/*PROMO SECTION*/}
         <PromoSection />
         {/*FOOTER*/}
         <Footer />
-        {/* MODAL */}
-        {selectedItem && (
+        {/* MEDIA MODAL */}
+        {selectedMedia && (
             <MediaModal
-                item={selectedItem}
-                onClose={closeModal}
+                mediaId={selectedMedia.id}
+                mediaType={selectedMedia.type}
+                onClose={closeMediaModal}
             />
         )}
-        
     </div>
   );
 }

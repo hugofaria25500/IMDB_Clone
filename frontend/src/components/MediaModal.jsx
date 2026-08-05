@@ -2,203 +2,235 @@
 import { useEffect, useState, useRef } from "react";
 
 /*SERVICES*/
-import { getMediaDetails } from "../services/catalogService";
+import { useMovieDetails } from "../hooks/useMovieDetails";
+import { useTrailer } from "../hooks/useTrailer";
+
+/*JS*/
+import { posterPathBase, logoPathBase } from "../js/constants";
 
 /*IMAGES*/
 import crossLogo from "../assets/cross_logo.png";
 
-function MediaModal({ item, onClose }) {
+function MediaModal({ mediaId, mediaType, onClose }) {
 
-    const [data, setData] = useState(null);
-    const requestIdRef = useRef(0);
+    const {
+        details,
+        loading
+    } = useMovieDetails(mediaId);
 
-    useEffect(() => {
-        if (!item) return;
-        setData(null);
-        const requestId = ++requestIdRef.current;
+    const {
+        trailer,
+        loading: trailerLoading
+    } = useTrailer(mediaId, mediaType);
 
-        async function loadDetails() {
-            const result = await getMediaDetails(item.id);
-            if (requestId === requestIdRef.current) setData(result);
-        }
-
-        loadDetails();
-    }, [item]);
-
-    if (!item) return null;
-
-    const backdrop  = data?.backdrop || data?.poster || item.image;
-    const title     = data?.title    || item.title;
-    const year      = data?.year     || item.year;
-    const rating    = data?.rating   || item.rating;
-    const hasFullRecs = Array.isArray(data?.recommendations) &&
-                        data.recommendations.length > 0 &&
-                        typeof data.recommendations[0] === "object";
+    if (!mediaId && !mediaType) return null;
 
     return (
         <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={onClose}
-        >
-            <div
-                className="bg-zinc-900 text-white rounded-2xl w-full md:w-[680px] max-h-[90vh] overflow-y-auto scrollbar-thin shadow-[0_0_50px_rgba(139,92,246,0.4)] relative"
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+            onClick={onClose}>
+            <div className="relative bg-black/90 text-white rounded-xl w-[95vw] max-w-[1100px] max-h-[90vh] overflow-y-aut p-4 sm:p-6 lg:p-8 shadow-[0_0_30px_rgba(168,85,247,0.6)]"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* ── CLOSE BUTTON ── */}
+
+                {/* Close */}
                 <button
-                    className="absolute top-3 right-3 z-10 bg-black/60 hover:bg-violet-600 p-2 rounded-full border border-white/10 transition-colors duration-200"
+                    className="absolute top-[-10px] right-[-10px] bg-purple-800 hover:bg-purple-600 hover:scale-110 transition text-white p-3 rounded-full border-2 border-black"
                     onClick={onClose}
                 >
-                    <img src={crossLogo} alt="Close" className="w-3.5 h-3.5" />
+                    <img
+                        src={crossLogo}
+                        alt="Close"
+                        className="w-[10px] h-[10px]"
+                    />
                 </button>
 
-                {/* ── BACKDROP HERO ── */}
-                <div className="relative h-[220px] w-full rounded-t-2xl overflow-hidden shrink-0">
-                    <img src={backdrop} alt={title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent" />
+                {/* Loading */}
+                {loading && (
+                    <div className="flex flex-col lg:flex-row gap-8">
 
-                    {/* Rating badge */}
-                    {rating && (
-                        <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1.5 rounded-lg border border-white/10">
-                            <span className="text-yellow-400 text-xs">⭐</span>
-                            <span className="text-white font-bold text-sm">{rating}</span>
-                        </div>
-                    )}
+                    {/* Poster */}
+                    <div className="w-[280px] shrink-0">
+                        <div className="w-full h-[420px] rounded-xl bg-zinc-800 animate-pulse" />
 
-                    {/* Title + meta */}
-                    <div className="absolute bottom-4 left-5 right-14">
-                        <h2 className="text-xl md:text-2xl font-bold text-white leading-tight drop-shadow">{title}</h2>
-                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1 text-xs text-gray-300">
-                            {year     && <span>{year}</span>}
-                            {data?.runtime  && <><span className="text-gray-500">·</span><span>{data.runtime} min</span></>}
-                            {data?.seasons  && <><span className="text-gray-500">·</span><span>{data.seasons} {data.seasons === 1 ? "Season" : "Seasons"}</span></>}
-                            {data?.language && <><span className="text-gray-500">·</span><span>{data.language}</span></>}
-                            {data?.ageRating && (
-                                <span className="border border-gray-500 px-1.5 py-0.5 rounded text-[10px] font-medium">
-                                    {data.ageRating}
-                                </span>
-                            )}
-                        </div>
+                        <div className="mt-4 h-12 w-full rounded-xl bg-zinc-800 animate-pulse" />
                     </div>
+
+                    {/* Content */}
+                    <div className="flex-1">
+
+                        <div className="h-10 w-2/3 rounded bg-zinc-800 animate-pulse" />
+
+                        <div className="mt-6 h-5 w-1/3 rounded bg-zinc-800 animate-pulse" />
+
+                        <div className="mt-6 flex gap-3">
+                            <div className="h-8 w-20 rounded-full bg-zinc-800 animate-pulse" />
+                            <div className="h-8 w-24 rounded-full bg-zinc-800 animate-pulse" />
+                        </div>
+
+                        <div className="mt-8 h-4 w-40 rounded bg-zinc-800 animate-pulse" />
+
+                        <div className="mt-4 space-y-3">
+                            <div className="h-3 w-full rounded bg-zinc-800 animate-pulse" />
+                            <div className="h-3 w-full rounded bg-zinc-800 animate-pulse" />
+                            <div className="h-3 w-3/4 rounded bg-zinc-800 animate-pulse" />
+                        </div>
+
+                    </div>
+
                 </div>
+                )}
 
-                {/* ── BODY ── */}
-                {data ? (
-                    <div className="p-5 flex flex-col gap-6">
+                {/* Card */}
+                {!loading && details && (
+                    <div className="flex flex-col lg:flex-row gap-8">
 
-                        {/* Genres */}
-                        {data.genres?.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
-                                {data.genres.map((genre, i) => (
-                                    <span key={i} className="bg-violet-600/20 text-violet-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-violet-500/30">
-                                        {genre}
-                                    </span>
+                        {/* LEFT */}
+                        <div className="flex flex-col items-center lg:w-[260px] shrink-0">
+                            <img src={posterPathBase + details.posterPath} className="w-[200px] sm:w-[240px] lg:w-full h-auto rounded-lg object-cover"/>
+
+                            <button className="mt-3 w-full h-7 rounded-sm bg-violet-600 hover:bg-violet-700 text-sm font-semibold transition"
+                                onClick={() => window.open(`https://www.youtube.com/watch?v=${trailer.key}`, "_blank")}>
+                                Watch Trailer
+                            </button>
+                        </div>
+
+                        {/* RIGHT */}
+                        <div className="flex-1">
+
+                            <div className="flex flex-row gap-1 items-center">
+                                <h1 className="text-2xl font-bold">
+                                    {details.title}
+                                </h1>
+                                <span className="text-lg text-gray-500 font-semibold">
+                                    ({details.releaseDate.substring(0,4)})
+                                </span>
+                            </div>
+                            
+                            <div className="flex flex-row gap-2 items-center">
+                                <span className="text-yellow-400 text-sm font-semibold">
+                                    ⭐{details.rating.toFixed(1)}
+                                </span>
+                                <span className="text-sm font-semibold">•</span>
+                                <span className="text-sm font-semibold">
+                                    {details.runtime} min.
+                                </span>
+                            </div>
+                            
+                            <div className="flex flex-row gap-2 items-center">
+                                {details?.genres.map((genre) => (
+                                    <div key={genre.id} className="flex items-center mt-2 px-3 py-[2px] rounded-md bg-purple-900 text-white" >
+                                        <span className="text-xs font-semibold">{genre.name}</span>
+                                    </div>
                                 ))}
                             </div>
-                        )}
 
-                        {/* Overview */}
-                        {data.overview && (
-                            <div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Overview</p>
-                                <p className="text-gray-300 text-sm leading-relaxed">{data.overview}</p>
+                            <hr className="mt-5 border-0 border-t border-zinc-700" />
+
+                            <div className="flex flex-col gap-2 mt-2">
+                               <h2 className="text-xs font-bold">OVERVIEW</h2>
+                               <p className="text-gray-400 text-xs font-semibold">{details.overview}</p>
                             </div>
-                        )}
 
-                        {/* Trailer */}
-                        {data.trailer?.url && (
-                            <div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Trailer</p>
-                                <div className="rounded-xl overflow-hidden border border-white/5">
-                                    <iframe
-                                        className="w-full h-[210px]"
-                                        src={data.trailer.url.replace("watch?v=", "embed/")}
-                                        title="Trailer"
-                                        frameBorder="0"
-                                        allow="autoplay; encrypted-media"
-                                        allowFullScreen
-                                    />
-                                </div>
-                            </div>
-                        )}
+                            <hr className="mt-5 border-0 border-t border-zinc-700" />
+                           
+                            <div className="mt-2 grid grid-cols-2 gap-10">
 
-                        {/* Director + Tags */}
-                        {(data.director || data.tags?.length > 0) && (
-                            <div className="flex flex-col sm:flex-row gap-5">
-                                {data.director && (
-                                    <div>
-                                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">Director</p>
-                                        <p className="text-white text-sm font-semibold">{data.director}</p>
+                                {/* DETAILS */}
+
+                                <div className="flex flex-col gap-1 mt-2">
+                                    <h2 className="text-xs font-bold">DETAILS</h2>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">STATUS</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">{details?.status}</span>
                                     </div>
-                                )}
-                                {data.tags?.length > 0 && (
-                                    <div>
-                                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1.5">Tags</p>
-                                        <div className="flex flex-wrap gap-1.5">
-                                            {data.tags.map((tag, i) => (
-                                                <span key={i} className="bg-zinc-800 text-gray-300 text-xs px-2.5 py-1 rounded-full border border-white/5">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">RELEASE DATE</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">{details?.releaseDate}</span>
                                     </div>
-                                )}
-                            </div>
-                        )}
 
-                        {/* Cast */}
-                        {data.cast?.length > 0 && (
-                            <div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Cast</p>
-                                <div className="flex gap-4 overflow-x-auto pb-1">
-                                    {data.cast.map((member, i) => (
-                                        <div key={i} className="flex flex-col items-center gap-1.5 min-w-[60px]">
-                                            <img
-                                                src={member.photo}
-                                                alt={member.name}
-                                                onError={(e) => {
-                                                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=6d28d9&color=fff&size=56`;
-                                                }}
-                                                className="h-14 w-14 rounded-full object-cover border-2 border-zinc-700 shrink-0"
-                                            />
-                                            <p className="text-white text-[11px] font-semibold text-center leading-tight">{member.name}</p>
-                                            <p className="text-gray-500 text-[10px] text-center leading-tight">{member.character}</p>
-                                        </div>
-                                    ))}
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">LANGUAGE</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">
+                                            {details.spokenLanguages
+                                                .map(language => language.englishName)
+                                                .join(", ")}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">COUNTRY</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">
+                                             {details.productionCountries
+                                                .map(country => country.name)
+                                                .join(", ")}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">BUDGET</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">{details.budget?.toLocaleString()}$</span>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">REVENUE</span>
+                                        <span className="text-[10px] text-violet-400 font-bold uppercase">{details.revenue?.toLocaleString()}$</span>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <span className="text-[10px] text-gray-400 font-semibold">RUNTIME</span>
+                                        <span className="text-[10px] text-violet-400 font-semibold uppercase">{details.runtime} mins</span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
 
-                        {/* Recommendations */}
-                        {hasFullRecs && (
-                            <div>
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">You Might Also Like</p>
-                                <div className="flex gap-3 overflow-x-auto pb-1">
-                                    {data.recommendations.map((rec, i) => (
-                                        <div key={i} className="min-w-[90px] flex flex-col gap-1.5 group cursor-pointer">
-                                            <div className="h-[130px] w-[90px] rounded-xl overflow-hidden shrink-0">
+                                {/* PRODUCTION */}
+
+                                <div className="flex flex-col gap-1 mt-2">
+                                    <h2 className="text-xs font-bold">PRODUCTION</h2>
+
+                                    {details.productionCompanies.map(company => (
+
+                                        <div key={company.id} className="flex items-center gap-4">
+
+                                            {company.logoPath ? (
                                                 <img
-                                                    src={rec.image}
-                                                    alt={rec.title}
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    src={logoPathBase + company.logoPath}
+                                                    className="w-8 h-8 rounded-md object-contain bg-zinc-700 p-2"
                                                 />
-                                            </div>
-                                            <p className="text-white text-[11px] font-medium line-clamp-2 leading-tight">{rec.title}</p>
-                                            <p className="text-gray-500 text-[10px]">⭐ {rec.rating} · {rec.year}</p>
+                                            ) : (
+
+                                                <div className="w-8 h-8 rounded-md bg-zinc-700" />
+                                            )}
+                                            <span className="text-[10px] text-gray-400 font-semibold uppercase">{company.name}</span>
                                         </div>
+
                                     ))}
                                 </div>
-                            </div>
-                        )}
 
-                    </div>
-                ) : (
-                    /* Loading skeleton */
-                    <div className="p-8 flex flex-col items-center justify-center gap-3 min-h-[160px]">
-                        <div className="w-7 h-7 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
-                        <p className="text-gray-400 text-sm">Loading details...</p>
+                            </div>
+
+                        </div>
+
                     </div>
                 )}
+
+                {/* No Details */}
+                {!loading && !details && (
+                    <div className="h-[65vh] flex flex-col items-center justify-center">
+
+                        <h2 className="text-2xl font-semibold">
+                            Details Unavailable
+                        </h2>
+
+                        <p className="text-gray-400 mt-3">
+                            We couldn't find any info for this movie.
+                        </p>
+
+                    </div>
+                )}
+
             </div>
         </div>
     );

@@ -61,8 +61,9 @@ export async function getTrailer(mediaId, mediaType) {
   return data;
 }
 
-export async function getMoviesDetails() {
-  return moviesDetailedMock;
+export async function getMovieDetails(movieId) {
+    const { data } = await api.get(`/movies/${movieId}/details`);
+    return data;
 }
 
 /*SERIES*/
