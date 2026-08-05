@@ -4,8 +4,9 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import FilterSection from '../components/FilterSection';
 import SingleItemCarousel from "../components/SingleItemCarousel";
+import SearchSection from "../components/SearchSection"
+import DiscoverSection from '../components/DiscoverSection';
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
@@ -13,36 +14,58 @@ import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { useMovies } from "../hooks/useMovies";
+import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
+import { useSearchMovies } from "../hooks/useSearchMovies";
+import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
 import { usePopularMovies } from "../hooks/usePopularMovies";
 import { useTrendingMovies } from "../hooks/useTrendingMovies";
-import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
 import { useRandomMovie } from "../hooks/useRandomMovie";
 
 function MoviesPage() {
-    const { movies, loading } = useMovies();
+
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchPage, setSearchPage] = useState(1);
+
+    const [discoverPage, setDiscoverPage] = useState(1);
+
+    const [filters, setFilters] = useState({
+        genre: null,
+        yearFrom: "",
+        yearTo: "",
+        rating: "all",
+        sortBy: "popularity.desc",
+    });
+
+    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
+    const { results: searchMovies, totalPages: searchTotalPages, loading: searchLoading} = useSearchMovies(searchQuery, searchPage);
+    const { results: discoverMovies,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverMovies(filters, discoverPage);
     const { popularMovies, popularMoviesLoading } = usePopularMovies();
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
-    const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
-    const { randomMovie, randomMovieLoading } = useRandomMovie();
+    const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
-    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedTrailer, setSelectedTrailer] = useState(null);
+    const [selectedMedia, setSelectedMedia] = useState(null);
 
     function openTrailerModal(item) {
-        setSelectedTrailerItem(item);
+        setSelectedTrailer({
+            id: item.id,
+            type: "movies"
+        });
     }
 
     function closeTrailerModal() {
-        setSelectedTrailerItem(null);
+        setSelectedTrailer(null);
     }
 
-    function openModal(item) {
-        setSelectedItem(item);
+    function openMediaModal(item) {
+        setSelectedMedia({
+            id: item.id,
+            type: "movies"
+        });
     }
 
-    function closeModal() {
-        setSelectedItem(null);
+    function closeMediaModal() {
+        setSelectedMedia(null);
     }
 
     return (
@@ -52,29 +75,35 @@ function MoviesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel onOpenTrailerModal={openTrailerModal} movies={newMoviesReleases} loading={newMoviesReleasesLoading} />
+            <SingleItemCarousel catalog={newMoviesReleases} loading={newMoviesReleasesLoading} onOpenTrailerModal={openTrailerModal}/>
+            {/* MOVIE SEARCH */}
+            <SearchSection label="movies" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
+            results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openMediaModal}/>
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={movies} onOpenModal={openModal} loading={loading} label={"movies"}/>
+            <DiscoverSection label="movies" filters={filters} setFilters={setFilters} page={discoverPage} setPage={setDiscoverPage} 
+            results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} onOpenModal={openModal} loading={popularMoviesLoading} />
+            <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading} onOpenModal={openMediaModal}/>
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} onOpenModal={openModal} loading={trendingMoviesLoading} />
+            <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} onOpenModal={openMediaModal}/>
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Movie"} onOpenModal={openModal} loading={randomMovieLoading} />
+            <ShuffleSection type={"Movie"} item={randomMovie} loading={randomMovieLoading} onShuffle={refreshRandomMovie} onOpenModal={openMediaModal}/>
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
-            {selectedTrailerItem && (
+            {selectedTrailer && (
                 <TrailerModal
-                    item={selectedTrailerItem}
+                    mediaId={selectedTrailer.id}
+                    mediaType={selectedTrailer.type}
                     onClose={closeTrailerModal}
                 />
             )}
             {/* MEDIA MODAL */}
-            {selectedItem && (
+            {selectedMedia && (
                 <MediaModal
-                    item={selectedItem}
-                    onClose={closeModal}
+                    mediaId={selectedMedia.id}
+                    mediaType={selectedMedia.type}
+                    onClose={closeMediaModal}
                 />
             )}
         </div>

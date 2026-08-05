@@ -4,47 +4,9 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import MediaCard from "./MediaCard";
+import SkeletonCard from "./SkeletonCard";
 
-/*JS*/
-import { useRandomMovie } from "../hooks/useRandomMovie";
-import { useRandomSerie } from "../hooks/useRandomSerie";
-
-import { getRandomMovie } from "../services/catalogService";
-import { getRandomSerie } from "../services/catalogService";
-
-function ShuffleSection( { type, onOpenModal, loading } ) {
-
-    const { randomMovie, randomMovieLoading } = useRandomMovie();
-    const { randomSerie, randomSerieLoading } = useRandomSerie();
-
-    const [selectedItem, setSelectedItem] = useState(null);
-
-    const [isShuffling, setIsShuffling] = useState(false);
-
-    useEffect(() => {
-        if (type === "Movie" && randomMovie) {
-            setSelectedItem(randomMovie);
-        } else if (type === "Serie" && randomSerie) {
-            setSelectedItem(randomSerie);
-        }
-    }, [randomMovie, randomSerie, type]);
-
-    async function handleShuffle() {
-        setIsShuffling(true);
-
-        let result = null;
-
-        if (type === "Movie") {
-            result = await getRandomMovie();
-        } else if (type === "Serie") {
-            result = await getRandomSerie();
-        }
-
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-        setSelectedItem(result);
-        setIsShuffling(false);        
-    }
+function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
 
     return (
         <div className="w-full flex flex-col items-center justify-center mt-8 px-4">
@@ -56,16 +18,16 @@ function ShuffleSection( { type, onOpenModal, loading } ) {
             </div>
 
             {/* SHUFFLE SECTION */}
-            { isShuffling && (
-                <div className="h-[310px] w-[200px] bg-zinc-800 rounded-xl animate-pulse" />
+            { loading && (
+                <SkeletonCard />
             )}
             
-            {selectedItem && !isShuffling && (
-                <MediaCard item={selectedItem} onClick={onOpenModal} />
+            {item && !loading && (
+                <MediaCard item={item} onClick={onOpenModal} />
             )}
 
             <button
-                onClick={handleShuffle}
+                onClick={onShuffle}
                 className="bg-violet-600 text-white text-sm px-5 py-2 rounded-full hover:bg-violet-700 mt-4 font-bold"
             >Shuffle
             </button>

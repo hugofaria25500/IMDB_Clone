@@ -1,6 +1,6 @@
 package com.example.backend.TMDB_Client.response;
 
-import com.example.backend.TMDB_Client.dto.GenreDTO;
+import com.example.backend.TMDB_Client.dto.NewReleaseMovieDTO;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -8,8 +8,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class GenreResponse {
+public class NewReleaseMoviesListResponse {
 
-    @JsonProperty("genres")
-    private List<GenreDTO> genres;
+    @JsonProperty("results")
+    private List<NewReleaseMovieDTO> results;
 }

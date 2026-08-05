@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BasicMovieDTO {
+public class DiscoverMovieDTO {
 
     @JsonProperty("id")
     private int id;
@@ -26,4 +26,7 @@ public class BasicMovieDTO {
 
     @JsonAlias("vote_average")
     private String rating;
+
+    @JsonProperty("popularity")
+    private String popularity;
 }

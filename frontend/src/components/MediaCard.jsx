@@ -1,14 +1,17 @@
+//JS
+import { posterPathBase } from "../js/constants";
+
 function MediaCard({ item, onClick }) {
 
     return (
         <div
             onClick={() => {onClick && onClick(item);}}
-            className="group bg-zinc-900 rounded-xl overflow-hidden cursor-pointer"
+            className="group w-[200px] bg-zinc-900 rounded-xl overflow-hidden cursor-pointer"
         >
             <div className="relative h-[250px] w-full overflow-hidden">
-                <img
-                    src={item.image}
-                    alt={item.title}
+                <img 
+                    src={posterPathBase+item?.posterPath}
+                    alt={item?.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
 
@@ -24,7 +27,7 @@ function MediaCard({ item, onClick }) {
                     {item.title}
                 </h3>
                 <p className="text-xs text-gray-400">
-                    {item.year} • ⭐ {item.rating}
+                    {item?.releaseDate?.substring(0,4)} • ⭐ {item?.rating?.substring(0,3)}
                 </p>
             </div>
         </div>

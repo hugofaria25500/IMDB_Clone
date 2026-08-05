@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BasicMovieDTO {
+public class NewReleaseMovieDTO {
 
     @JsonProperty("id")
     private int id;
@@ -15,15 +15,15 @@ public class BasicMovieDTO {
     @JsonProperty("title")
     private String title;
 
-    @JsonAlias("poster_path")
-    private String posterPath;
+    @JsonProperty("overview")
+    private String overview;
+
+    @JsonAlias("backdrop_path")
+    private String backdropPath;
 
     @JsonAlias("genre_ids")
     private List<Integer> genreIds;
 
     @JsonAlias("release_date")
     private String releaseDate;
-
-    @JsonAlias("vote_average")
-    private String rating;
 }

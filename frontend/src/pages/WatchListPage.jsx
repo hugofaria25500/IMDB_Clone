@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
 import MediaStatsHeader from "../components/MediaStatsHeader"
-import FilterSection from '../components/FilterSection';
+import DiscoverSection from '../components/DiscoverSection';
 import Footer from "../components/Footer";
 import MediaModal from "../components/MediaModal";
 
@@ -50,7 +50,7 @@ function WatchListPage() {
                 seriesCount={series.length}
             />
             {/* MOVIE FILTERS */}
-            <FilterSection catalog={catalog} onOpenModal={openModal} loading={loading} label={selectedType} />
+            <DiscoverSection catalog={catalog} onOpenModal={openModal} loading={loading} label={selectedType} />
             {/* FOOTER */}
             <Footer />
             {/* MODAL */}

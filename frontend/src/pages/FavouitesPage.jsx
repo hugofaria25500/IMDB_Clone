@@ -5,7 +5,7 @@ import { useEffect } from "react";
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
 import MediaStatsHeader from "../components/MediaStatsHeader"
-import FilterSection from '../components/FilterSection';
+import DiscoverSection from '../components/DiscoverSection';
 import Footer from "../components/Footer";
 import MediaModal from "../components/MediaModal";
 
@@ -50,7 +50,7 @@ function FavouritesPage() {
                 seriesCount={series.length}
             />
             {/* FILTER SECTION */}
-            <FilterSection catalog={catalog} loading={loading} onOpenModal={openModal} label={selectedType} />
+            <DiscoverSection catalog={catalog} loading={loading} onOpenModal={openModal} label={selectedType} />
             {/* FOOTER */}
             <Footer />
             {/* MODAL */}

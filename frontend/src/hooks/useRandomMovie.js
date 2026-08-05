@@ -2,18 +2,27 @@ import { useEffect, useState } from "react";
 import { getRandomMovie} from "../services/catalogService";
 
 export function useRandomMovie() {
-  const [randomMovie, setRandomMovie] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadRandomMovie() {
-      const data = await getRandomMovie();
-      setRandomMovie(data);
-      setLoading(false);
+    const [randomMovie, setRandomMovie] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    async function refreshRandomMovie() {
+        try {
+            setLoading(true);
+            const movie = await getRandomMovie();
+            setRandomMovie(movie);
+        } finally {
+            setLoading(false);
+        }
     }
 
-    loadRandomMovie();
-  }, []);
+    useEffect(() => {
+        refreshRandomMovie();
+    }, []);
 
-  return { randomMovie, loading };
+    return {
+        randomMovie,
+        loading,
+        refreshRandomMovie
+    };
 }

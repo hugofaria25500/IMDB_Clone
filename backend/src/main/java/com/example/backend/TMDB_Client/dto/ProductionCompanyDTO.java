@@ -5,10 +5,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class GenreDTO {
+public class ProductionCompanyDTO {
+
     @JsonProperty("id")
-    private int id;
+    private Integer id;
 
     @JsonProperty("name")
     private String name;
+
+    @JsonAlias("logo_path")
+    private String logoPath;
 }

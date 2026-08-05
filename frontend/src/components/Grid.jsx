@@ -1,22 +1,71 @@
 /*COMPONENTS*/
 import MediaCard from "../components/MediaCard";
+import SkeletonCard from "./SkeletonCard";
 
-function Grid({ catalog, onOpenModal, loading }) {
-    return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 transition-opacity duration-300">
-            {loading
-              ? Array.from({ length: 18 }).map((_, i) => (
-                  <div key={i} className="bg-zinc-800 h-[250px] rounded-xl animate-pulse" />
-                ))
-              : catalog.map((catalog) => (
-                  <MediaCard
-                    key={catalog.id}
-                    item={catalog}
-                    onClick={onOpenModal}
-                  />  
+function Grid({ catalog = [], onOpenModal, loading, hasSearched = true }) {
+    if (loading) {
+        return (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                {Array.from({ length: 20 }).map((_, i) => (
+                    <div
+                        key={i}
+                        className="rounded-xl overflow-hidden"
+                    >
+                       <SkeletonCard />
+                    </div>
                 ))}
-          </div>
+            </div>
+        );
+    }
+
+    if (!hasSearched) {
+        return (
+            <div className="flex flex-col items-center justify-center">
+
+                <h2 className="text-2xl font-semibold text-white">
+                    Lights, Camera... Search!
+                </h2>
+
+                <p className="text-gray-400 mt-3">
+                    Start typing a movie title above and we'll help you find your next favorite film.
+                </p>
+
+            </div>
+        );
+    }
+
+    if (catalog.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center">
+
+                <h2 className="text-2xl font-semibold">
+                    No Movies Found
+                </h2>
+
+                <p className="text-gray-400 mt-3">
+                    We couldn't find any matches. Try another title, check the spelling, or search using fewer words.
+                </p>
+
+            </div>
+        );
+    }
+
+    return (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+            {catalog.map(movie => (
+
+                <MediaCard
+                    key={movie.id}
+                    item={movie}
+                    onClick={onOpenModal}
+                />
+
+            ))}
+
+        </div>
     );
-} 
+}
 
 export default Grid;
+
