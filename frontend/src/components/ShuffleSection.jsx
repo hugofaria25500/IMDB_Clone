@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import MediaCard from "./MediaCard";
 import SkeletonCard from "./SkeletonCard";
 
-function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
+function ShuffleSection( {label, type, item, loading, onShuffle, onOpenModal } ) {
 
     return (
         <div className="w-full flex flex-col items-center justify-center mt-8 px-4">
@@ -14,7 +14,7 @@ function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
             {/* HERO */}
             <div className="w-full h-[100px] mt-[50px] flex flex-col items-center justify-center">
                 <h1 className="text-2xl sm:text-5xl font-bold text-violet-500">Not Sure What to Watch?</h1>
-                <p className="text-gray-400 mt-2">Get a random {type} in one click</p>
+                <p className="text-gray-400 mt-2">Get a random {label} in one click</p>
             </div>
 
             {/* SHUFFLE SECTION */}
@@ -23,7 +23,7 @@ function ShuffleSection( { type, item, loading, onShuffle, onOpenModal } ) {
             )}
             
             {item && !loading && (
-                <MediaCard item={item} onClick={onOpenModal} />
+                <MediaCard type={type} item={item} onClick={onOpenModal} />
             )}
 
             <button

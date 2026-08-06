@@ -9,7 +9,7 @@ import GridPagination from "./GridPagination";
 /* JS */
 import { useDiscoverMovies } from "../hooks/movies/useDiscoverMovies";
 
-function DiscoverSection({ label, onOpenModal, filters, setFilters, genres, genresLoading, page, setPage, results, totalPages, loading }) {
+function DiscoverSection({ type, onOpenModal, filters, setFilters, genres, genresLoading, page, setPage, results, totalPages, loading }) {
 
     const resultsRef = useRef(null);
 
@@ -39,13 +39,13 @@ function DiscoverSection({ label, onOpenModal, filters, setFilters, genres, genr
             >
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
-                    {label === "movies"
+                    {type === "movies"
                         ? "Your Movie Journey Starts Here"
                         : "Discover Your Next Favorite Series"}
                 </h1>
 
                 <p className="text-gray-400 mt-2">
-                    {label === "movies"
+                    {type === "movies"
                         ? "Browse thousands of movies using powerful filters."
                         : "Discover series by genre, rating and release year."}
                 </p>
@@ -84,6 +84,7 @@ function DiscoverSection({ label, onOpenModal, filters, setFilters, genres, genr
             >
 
                 <Grid
+                    type={type}
                     catalog={results}
                     loading={loading}
                     onOpenModal={onOpenModal}

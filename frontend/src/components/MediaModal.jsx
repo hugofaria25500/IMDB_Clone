@@ -11,7 +11,7 @@ import { posterPathBase, logoPathBase } from "../js/constants";
 /*IMAGES*/
 import crossLogo from "../assets/cross_logo.png";
 
-function MediaModal({ mediaId, mediaType, onClose }) {
+function MediaModal({type, mediaId, mediaType, onClose }) {
 
     const {
         details,

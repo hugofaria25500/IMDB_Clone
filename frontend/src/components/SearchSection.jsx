@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
-function SearchSection({ label, onOpenModal, query, setQuery, page, setPage, results, totalPages, loading }) {
+function SearchSection({ type, onOpenModal, query, setQuery, page, setPage, results, totalPages, loading }) {
 
     const resultsRef = useRef(null);
 
@@ -36,13 +36,13 @@ function SearchSection({ label, onOpenModal, query, setQuery, page, setPage, res
             >
 
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-violet-500">
-                    {label === "movies"
+                    {type === "movies"
                         ? "Find Your Next Favorite Movie"
                         : "Find Your Next Favorite Series"}
                 </h1>
 
                 <p className="text-gray-400 mt-2">
-                    {label === "movies"
+                    {type === "movies"
                         ? "From timeless classics to the latest blockbusters, discover movies you'll love."
                         : "Explore unforgettable stories, one episode at a time."}
                 </p>
@@ -52,12 +52,13 @@ function SearchSection({ label, onOpenModal, query, setQuery, page, setPage, res
             <SearchBar
                 value={query}
                 onChange={setQuery}
-                label={label}
+                label={type}
             />
 
             <div className="mt-10 px-[15%]">
 
                 <Grid
+                    type={type}
                     catalog={results}
                     loading={loading}
                     onOpenModal={onOpenModal}

@@ -2,7 +2,7 @@
 import MediaCard from "../components/MediaCard";
 import SkeletonCard from "./SkeletonCard";
 
-function Grid({ catalog = [], onOpenModal, loading, hasSearched = true }) {
+function Grid({type, catalog = [], onOpenModal, loading, hasSearched = true }) {
     if (loading) {
         return (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -53,11 +53,12 @@ function Grid({ catalog = [], onOpenModal, loading, hasSearched = true }) {
     return (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
 
-            {catalog.map(movie => (
+            {catalog.map(item => (
 
                 <MediaCard
-                    key={movie.id}
-                    item={movie}
+                    key={item.id}
+                    type={type}
+                    item={item}
                     onClick={onOpenModal}
                 />
 

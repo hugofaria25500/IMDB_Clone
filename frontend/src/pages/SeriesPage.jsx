@@ -45,8 +45,6 @@ function SeriesPage() {
     const { trendingSeries, trendingSeriesLoading } = useTrendingSeries();
     const { randomSeries, loading:randomSeriesLoading, refreshRandomSeries } = useRandomSeries();
 
-    console.log(newSeriesReleases);
-
     const [selectedTrailer, setSelectedTrailer] = useState(null);
     const [selectedMedia, setSelectedMedia] = useState(null);
     
@@ -79,19 +77,19 @@ function SeriesPage() {
             {/* NAVBAR */}
             <Navbar />
             {/* MOVIE CAROUSELS */}
-            <SingleItemCarousel catalog={newSeriesReleases} loading={newSeriesReleasesLoading} onOpenTrailerModal={openTrailerModal}/>
+            <SingleItemCarousel type={"series"} catalog={newSeriesReleases} loading={newSeriesReleasesLoading} onOpenTrailerModal={openTrailerModal}/>
             {/* MOVIE SEARCH */}
-            <SearchSection label="series" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
+            <SearchSection type={"series"} query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
             results={searchSeries} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openMediaModal}/>
             {/* MOVIE FILTERS */}
-            <DiscoverSection label="series" filters={filters} setFilters={setFilters} genres={seriesGenres} genresLoading={seriesGenresLoading} page={discoverPage} 
+            <DiscoverSection type={"series"} filters={filters} setFilters={setFilters} genres={seriesGenres} genresLoading={seriesGenresLoading} page={discoverPage} 
             setPage={setDiscoverPage} results={discoverSeries} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
             {/* POPULAR MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Series" catalog={popularSeries} loading={popularSeriesLoading} onOpenModal={openMediaModal}/>
+            <MultiItemCarousel title="Popular Series" type={"series"} catalog={popularSeries} loading={popularSeriesLoading} onOpenModal={openMediaModal}/>
             {/* TRENDING MOVIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Series" catalog={trendingSeries} loading={trendingSeriesLoading} onOpenModal={openMediaModal}/>
+            <MultiItemCarousel title="Trending Series" type={"series"} catalog={trendingSeries} loading={trendingSeriesLoading} onOpenModal={openMediaModal}/>
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Series"} item={randomSeries} loading={randomSeriesLoading} onShuffle={refreshRandomSeries} onOpenModal={openMediaModal}/>
+            <ShuffleSection label={"Series"} type={"series"} item={randomSeries} loading={randomSeriesLoading} onShuffle={refreshRandomSeries} onOpenModal={openMediaModal}/>
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
@@ -105,6 +103,7 @@ function SeriesPage() {
             {/* MEDIA MODAL */}
             {selectedMedia && (
                 <MediaModal
+                    type={"series"}
                     mediaId={selectedMedia.id}
                     mediaType={selectedMedia.type}
                     onClose={closeMediaModal}
