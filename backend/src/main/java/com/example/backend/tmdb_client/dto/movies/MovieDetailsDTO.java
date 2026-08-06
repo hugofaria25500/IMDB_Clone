@@ -1,6 +1,9 @@
 package com.example.backend.tmdb_client.dto.movies;
 
 import com.example.backend.tmdb_client.dto.genres.GenreDTO;
+import com.example.backend.tmdb_client.dto.media.ProductionCompanyDTO;
+import com.example.backend.tmdb_client.dto.media.ProductionCountryDTO;
+import com.example.backend.tmdb_client.dto.media.SpokenLanguageDTO;
 import lombok.Builder;
 import lombok.Data;
 

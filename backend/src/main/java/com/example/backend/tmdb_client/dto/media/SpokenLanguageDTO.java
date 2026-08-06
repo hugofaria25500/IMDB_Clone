@@ -1,4 +1,4 @@
-package com.example.backend.tmdb_client.dto.movies;
+package com.example.backend.tmdb_client.dto.media;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;

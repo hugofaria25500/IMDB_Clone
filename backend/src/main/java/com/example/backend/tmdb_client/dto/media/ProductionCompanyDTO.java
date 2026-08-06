@@ -1,4 +1,4 @@
-package com.example.backend.tmdb_client.dto.series;
+package com.example.backend.tmdb_client.dto.media;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
