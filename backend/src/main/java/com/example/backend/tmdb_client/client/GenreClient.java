@@ -1,7 +1,7 @@
-package com.example.backend.TMDB_Client.client;
+package com.example.backend.tmdb_client.client;
 
-import com.example.backend.TMDB_Client.config.TMDBProperties;
-import com.example.backend.TMDB_Client.response.genres.GenreResponse;
+import com.example.backend.tmdb_client.config.TMDBProperties;
+import com.example.backend.tmdb_client.response.genres.GenreResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

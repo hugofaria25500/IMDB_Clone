@@ -1,6 +1,6 @@
-package com.example.backend.TMDB_Client.dto.movies;
+package com.example.backend.tmdb_client.dto.movies;
 
-import com.example.backend.TMDB_Client.dto.genres.GenreDTO;
+import com.example.backend.tmdb_client.dto.genres.GenreDTO;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,8 +15,6 @@ public class MovieDetailsDTO {
     private String title;
 
     private String overview;
-
-    private String tagline;
 
     private Integer runtime;
 

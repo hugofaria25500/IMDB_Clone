@@ -1,6 +1,6 @@
-package com.example.backend.TMDB_Client.dto.series;
+package com.example.backend.tmdb_client.dto.series;
 
-import com.example.backend.TMDB_Client.dto.genres.GenreDTO;
+import com.example.backend.tmdb_client.dto.genres.GenreDTO;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,19 +16,17 @@ public class SeriesDetailsDTO {
 
     private String overview;
 
-    private String tagline;
-
     private Integer runtime;
 
-    private String releaseDate;
+    private String firstAirDate;
 
     private Double rating;
 
     private String posterPath;
 
-    private Long budget;
+    private Long totalEpisodes;
 
-    private Long revenue;
+    private Long totalSeasons;
 
     private String status;
 

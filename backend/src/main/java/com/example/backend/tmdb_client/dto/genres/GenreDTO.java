@@ -1,6 +1,5 @@
-package com.example.backend.TMDB_Client.dto.genres;
+package com.example.backend.tmdb_client.dto.genres;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

@@ -1,9 +1,9 @@
-package com.example.backend.TMDB_Client.response.movies;
+package com.example.backend.tmdb_client.response.movies;
 
-import com.example.backend.TMDB_Client.dto.genres.GenreDTO;
-import com.example.backend.TMDB_Client.dto.movies.ProductionCompanyDTO;
-import com.example.backend.TMDB_Client.dto.movies.ProductionCountryDTO;
-import com.example.backend.TMDB_Client.dto.movies.SpokenLanguageDTO;
+import com.example.backend.tmdb_client.dto.genres.GenreDTO;
+import com.example.backend.tmdb_client.dto.movies.ProductionCompanyDTO;
+import com.example.backend.tmdb_client.dto.movies.ProductionCountryDTO;
+import com.example.backend.tmdb_client.dto.movies.SpokenLanguageDTO;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -21,9 +21,6 @@ public class MovieDetailsResponse {
 
     @JsonProperty("overview")
     private String overview;
-
-    @JsonProperty("tagline")
-    private String tagline;
 
     @JsonProperty("runtime")
     private Integer runtime;

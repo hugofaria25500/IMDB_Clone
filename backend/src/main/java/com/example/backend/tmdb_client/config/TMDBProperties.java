@@ -1,4 +1,4 @@
-package com.example.backend.TMDB_Client.config;
+package com.example.backend.tmdb_client.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

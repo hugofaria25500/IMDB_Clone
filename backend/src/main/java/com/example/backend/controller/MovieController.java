@@ -1,13 +1,13 @@
-package com.example.backend.Controllers;
+package com.example.backend.controller;
 
-import com.example.backend.Services.MovieService;
-import com.example.backend.TMDB_Client.dto.movies.BasicMovieDTO;
-import com.example.backend.TMDB_Client.dto.movies.MovieDetailsDTO;
-import com.example.backend.TMDB_Client.dto.movies.MovieTrailerDTO;
-import com.example.backend.TMDB_Client.response.movies.DiscoverMoviesListResponse;
-import com.example.backend.TMDB_Client.response.movies.MoviesListResponse;
-import com.example.backend.TMDB_Client.response.movies.NewReleaseMoviesListResponse;
-import com.example.backend.TMDB_Client.response.movies.SearchMoviesListResponse;
+import com.example.backend.service.MovieService;
+import com.example.backend.tmdb_client.dto.movies.BasicMovieDTO;
+import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
+import com.example.backend.tmdb_client.dto.movies.MovieTrailerDTO;
+import com.example.backend.tmdb_client.response.movies.DiscoverMoviesListResponse;
+import com.example.backend.tmdb_client.response.movies.MoviesListResponse;
+import com.example.backend.tmdb_client.response.movies.NewReleaseMoviesListResponse;
+import com.example.backend.tmdb_client.response.movies.SearchMoviesListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

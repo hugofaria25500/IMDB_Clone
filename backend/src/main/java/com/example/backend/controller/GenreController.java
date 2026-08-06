@@ -1,7 +1,7 @@
-package com.example.backend.Controllers;
+package com.example.backend.controller;
 
-import com.example.backend.Services.GenreService;
-import com.example.backend.TMDB_Client.response.genres.GenreResponse;
+import com.example.backend.service.GenreService;
+import com.example.backend.tmdb_client.response.genres.GenreResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

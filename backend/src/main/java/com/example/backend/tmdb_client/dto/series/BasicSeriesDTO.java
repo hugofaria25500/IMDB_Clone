@@ -1,4 +1,4 @@
-package com.example.backend.TMDB_Client.dto.series;
+package com.example.backend.tmdb_client.dto.series;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,8 +12,8 @@ public class BasicSeriesDTO {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonAlias("original_name")
+    private String originalName;
 
     @JsonAlias("poster_path")
     private String posterPath;
@@ -21,8 +21,8 @@ public class BasicSeriesDTO {
     @JsonAlias("genre_ids")
     private List<Integer> genreIds;
 
-    @JsonAlias("release_date")
-    private String releaseDate;
+    @JsonAlias("first_air_date")
+    private String firstReleaseDate;
 
     @JsonAlias("vote_average")
     private String rating;

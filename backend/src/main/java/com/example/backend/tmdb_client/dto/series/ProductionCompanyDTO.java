@@ -1,4 +1,4 @@
-package com.example.backend.TMDB_Client.dto.series;
+package com.example.backend.tmdb_client.dto.series;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;

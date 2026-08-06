@@ -1,6 +1,6 @@
-package com.example.backend.Config;
+package com.example.backend.config;
 
-import com.example.backend.TMDB_Client.config.TMDBProperties;
+import com.example.backend.tmdb_client.config.TMDBProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;

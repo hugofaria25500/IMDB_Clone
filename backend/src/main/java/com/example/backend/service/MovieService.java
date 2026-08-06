@@ -1,10 +1,10 @@
-package com.example.backend.Services;
+package com.example.backend.service;
 
-import com.example.backend.TMDB_Client.client.MovieClient;
-import com.example.backend.TMDB_Client.dto.movies.BasicMovieDTO;
-import com.example.backend.TMDB_Client.dto.movies.MovieDetailsDTO;
-import com.example.backend.TMDB_Client.dto.movies.MovieTrailerDTO;
-import com.example.backend.TMDB_Client.response.movies.*;
+import com.example.backend.tmdb_client.client.MovieClient;
+import com.example.backend.tmdb_client.dto.movies.BasicMovieDTO;
+import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
+import com.example.backend.tmdb_client.dto.movies.MovieTrailerDTO;
+import com.example.backend.tmdb_client.response.movies.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

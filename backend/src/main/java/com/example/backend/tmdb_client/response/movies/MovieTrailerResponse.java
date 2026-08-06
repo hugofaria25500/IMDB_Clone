@@ -1,6 +1,6 @@
-package com.example.backend.TMDB_Client.response.movies;
+package com.example.backend.tmdb_client.response.movies;
 
-import com.example.backend.TMDB_Client.dto.movies.MovieTrailerDTO;
+import com.example.backend.tmdb_client.dto.movies.MovieTrailerDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
