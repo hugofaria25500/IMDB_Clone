@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { searchMovies } from "../services/catalogService";
+import { searchMovies } from "../services/movieService";
 
 export function useSearchMovies(query, page) {
 

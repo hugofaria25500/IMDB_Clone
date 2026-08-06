@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getWatchlistSeries } from "../services/catalogService";
+import { getWatchlistSeries } from "../services/movieService";
 
 export function useWatchlistSeries() {
   const [series, setSeries] = useState([]);

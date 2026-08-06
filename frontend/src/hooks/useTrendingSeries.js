@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTrendingSeries } from "../services/catalogService";
+import { getTrendingSeries } from "../services/movieService";
 
 export function useTrendingSeries() {
   const [trendingSeries, setTrendingSeries] = useState([]);

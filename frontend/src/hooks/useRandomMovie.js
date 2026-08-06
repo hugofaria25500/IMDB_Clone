@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRandomMovie} from "../services/catalogService";
+import { getRandomMovie} from "../services/movieService";
 
 export function useRandomMovie() {
 

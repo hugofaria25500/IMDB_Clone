@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRandomSerie} from "../services/catalogService";
+import { getRandomSerie} from "../services/movieService";
 
 export function useRandomSerie() {
   const [randomSerie, setRandomSerie] = useState(null);

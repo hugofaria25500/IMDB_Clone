@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getFavouriteSeries } from "../services/catalogService";
+import { getFavouriteSeries } from "../services/movieService";
 
 export function useFavouriteSeries() {
   const [series, setSeries] = useState([]);

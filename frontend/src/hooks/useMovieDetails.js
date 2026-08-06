@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getMovieDetails } from "../services/catalogService";
+import { getMovieDetails } from "../services/movieService";
 
 export function useMovieDetails(movieId) {
 
