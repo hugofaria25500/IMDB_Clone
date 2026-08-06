@@ -56,7 +56,7 @@ public class MovieClient {
 
     public MoviesListResponse getRandomMovie() {
 
-        int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 301);
+        int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 51);
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/discover/movie")
