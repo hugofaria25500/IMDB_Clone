@@ -61,7 +61,7 @@ public class SeriesClient {
                 .uri(uriBuilder -> uriBuilder
                         .path("/discover/tv")
                         .queryParam("api_key", properties.getApiKey())
-                        .queryParam("sort_by", "popularity.asc")
+                        .queryParam("sort_by", "popularity.desc")
                         .queryParam("page", randomizePageResult)
                         .build())
                 .retrieve()
@@ -73,7 +73,7 @@ public class SeriesClient {
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/search/movie")
+                        .path("/search/tv")
                         .queryParam("api_key", properties.getApiKey())
                         .queryParam("query", query)
                         .queryParam("page", page)

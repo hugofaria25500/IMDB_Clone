@@ -61,7 +61,7 @@ public class MovieClient {
                 .uri(uriBuilder -> uriBuilder
                         .path("/discover/movie")
                         .queryParam("api_key", properties.getApiKey())
-                        .queryParam("sort_by", "popularity.asc")
+                        .queryParam("sort_by", "popularity.desc")
                         .queryParam("page", randomizePageResult)
                         .build())
                 .retrieve()
