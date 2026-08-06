@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { discoverMovies } from "../services/movieService";
+import { discoverMovies } from "../../services/movieService";
 
 export function useDiscoverMovies(filters, page) {
 

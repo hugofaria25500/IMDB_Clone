@@ -1,5 +1,5 @@
 /*JS*/
-import { useMovieGenres } from "../hooks/useMovieGenres";
+import { useMovieGenres } from "../hooks/genres/useMovieGenres";
 
 function QuickFilters({ selectedGenre, onSelect }) {
 

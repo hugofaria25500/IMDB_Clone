@@ -10,8 +10,8 @@ import Footer from '../components/Footer';
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { usePopularMovies } from "../hooks/usePopularMovies";
-import { useTrendingMovies } from "../hooks/useTrendingMovies";
+import { usePopularMovies } from "../hooks/movies/usePopularMovies";
+import { useTrendingMovies } from "../hooks/movies/useTrendingMovies";
 
 function Homepage() {
     const { popularMovies, popularMoviesLoading } = usePopularMovies();

@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 
 /*SERVICES*/
-import { useMovieDetails } from "../hooks/useMovieDetails";
+import { useMovieDetails } from "../hooks/movies/useMovieDetails";
 import { useTrailer } from "../hooks/useTrailer";
 
 /*JS*/

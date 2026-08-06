@@ -9,13 +9,9 @@ import DiscoverSection from '../components/DiscoverSection';
 import Footer from "../components/Footer";
 import MediaModal from "../components/MediaModal";
 
-/*JS*/
-import { useFavouriteMovies } from "../hooks/useFavouriteMovies";
-import { useFavouriteSeries } from "../hooks/useFavouriteSeries";
-
 function FavouritesPage() {
-    const { movies, loading: loadingMovies } = useFavouriteMovies();
-    const { series, loading: loadingSeries } = useFavouriteSeries();
+    const { movies, loading: loadingMovies } = null;
+    const { series, loading: loadingSeries } = null;
 
     const [selectedType, setSelectedType] = useState("movies");
     const [catalog, setCatalog] = useState([]);

@@ -14,12 +14,12 @@ import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { useNewMoviesReleases } from "../hooks/useNewMoviesReleases";
-import { useSearchMovies } from "../hooks/useSearchMovies";
-import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
-import { usePopularMovies } from "../hooks/usePopularMovies";
-import { useTrendingMovies } from "../hooks/useTrendingMovies";
-import { useRandomMovie } from "../hooks/useRandomMovie";
+import { useNewMoviesReleases } from "../hooks/movies/useNewMoviesReleases";
+import { useSearchMovies } from "../hooks/movies/useSearchMovies";
+import { useDiscoverMovies } from "../hooks/movies/useDiscoverMovies";
+import { usePopularMovies } from "../hooks/movies/usePopularMovies";
+import { useTrendingMovies } from "../hooks/movies/useTrendingMovies";
+import { useRandomMovie } from "../hooks/movies/useRandomMovie";
 
 function MoviesPage() {
 

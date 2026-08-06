@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { getMovieGenres } from "../services/movieService";
+import { getMovieGenres } from "../../services/movieService";
 
 export function useMovieGenres() {
 

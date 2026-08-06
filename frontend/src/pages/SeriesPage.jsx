@@ -13,19 +13,15 @@ import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { useSeries } from "../hooks/useSeries";
-import { usePopularSeries } from "../hooks/usePopularSeries";
-import { useTrendingSeries } from "../hooks/useTrendingSeries";
-import { useNewSeriesReleases } from "../hooks/useNewSeriesReleases";
-import { useRandomSerie } from "../hooks/useRandomSerie";
+
 
 function SeriesPage() {
 
     const { series, loading } = useSeries();
-    const { popularSeries, popularSeriesLoading } = usePopularSeries();
-    const { trendingSeries, trendingSeriesLoading } = useTrendingSeries();  
-    const { newSeriesReleases, newSeriesReleasesLoading } = useNewSeriesReleases();
-    const { randomSerie, randomSerieLoading } = useRandomSerie();
+    const { popularSeries, popularSeriesLoading } = null;
+    const { trendingSeries, trendingSeriesLoading } = null;  
+    const { newSeriesReleases, newSeriesReleasesLoading } = null;
+    const { randomSerie, randomSerieLoading } = null;
 
     const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);

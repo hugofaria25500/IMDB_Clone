@@ -7,7 +7,7 @@ import Grid from "./Grid";
 import GridPagination from "./GridPagination";
 
 /* JS */
-import { useDiscoverMovies } from "../hooks/useDiscoverMovies";
+import { useDiscoverMovies } from "../hooks/movies/useDiscoverMovies";
 
 function DiscoverSection({ label, onOpenModal, filters, setFilters, page, setPage, results, totalPages, loading }) {
 
