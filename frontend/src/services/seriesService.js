@@ -1,14 +1,14 @@
 /*API*/
 import api from "./api";
 
-/*MOVIES*/
-export async function getPopularMovies() {
-  const response = await api.get("/movies/popular");
+/*SERIES*/
+export async function getPopularSeries() {
+  const response = await api.get("/series/popular");
   return response.data.results;
 }
 
-export async function getTrendingMovies() {
-  const response = await api.get("/movies/trending");
+export async function getTrendingSeries() {
+  const response = await api.get("/series/trending");
   return response.data.results;
 }
 
@@ -22,24 +22,24 @@ export async function searchMovies(query, page = 1) {
     return data;
 }
 
-export async function getNewMoviesReleases() {
-  const response = await api.get("/movies/newReleases");
+export async function getNewSeriesReleases() {
+  const response = await api.get("/series/newReleases");
   return response.data.results;
 }
 
-export async function getRandomMovie() {
-  const response = await api.get("/movies/random");
+export async function getRandomSeries() {
+  const response = await api.get("/series/random");
   return response.data;
 }
 
-export async function getMovieGenres() {
-  const response = await api.get("/genres/movies");  
+export async function getSeriesGenres() {
+  const response = await api.get("/genres/series");  
   return response.data;  
 }
 
-export async function discoverMovies(filters, page) {
+export async function discoverSeries(filters, page) {
 
-    const { data } = await api.get("/movies/discover", {
+    const { data } = await api.get("/series/discover", {
         params: {
             page,
             genre: filters.genre || undefined,
@@ -58,7 +58,7 @@ export async function getTrailer(mediaId, mediaType) {
   return data;
 }
 
-export async function getMovieDetails(movieId) {
-    const { data } = await api.get(`/movies/${movieId}/details`);
+export async function getSeriesDetails(movieId) {
+    const { data } = await api.get(`/series/${movieId}/details`);
     return data;
 }
