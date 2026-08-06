@@ -9,11 +9,11 @@ export function useRandomSeries() {
     async function refreshRandomSeries() {
         try {
             setLoading(true);
-            const movie = await getRandomSeries();
-            setRandomSeries(movie);
+            const series = await getRandomSeries();
+            setRandomSeries(series);
         } finally {
             setLoading(false);
-        }s
+        }
     }
 
     useEffect(() => {

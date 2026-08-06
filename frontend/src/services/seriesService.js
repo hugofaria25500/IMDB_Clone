@@ -13,7 +13,7 @@ export async function getTrendingSeries() {
 }
 
 export async function searchSeries(query, page = 1) {
-    const { data } = await api.get("/movies/search", {
+    const { data } = await api.get("/series/search", {
         params: {
             query,
             page

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getNewSeriesReleases } from "../../services/seriesService";
 
 export function useNewSeriesReleases() {
-  const [newMoviesReleases, setNewSeriesReleases] = useState([]);
+  const [newSeriesReleases, setNewSeriesReleases] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,5 +15,5 @@ export function useNewSeriesReleases() {
     loadNewSeriesReleases();
   }, []);
 
-  return { newMoviesReleases, loading };
+  return { newSeriesReleases, loading };
 }

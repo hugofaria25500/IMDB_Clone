@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { searchSeries } from "../../services/seriesService";
 
-export function useSearchMovies(query, page) {
+export function useSearchSeries(query, page) {
 
     const [results, setResults] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -27,7 +27,7 @@ export function useSearchMovies(query, page) {
                 setTotalPages(data.results.length === 0? 0: data.totalPages);
 
             } catch (error) {
-                console.error("Error searching movies:", error);
+                console.error("Error searching series:", error);
                 setResults([]);
                 setTotalPages(0);
             } finally {

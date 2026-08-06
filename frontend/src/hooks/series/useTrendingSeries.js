@@ -8,7 +8,7 @@ export function useTrendingSeries() {
   useEffect(() => {
     async function loadTrendingSeries() {
       const data = await getTrendingSeries();
-      setTrendingMovies(data);
+      setTrendingSeries(data);
       setLoading(false);
     }
 

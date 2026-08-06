@@ -7,7 +7,7 @@ export function usePopularSeries() {
 
   useEffect(() => {
     async function loadPopularSeries() {
-      const data = await usePopularSeries();
+      const data = await getPopularSeries();
       setPopularSeries(data);
       setLoading(false);
     }

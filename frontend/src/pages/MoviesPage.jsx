@@ -45,8 +45,6 @@ function MoviesPage() {
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
     const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
-    console.log(movieGenres)
-
     const [selectedTrailer, setSelectedTrailer] = useState(null);
     const [selectedMedia, setSelectedMedia] = useState(null);
 
