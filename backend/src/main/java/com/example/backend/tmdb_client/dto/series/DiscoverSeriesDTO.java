@@ -12,8 +12,8 @@ public class DiscoverMoviesDTO {
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonAlias("original_name")
+    private String originalName;
 
     @JsonAlias("poster_path")
     private String posterPath;
@@ -21,8 +21,8 @@ public class DiscoverMoviesDTO {
     @JsonAlias("genre_ids")
     private List<Integer> genreIds;
 
-    @JsonAlias("release_date")
-    private String releaseDate;
+    @JsonAlias("first_air_date")
+    private String firstReleaseDate;
 
     @JsonAlias("vote_average")
     private String rating;
