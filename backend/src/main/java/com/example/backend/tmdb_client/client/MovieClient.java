@@ -59,7 +59,7 @@ public class MovieClient {
         int randomizePageResult = ThreadLocalRandom.current().nextInt(1, 301);
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/trending/movie/week")
+                        .path("/discover/movie")
                         .queryParam("api_key", properties.getApiKey())
                         .queryParam("sort_by", "popularity.asc")
                         .queryParam("page", randomizePageResult)
