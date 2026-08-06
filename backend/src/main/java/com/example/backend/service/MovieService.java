@@ -20,7 +20,7 @@ public class MovieService {
 
     public MoviesListResponse getTrendingMovies() { return movieClient.getTrendingMovies(); }
 
-    public NewReleaseMoviesListResponse getNewReleaseMovies() { return movieClient.getNewReleases(); }
+    public NewReleaseMoviesListResponse getNewReleaseMovies() { return movieClient.getNewMovieReleases(); }
 
     public BasicMovieDTO getRandomMovie(){
         return movieClient.getRandomMovie().getResults().get(0);
@@ -71,7 +71,6 @@ public class MovieService {
                 .id(response.getId())
                 .title(response.getTitle())
                 .overview(response.getOverview())
-                .tagline(response.getTagline())
                 .runtime(response.getRuntime())
                 .releaseDate(response.getReleaseDate())
                 .rating(response.getVoteAverage())

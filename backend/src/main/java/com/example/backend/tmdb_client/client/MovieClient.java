@@ -41,8 +41,8 @@ public class MovieClient {
             .block();
     }
 
-    @Cacheable("newReleases")
-    public NewReleaseMoviesListResponse getNewReleases() {
+    @Cacheable("newMovieReleases")
+    public NewReleaseMoviesListResponse getNewMovieReleases() {
 
             return webClient.get()
                     .uri(uriBuilder -> uriBuilder
