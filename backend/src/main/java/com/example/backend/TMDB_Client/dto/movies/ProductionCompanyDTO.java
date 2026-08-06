@@ -1,4 +1,4 @@
-package com.example.backend.TMDB_Client.dto;
+package com.example.backend.TMDB_Client.dto.movies;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;

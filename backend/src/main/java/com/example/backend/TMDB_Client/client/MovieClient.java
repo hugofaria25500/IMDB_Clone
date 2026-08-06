@@ -1,9 +1,7 @@
 package com.example.backend.TMDB_Client.client;
 
 import com.example.backend.TMDB_Client.config.TMDBProperties;
-import com.example.backend.TMDB_Client.dto.MovieTrailerDTO;
-import com.example.backend.TMDB_Client.dto.NewReleaseMovieDTO;
-import com.example.backend.TMDB_Client.response.*;
+import com.example.backend.TMDB_Client.response.movies.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

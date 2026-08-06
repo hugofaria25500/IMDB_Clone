@@ -1,5 +1,6 @@
-package com.example.backend.TMDB_Client.dto;
+package com.example.backend.TMDB_Client.dto.movies;
 
+import com.example.backend.TMDB_Client.dto.genres.GenreDTO;
 import lombok.Builder;
 import lombok.Data;
 

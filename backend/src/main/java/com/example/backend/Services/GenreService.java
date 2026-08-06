@@ -1,7 +1,7 @@
 package com.example.backend.Services;
 
 import com.example.backend.TMDB_Client.client.GenreClient;
-import com.example.backend.TMDB_Client.response.GenreResponse;
+import com.example.backend.TMDB_Client.response.genres.GenreResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

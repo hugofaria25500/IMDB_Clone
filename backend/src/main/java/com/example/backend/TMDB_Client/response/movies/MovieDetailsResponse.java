@@ -1,9 +1,9 @@
-package com.example.backend.TMDB_Client.response;
+package com.example.backend.TMDB_Client.response.movies;
 
-import com.example.backend.TMDB_Client.dto.GenreDTO;
-import com.example.backend.TMDB_Client.dto.ProductionCompanyDTO;
-import com.example.backend.TMDB_Client.dto.ProductionCountryDTO;
-import com.example.backend.TMDB_Client.dto.SpokenLanguageDTO;
+import com.example.backend.TMDB_Client.dto.genres.GenreDTO;
+import com.example.backend.TMDB_Client.dto.movies.ProductionCompanyDTO;
+import com.example.backend.TMDB_Client.dto.movies.ProductionCountryDTO;
+import com.example.backend.TMDB_Client.dto.movies.SpokenLanguageDTO;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
