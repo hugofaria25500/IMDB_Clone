@@ -22,7 +22,7 @@ public class SeriesService {
 
     public NewReleaseSeriesListResponse getNewReleaseSeries() { return seriesClient.getNewSeriesReleases(); }
 
-    public BasicSeriesDTO getRandomMovie(){
+    public BasicSeriesDTO getRandomSeries(){
         return seriesClient.getRandomSeries().getResults().get(0);
     }
 
