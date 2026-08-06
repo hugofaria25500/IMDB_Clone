@@ -17,6 +17,7 @@ import MediaModal from "../components/MediaModal";
 import { useNewMoviesReleases } from "../hooks/movies/useNewMoviesReleases";
 import { useSearchMovies } from "../hooks/movies/useSearchMovies";
 import { useDiscoverMovies } from "../hooks/movies/useDiscoverMovies";
+import { useMovieGenres} from "../hooks/genres/useMovieGenres"
 import { usePopularMovies } from "../hooks/movies/usePopularMovies";
 import { useTrendingMovies } from "../hooks/movies/useTrendingMovies";
 import { useRandomMovie } from "../hooks/movies/useRandomMovie";
@@ -39,9 +40,12 @@ function MoviesPage() {
     const { newMoviesReleases, newMoviesReleasesLoading } = useNewMoviesReleases();
     const { results: searchMovies, totalPages: searchTotalPages, loading: searchLoading} = useSearchMovies(searchQuery, searchPage);
     const { results: discoverMovies,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverMovies(filters, discoverPage);
+    const { genres:movieGenres, loading: movieGenresLoading } = useMovieGenres();
     const { popularMovies, popularMoviesLoading } = usePopularMovies();
     const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
     const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
+
+    console.log(movieGenres)
 
     const [selectedTrailer, setSelectedTrailer] = useState(null);
     const [selectedMedia, setSelectedMedia] = useState(null);
@@ -80,8 +84,8 @@ function MoviesPage() {
             <SearchSection label="movies" query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
             results={searchMovies} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openMediaModal}/>
             {/* MOVIE FILTERS */}
-            <DiscoverSection label="movies" filters={filters} setFilters={setFilters} page={discoverPage} setPage={setDiscoverPage} 
-            results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
+            <DiscoverSection label="movies" filters={filters} setFilters={setFilters} genres={movieGenres} genresLoading={movieGenresLoading} page={discoverPage} 
+            setPage={setDiscoverPage} results={discoverMovies} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
             {/* POPULAR MOVIES CAROUSEL */}
             <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading} onOpenModal={openMediaModal}/>
             {/* TRENDING MOVIES CAROUSEL */}

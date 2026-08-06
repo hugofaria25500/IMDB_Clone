@@ -9,7 +9,7 @@ import GridPagination from "./GridPagination";
 /* JS */
 import { useDiscoverMovies } from "../hooks/movies/useDiscoverMovies";
 
-function DiscoverSection({ label, onOpenModal, filters, setFilters, page, setPage, results, totalPages, loading }) {
+function DiscoverSection({ label, onOpenModal, filters, setFilters, genres, genresLoading, page, setPage, results, totalPages, loading }) {
 
     const resultsRef = useRef(null);
 
@@ -53,6 +53,8 @@ function DiscoverSection({ label, onOpenModal, filters, setFilters, page, setPag
             </div>
 
             <QuickFilters
+                genres={genres}
+                loading={genresLoading}
                 selectedGenre={filters.genre}
                 onSelect={(genre) =>
                     setFilters(prev => ({
