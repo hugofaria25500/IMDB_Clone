@@ -37,9 +37,9 @@ function Homepage() {
         {/* HERO SECTION */}
         <HeroSection />
         {/* POPULAR MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Popular Movies" catalog={popularMovies} loading={popularMoviesLoading}  onOpenModal={openMediaModal}/>
+        <MultiItemCarousel title={"Popular Movies"} type={"movies"} catalog={popularMovies} loading={popularMoviesLoading}  onOpenModal={openMediaModal}/>
         {/*TRENDING MOVIES CAROUSEL */}
-        <MultiItemCarousel title="Trending Movies" catalog={trendingMovies} loading={trendingMoviesLoading} onOpenModal={openMediaModal}/>
+        <MultiItemCarousel title={"Trending Movies"} type={"movies"} catalog={trendingMovies} loading={trendingMoviesLoading} onOpenModal={openMediaModal}/>
         {/*PROMO SECTION*/}
         <PromoSection />
         {/*FOOTER*/}
@@ -47,6 +47,7 @@ function Homepage() {
         {/* MEDIA MODAL */}
         {selectedMedia && (
             <MediaModal
+                type={"movies"}
                 mediaId={selectedMedia.id}
                 mediaType={selectedMedia.type}
                 onClose={closeMediaModal}
