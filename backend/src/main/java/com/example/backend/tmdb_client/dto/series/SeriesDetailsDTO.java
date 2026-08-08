@@ -19,8 +19,6 @@ public class SeriesDetailsDTO {
 
     private String overview;
 
-    private Integer runtime;
-
     private String firstAirDate;
 
     private Double rating;

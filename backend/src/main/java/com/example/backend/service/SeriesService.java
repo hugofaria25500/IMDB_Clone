@@ -71,7 +71,6 @@ public class SeriesService {
                 .id(response.getId())
                 .originalName(response.getOriginalName())
                 .overview(response.getOverview())
-                .runtime(response.getRuntime())
                 .firstAirDate(response.getFirstReleaseDate())
                 .rating(response.getVoteAverage())
                 .posterPath(response.getPosterPath())

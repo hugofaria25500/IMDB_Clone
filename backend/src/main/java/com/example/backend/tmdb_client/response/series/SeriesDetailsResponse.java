@@ -22,9 +22,6 @@ public class SeriesDetailsResponse {
     @JsonProperty("overview")
     private String overview;
 
-    @JsonProperty("runtime")
-    private Integer runtime;
-
     @JsonAlias("first_air_date")
     private String firstReleaseDate;
 
