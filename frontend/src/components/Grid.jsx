@@ -27,7 +27,9 @@ function Grid({type, catalog = [], onOpenModal, loading, hasSearched = true }) {
                 </h2>
 
                 <p className="text-gray-400 mt-3">
-                    Start typing a movie title above and we'll help you find your next favorite film.
+                    {type === "movies"
+                        ? "Start typing a movie title above and we'll help you find your next favorite film."
+                        : "Start typing a series name above and we'll help you find your next favorite series."}
                 </p>
 
             </div>
