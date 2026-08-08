@@ -4,6 +4,7 @@ import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.request.CreateUserRequest;
 import com.example.backend.response.UserResponse;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +14,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAllUsers(){ return userRepository.findAll();}
@@ -33,7 +37,7 @@ public class UserService {
 
         user.setUsername(request.username());
         user.setEmail(request.email());
-        user.setPassword(request.password());
+        user.setPassword(passwordEncoder.encode(request.password()));
 
         User savedUser = userRepository.save(user);
 
