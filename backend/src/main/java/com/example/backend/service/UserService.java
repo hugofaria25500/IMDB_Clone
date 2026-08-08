@@ -44,7 +44,8 @@ public class UserService {
         return new UserResponse(
                 savedUser.getId(),
                 savedUser.getUsername(),
-                savedUser.getEmail()
+                savedUser.getEmail(),
+                savedUser.getIcon()
         );
     }
 }
