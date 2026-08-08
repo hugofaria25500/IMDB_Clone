@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.entity.RefreshToken;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.request.LoginRequest;
@@ -15,15 +16,19 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+
 
     public AuthService(
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
-            JwtService jwtService
+            JwtService jwtService,
+            RefreshTokenService refreshTokenService
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
     }
 
     public LoginResponse login(LoginRequest request) {
@@ -43,6 +48,8 @@ public class AuthService {
 
         String token = jwtService.generateToken(user);
 
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+
         UserResponse userResponse = new UserResponse(
                 user.getId(),
                 user.getUsername(),
@@ -52,6 +59,7 @@ public class AuthService {
 
         return new LoginResponse(
                 token,
+                refreshToken,
                 userResponse
         );
     }
