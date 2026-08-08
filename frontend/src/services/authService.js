@@ -54,8 +54,25 @@ const authService = {
              );
 
         return response.data;
-    }
+    },
 
+    async updateCurrentUser(icon) {
+        const accessToken = localStorage.getItem("accessToken");
+
+        const response = await api.patch(
+            "/users/me",
+            {
+                icon: icon
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }
+        );
+
+        return response.data;
+    }
    
 };
 
