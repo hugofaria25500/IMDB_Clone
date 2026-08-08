@@ -25,7 +25,7 @@ function CreateAccountCard() {
 
         setError("");
 
-        if (!name || !email || !password) {
+        if (!username || !email || !password) {
             setError("Please fill in all fields.");
             return;
         }
@@ -33,7 +33,7 @@ function CreateAccountCard() {
         setLoading(true);
 
         try {
-            await register(name, email, password);
+            await register(username, email, password);
             navigate("/");
         } catch (error) {
             setError(
@@ -65,7 +65,7 @@ function CreateAccountCard() {
                 <input
                     type="text"
                     placeholder="Username"
-                    value={name}
+                    value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />

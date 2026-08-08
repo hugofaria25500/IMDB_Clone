@@ -5,8 +5,8 @@ const authService = {
     async register(username, email, password) {
 
         try {
-            const response = await api.post("/users", {
-                name,
+            const response = await api.post("/users/create", {
+                username,
                 email,
                 password
             });
