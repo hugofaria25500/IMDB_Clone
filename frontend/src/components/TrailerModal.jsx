@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 
 /*COMPONENTS*/
-import { useTrailer } from "../hooks/useTrailer";
+import { useTrailer } from "../hooks/media/useTrailer";
 
 /*JS*/
 import { youtubePathBase } from "../js/constants";
