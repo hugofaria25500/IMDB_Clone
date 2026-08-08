@@ -46,6 +46,8 @@ function Navbar() {
                         <span className={`block h-0.5 w-6 bg-white transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
                     </button>
 
+                    
+
                     {isAuthenticated ? (
                         <ProfileMenu />
                     ) : (

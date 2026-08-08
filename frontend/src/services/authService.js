@@ -1,24 +1,42 @@
-/*API */
 import api from "./api";
 
 const authService = {
+
+    async login(email, password) {
+
+        const response = await api.post("/auth/login", {
+            email,
+            password
+        });
+
+        return response.data;
+    },
+
     async register(username, email, password) {
 
-        try {
-            const response = await api.post("/users/create", {
-                username,
-                email,
-                password
-            });
+        const response = await api.post("/auth/register", {
+            username,
+            email,
+            password
+        });
 
-            return response.data;
+        return response.data;
+    },
 
-        } catch (error) {
-            throw new Error(
-                error.response?.data?.message ||
-                "Something went wrong while creating your account."
-            );
-        }
+    async refresh(refreshToken) {
+
+        const response = await api.post("/auth/refresh", {
+            refreshToken
+        });
+
+        return response.data;
+    },
+
+    async logout(refreshToken) {
+
+        await api.post("/auth/logout", {
+            refreshToken
+        });
     }
 };
 
