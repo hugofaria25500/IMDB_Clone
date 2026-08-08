@@ -6,6 +6,6 @@ import com.example.backend.entity.User;
 public record LoginResponse(
         String token,
 
-        RefreshToken refreshToken,
+        String refreshToken,
         UserResponse userResponse
 ) {}

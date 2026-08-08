@@ -46,9 +46,9 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtService.generateToken(user);
+        String accessToken = jwtService.generateToken(user);
 
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(user);
+        String refreshToken = refreshTokenService.createRefreshToken(user).getToken();
 
         UserResponse userResponse = new UserResponse(
                 user.getId(),
@@ -58,7 +58,30 @@ public class AuthService {
         );
 
         return new LoginResponse(
-                token,
+                accessToken,
+                refreshToken,
+                userResponse
+        );
+    }
+
+    public LoginResponse refresh(String refreshTokenValue) {
+
+        RefreshToken refreshTokenObject =
+                refreshTokenService.validateRefreshToken(refreshTokenValue);
+        User user = refreshTokenObject.getUser();
+
+        String accessToken = jwtService.generateToken(user);
+        String refreshToken = refreshTokenObject.getToken();
+
+        UserResponse userResponse = new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getIcon()
+        );
+
+        return new LoginResponse(
+                accessToken,
                 refreshToken,
                 userResponse
         );
