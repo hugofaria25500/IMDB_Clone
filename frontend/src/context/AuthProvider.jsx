@@ -99,16 +99,27 @@ function AuthProvider({ children }) {
         }
     }
 
+    async function updateUser(icon) {
+
+        const updatedUser =
+            await authService.updateCurrentUser(icon);
+
+        setUser(updatedUser);
+
+        return updatedUser;
+    }
+
     const isAuthenticated = user !== null;
 
     return (
         <AuthContext.Provider
             value={{
                 user,
-                isAuthenticated,
                 register,
                 login,
-                logout
+                logout,
+                updateUser,
+                isAuthenticated
             }}
         >
             {children}

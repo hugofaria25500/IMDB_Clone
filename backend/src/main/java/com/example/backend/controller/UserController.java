@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.User;
 import com.example.backend.request.CreateUserRequest;
+import com.example.backend.request.UpdateUserRequest;
 import com.example.backend.response.UserResponse;
 import com.example.backend.service.UserService;
 import com.example.backend.tmdb_client.response.genres.GenreResponse;
@@ -31,6 +32,13 @@ public class UserController {
     public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         UserResponse response = userService.getUserResponse(user);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<UserResponse> updateCurrentUser( Authentication authentication, @RequestBody UpdateUserRequest request) {
+        User user = (User) authentication.getPrincipal();
+        UserResponse response = userService.updateUser(user, request);
         return ResponseEntity.ok(response);
     }
 }

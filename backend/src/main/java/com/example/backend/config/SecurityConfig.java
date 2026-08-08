@@ -25,7 +25,8 @@ public class SecurityConfig {
                             "/api/auth/**",
                             "/api/movies/**",
                             "/api/series/**",
-                            "/api/genres/**"
+                            "/api/genres/**",
+                            "/h2-console/**"
                     ).permitAll()
 
                     // PRIVATE
