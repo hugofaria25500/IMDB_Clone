@@ -25,10 +25,4 @@ public class UserController {
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
-
-    @PostMapping(path = "/create")
-    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
-        UserResponse response = userService.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
 }
