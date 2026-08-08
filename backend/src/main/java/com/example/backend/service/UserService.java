@@ -20,4 +20,14 @@ public class UserService {
 
     public List<User> getAllUsers(){ return userRepository.findAll();}
 
+    public UserResponse getUserResponse(User user) {
+
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getIcon()
+        );
+    }
+
 }
