@@ -7,6 +7,7 @@ import com.example.backend.service.UserService;
 import com.example.backend.tmdb_client.response.genres.GenreResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,9 +27,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PostMapping(path = "/create")
-    public ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
-        UserResponse response = userService.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    @GetMapping("/me")
+    public ResponseEntity<UserResponse> getCurrentUser(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        UserResponse response = userService.getUserResponse(user);
+        return ResponseEntity.ok(response);
     }
 }

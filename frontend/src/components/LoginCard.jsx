@@ -10,8 +10,7 @@ import mainLogo from "../assets/main_logo.png"
 
 function LoginCard() {
     const navigate = useNavigate();
-
-    const auth = useAuth();
+    const { login } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -30,15 +29,24 @@ function LoginCard() {
         }
 
         try {
+
             setLoading(true);
-            await auth.login(email, password);
+
+            await login(email, password);
+
             navigate("/");
+
         } catch (error) {
-            setError(error.message);
+
+            setError(
+                error.response?.data?.message ??
+                "Invalid email or password."
+            );
+
         } finally {
+
             setLoading(false);
         }
-
     }
 
     return (

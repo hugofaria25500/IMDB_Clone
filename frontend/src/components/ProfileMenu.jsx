@@ -35,8 +35,14 @@ function ProfileMenu({ onOpen }) {
     }, []);
 
     async function handleLogout() {
-        await logout();
-        navigate("/");
+
+        try {
+            await logout();
+            setIsOpen(false);
+            navigate("/");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
     }
 
     if (!user) return null;
@@ -45,10 +51,10 @@ function ProfileMenu({ onOpen }) {
         <div ref={menuRef} className="relative">
 
             <button onClick={() => { setIsOpen(!isOpen); if (onOpen) onOpen(); }} className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-white/10 cursor-pointer">
-                <img src={getAvatarById(user.avatar_id)} alt={user.name} className="h-10 w-10 rounded-full object-cover border-2 border-violet-600"/>
+                <img src={user.icon} alt={user.username} className="h-10 w-10 rounded-full object-cover border-2 border-violet-600"/>
 
                 <span className="hidden md:block text-white font-medium">
-                    {user.name}
+                    {user.username}
                 </span>
 
             </button>

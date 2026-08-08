@@ -1,0 +1,120 @@
+package com.example.backend.service;
+
+import com.example.backend.entity.RefreshToken;
+import com.example.backend.entity.User;
+import com.example.backend.repository.UserRepository;
+import com.example.backend.request.CreateUserRequest;
+import com.example.backend.request.LoginRequest;
+import com.example.backend.response.LoginResponse;
+import com.example.backend.response.UserResponse;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
+
+
+    public AuthService(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService,
+            RefreshTokenService refreshTokenService
+    ) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.refreshTokenService = refreshTokenService;
+    }
+
+    public UserResponse register(CreateUserRequest request) {
+
+        if (userRepository.existsByUsername(request.username())) {
+            throw new RuntimeException("Username already exists.");
+        }
+
+        if (userRepository.existsByEmail(request.email())) {
+            throw new RuntimeException("Email already exists.");
+        }
+
+        User user = new User();
+
+        user.setUsername(request.username());
+        user.setEmail(request.email());
+        user.setPassword(passwordEncoder.encode(request.password()));
+
+        User savedUser = userRepository.save(user);
+
+        return new UserResponse(
+                savedUser.getId(),
+                savedUser.getUsername(),
+                savedUser.getEmail(),
+                savedUser.getIcon()
+        );
+    }
+
+    public LoginResponse login(LoginRequest request) {
+
+        User user = userRepository
+                .findByEmail(request.email())
+                .orElseThrow(() ->
+                        new RuntimeException("Invalid credentials")
+                );
+
+        if (!passwordEncoder.matches(
+                request.password(),
+                user.getPassword()
+        )) {
+            throw new RuntimeException("Invalid credentials");
+        }
+
+        String accessToken = jwtService.generateToken(user);
+
+        String refreshToken = refreshTokenService.createRefreshToken(user).getToken();
+
+        UserResponse userResponse = new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getIcon()
+        );
+
+        return new LoginResponse(
+                accessToken,
+                refreshToken,
+                userResponse
+        );
+    }
+
+    public LoginResponse refresh(String refreshTokenValue) {
+
+        RefreshToken refreshTokenObject =
+                refreshTokenService.validateRefreshToken(refreshTokenValue);
+        User user = refreshTokenObject.getUser();
+
+        String accessToken = jwtService.generateToken(user);
+        String refreshToken = refreshTokenObject.getToken();
+
+        UserResponse userResponse = new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getIcon()
+        );
+
+        return new LoginResponse(
+                accessToken,
+                refreshToken,
+                userResponse
+        );
+    }
+
+    public void logout(String refreshToken) {
+        refreshTokenService.revokeToken(refreshToken);
+    }
+}
