@@ -1,15 +1,5 @@
-/*JS*/
-import { useMovieGenres } from "../hooks/useMovieGenres";
-
-function QuickFilters({ selectedGenre, onSelect }) {
-
-    const {
-        genres,
-        loading
-    } = useMovieGenres();
-
+function QuickFilters({ genres, loading, selectedGenre, onSelect }) {
     return (
-
         <div className="w-full flex justify-center mt-6 px-4">
 
             <div className="flex flex-wrap gap-3 justify-center max-w-[800px]">
@@ -27,7 +17,7 @@ function QuickFilters({ selectedGenre, onSelect }) {
 
                 ) : (
 
-                    genres.map((genre) => (
+                    genres?.map((genre) => (
 
                         <button
                             key={genre.id}

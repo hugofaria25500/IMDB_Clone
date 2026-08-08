@@ -8,7 +8,7 @@ import ReleaseMediaCard from "./ReleaseMediaCard";
 /*CSS*/
 import "../css/SingleItemCarousel.css";
 
-function SingleItemCarousel( { catalog, onOpenTrailerModal, loading} ) {
+function SingleItemCarousel( { type, catalog, onOpenTrailerModal, loading} ) {
     return (
         <div className="bg-black w-full h-[calc(100vh-100px)] flex items-center justify-center">
 
@@ -20,7 +20,7 @@ function SingleItemCarousel( { catalog, onOpenTrailerModal, loading} ) {
             >
                 {catalog.map((item) => (
                     <SwiperSlide key={item.id}>
-                        <ReleaseMediaCard item={item} onOpenTrailerModal={onOpenTrailerModal} />
+                        <ReleaseMediaCard type={type} item={item} onOpenTrailerModal={onOpenTrailerModal} />
                     </SwiperSlide>
                 ))}
             </Swiper>

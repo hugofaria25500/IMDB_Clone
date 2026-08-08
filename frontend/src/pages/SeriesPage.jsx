@@ -4,8 +4,9 @@ import { useEffect } from "react";
 
 /*COMPONENTS*/
 import Navbar from "../components/Navbar";
-import DiscoverSection from '../components/DiscoverSection';
 import SingleItemCarousel from "../components/SingleItemCarousel";
+import SearchSection from "../components/SearchSection"
+import DiscoverSection from '../components/DiscoverSection';
 import MultiItemCarousel from '../components/MultiItemCarousel';
 import ShuffleSection from "../components/ShuffleSection";
 import Footer from "../components/Footer";
@@ -13,69 +14,99 @@ import TrailerModal from "../components/TrailerModal";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { useSeries } from "../hooks/useSeries";
-import { usePopularSeries } from "../hooks/usePopularSeries";
-import { useTrendingSeries } from "../hooks/useTrendingSeries";
-import { useNewSeriesReleases } from "../hooks/useNewSeriesReleases";
-import { useRandomSerie } from "../hooks/useRandomSerie";
+import { useNewSeriesReleases } from "../hooks/series/useNewSeriesReleases";
+import { useSearchSeries } from "../hooks/series/useSearchSeries";
+import { useDiscoverSeries } from "../hooks/series/useDiscoverSeries";
+import { useSeriesGenres} from "../hooks/genres/useSeriesGenres";
+import { usePopularSeries } from "../hooks/series/usePopularSeries";
+import { useTrendingSeries } from "../hooks/series/useTrendingSeries";
+import { useRandomSeries } from "../hooks/series/useRandomSeries";
 
 function SeriesPage() {
 
-    const { series, loading } = useSeries();
-    const { popularSeries, popularSeriesLoading } = usePopularSeries();
-    const { trendingSeries, trendingSeriesLoading } = useTrendingSeries();  
+    const [searchQuery, setSearchQuery] = useState("");
+    const [searchPage, setSearchPage] = useState(1);
+
+    const [discoverPage, setDiscoverPage] = useState(1);
+
+    const [filters, setFilters] = useState({
+        genre: null,
+        yearFrom: "",
+        yearTo: "",
+        rating: "all",
+        sortBy: "popularity.desc",
+    });
+
     const { newSeriesReleases, newSeriesReleasesLoading } = useNewSeriesReleases();
-    const { randomSerie, randomSerieLoading } = useRandomSerie();
+    const { results: searchSeries, totalPages: searchTotalPages, loading: searchLoading} = useSearchSeries(searchQuery, searchPage);
+    const { results: discoverSeries,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverSeries(filters, discoverPage);
+    const { genres:seriesGenres, loading: seriesGenresLoading } = useSeriesGenres();
+    const { popularSeries, popularSeriesLoading } = usePopularSeries();
+    const { trendingSeries, trendingSeriesLoading } = useTrendingSeries();
+    const { randomSeries, loading:randomSeriesLoading, refreshRandomSeries } = useRandomSeries();
 
-    const [selectedTrailerItem, setSelectedTrailerItem] = useState(null);
-    const [selectedItem, setSelectedItem] = useState(null);
-
+    const [selectedTrailer, setSelectedTrailer] = useState(null);
+    const [selectedMedia, setSelectedMedia] = useState(null);
+    
     function openTrailerModal(item) {
-        setSelectedTrailerItem(item);
+        setSelectedTrailer({
+            id: item.id,
+            type: "series"
+        });
     }
 
     function closeTrailerModal() {
-        setSelectedTrailerItem(null);
+        setSelectedTrailer(null);
     }
 
-    function openModal(item) {
-        setSelectedItem(item);
+    function openMediaModal(item) {
+        setSelectedMedia({
+            id: item.id,
+            type: "series"
+        });
     }
 
-    function closeModal() {
-        setSelectedItem(null);
+    function closeMediaModal() {
+        setSelectedMedia(null);
     }
 
     return (
         <div className="bg-black">
-             {/* SPACE */}
+            {/* SPACE */}
             <div className="h-[100px] bg-black"></div>
             {/* NAVBAR */}
             <Navbar />
-            {/* SERIES CAROUSELS */}
-            <SingleItemCarousel movies={newSeriesReleases} onOpenTrailerModal={openTrailerModal} loading={newSeriesReleasesLoading} />
-            {/* SERIES FILTERS */}
-            <DiscoverSection catalog={series} onOpenModal={openModal} loading={loading} label={"series"}/>
-            {/* POPULAR SERIES CAROUSEL */}
-            <MultiItemCarousel title="Popular Series" catalog={popularSeries} onOpenModal={openModal} loading={popularSeriesLoading} />
-            {/* TRENDING SERIES CAROUSEL */}
-            <MultiItemCarousel title="Trending Series" catalog={trendingSeries} onOpenModal={openModal} loading={trendingSeriesLoading} />
+            {/* MOVIE CAROUSELS */}
+            <SingleItemCarousel type={"series"} catalog={newSeriesReleases} loading={newSeriesReleasesLoading} onOpenTrailerModal={openTrailerModal}/>
+            {/* MOVIE SEARCH */}
+            <SearchSection type={"series"} query={searchQuery} setQuery={setSearchQuery} page={searchPage} setPage={setSearchPage} 
+            results={searchSeries} totalPages={searchTotalPages} loading={searchLoading} onOpenModal={openMediaModal}/>
+            {/* MOVIE FILTERS */}
+            <DiscoverSection type={"series"} filters={filters} setFilters={setFilters} genres={seriesGenres} genresLoading={seriesGenresLoading} page={discoverPage} 
+            setPage={setDiscoverPage} results={discoverSeries} totalPages={discoverTotalPages} loading={discoverLoading} onOpenModal={openMediaModal}/>
+            {/* POPULAR MOVIES CAROUSEL */}
+            <MultiItemCarousel title="Popular Series" type={"series"} catalog={popularSeries} loading={popularSeriesLoading} onOpenModal={openMediaModal}/>
+            {/* TRENDING MOVIES CAROUSEL */}
+            <MultiItemCarousel title="Trending Series" type={"series"} catalog={trendingSeries} loading={trendingSeriesLoading} onOpenModal={openMediaModal}/>
             {/* SHUFFLE SECTION */}
-            <ShuffleSection type={"Serie"} onOpenModal={openModal} loading={randomSerieLoading} />
+            <ShuffleSection label={"Series"} type={"series"} item={randomSeries} loading={randomSeriesLoading} onShuffle={refreshRandomSeries} onOpenModal={openMediaModal}/>
             {/* FOOTER */}
             <Footer />
             {/* TRAILER MODAL */}
-            {selectedTrailerItem && (
+            {selectedTrailer && (
                 <TrailerModal
-                    item={selectedTrailerItem}
+                    mediaId={selectedTrailer.id}
+                    mediaType={selectedTrailer.type}
                     onClose={closeTrailerModal}
                 />
             )}
-            {/* MODAL */}
-            {selectedItem && (
+            {/* MEDIA MODAL */}
+            {selectedMedia && (
                 <MediaModal
-                    item={selectedItem}
-                    onClose={closeModal}
+                    type={"series"}
+                    mediaId={selectedMedia.id}
+                    mediaType={selectedMedia.type}
+                    onClose={closeMediaModal}
                 />
             )}
         </div>

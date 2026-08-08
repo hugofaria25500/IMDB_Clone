@@ -9,13 +9,12 @@ import Footer from "../components/Footer";
 import MediaModal from "../components/MediaModal";
 
 /*JS*/
-import { useWatchlistMovies } from "../hooks/useWatchlistMovies";
-import { useWatchlistSeries } from "../hooks/useWatchlistSeries";
+
 
 function WatchListPage() {
 
-    const { movies, loading: loadingMovies } = useWatchlistMovies();
-    const { series, loading: loadingSeries } = useWatchlistSeries();
+    const { movies, loading: loadingMovies } = null;
+    const { series, loading: loadingSeries } = null;
 
     const [selectedType, setSelectedType] = useState("movies");
     const [catalog, setCatalog] = useState([]);

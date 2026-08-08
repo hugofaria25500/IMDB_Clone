@@ -1,0 +1,47 @@
+import { useEffect, useState } from "react";
+import { searchSeries } from "../../services/seriesService";
+
+export function useSearchSeries(query, page) {
+
+    const [results, setResults] = useState([]);
+    const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+
+        if (!query.trim()) {
+            setResults([]);
+            setTotalPages(1);
+            return;
+        }
+
+        async function loadSeries() {
+
+            try {
+
+                setLoading(true);
+
+                const data = await searchSeries(query, page);
+
+                setResults(data.results);
+                setTotalPages(data.results.length === 0? 0: data.totalPages);
+
+            } catch (error) {
+                console.error("Error searching series:", error);
+                setResults([]);
+                setTotalPages(0);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadSeries();
+
+    }, [query, page]);
+
+    return {
+        results,
+        totalPages,
+        loading
+    };
+}
