@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTrailer } from "../services/movieService";
+import { getTrailer } from "../../services/mediaService";
 
 export function useTrailer(mediaId, mediaType) {
 

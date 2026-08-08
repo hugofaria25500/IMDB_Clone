@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { getMovieDetails } from "../../services/movieService";
+import { getMediaDetails } from "../../services/mediaService";
 
-export function useMovieDetails(movieId) {
+export function useMediaDetails(movieId, mediaType) {
 
     const [details, setDetails] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ export function useMovieDetails(movieId) {
 
             try {
                 setLoading(true);
-                const data = await getMovieDetails(movieId);
+                const data = await getMediaDetails(movieId, mediaType);
                 setDetails(data);
             } catch (error) {
                 console.error("Error loading movie details:", error);
@@ -27,7 +27,7 @@ export function useMovieDetails(movieId) {
 
         loadDetails();
 
-    }, [movieId]);
+    }, [movieId, mediaType]);
 
     return {
         details,
