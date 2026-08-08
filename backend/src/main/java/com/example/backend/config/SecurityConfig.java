@@ -17,7 +17,12 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth ->
                         auth.anyRequest().permitAll()
-                );
+                )
+                .headers(headers ->
+                headers.frameOptions(frame ->
+                        frame.sameOrigin()
+                )
+        );
 
         return http.build();
     }
