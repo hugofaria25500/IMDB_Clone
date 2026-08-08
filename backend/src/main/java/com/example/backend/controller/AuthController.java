@@ -25,9 +25,15 @@ public class AuthController {
     public LoginResponse login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
+
     @PostMapping("/refresh")
     public LoginResponse refresh(@RequestBody RefreshRequest request) {
         System.out.println("🔥 REFRESH ENDPOINT HIT");
         return authService.refresh(request.refreshToken());
+    }
+
+    @PostMapping("/logout")
+    public void logout(@RequestBody RefreshRequest request) {
+        authService.logout(request.refreshToken());
     }
 }

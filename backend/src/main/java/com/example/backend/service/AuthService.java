@@ -86,4 +86,8 @@ public class AuthService {
                 userResponse
         );
     }
+
+    public void logout(String refreshToken) {
+        refreshTokenService.revokeToken(refreshToken);
+    }
 }
