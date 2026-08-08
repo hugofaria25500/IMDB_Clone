@@ -37,7 +37,26 @@ const authService = {
         await api.post("/auth/logout", {
             refreshToken
         });
+    },
+
+    async getCurrentUser() {
+
+        const accessToken = localStorage.getItem("accessToken");
+
+        console.log("ACCESS TOKEN:", accessToken);
+
+        const response = await api.get("/users/me",
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                }
+             );
+
+        return response.data;
     }
+
+   
 };
 
 export default authService;

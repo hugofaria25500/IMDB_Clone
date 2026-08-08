@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import authService from "../services/authService";
 
 export const AuthContext = createContext();
@@ -6,6 +6,41 @@ export const AuthContext = createContext();
 function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+
+        async function restoreSession() {
+
+            const accessToken =
+                localStorage.getItem("accessToken");
+
+            if (!accessToken) {
+                return;
+            }
+
+            try {
+
+                const currentUser = await authService.getCurrentUser();
+
+                setUser(currentUser);
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to restore session:",
+                    error
+                );
+
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+
+                setUser(null);
+            }
+        }
+
+        restoreSession();
+
+    }, []);
 
     async function register(username, email, password) {
 
@@ -26,10 +61,12 @@ function AuthProvider({ children }) {
             email,
             password
         );
-        
+
+        console.log(response)
+
         localStorage.setItem(
             "accessToken",
-            response.accessToken
+            response.token
         );
 
         localStorage.setItem(
