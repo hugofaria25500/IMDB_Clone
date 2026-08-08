@@ -11,19 +11,18 @@ import mainLogo from "../assets/main_logo.png"
 function CreateAccountCard() {
 
     const navigate = useNavigate();
+    const { register } = useAuth();
 
-    const auth = useAuth();
-
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    async function handleSubmit(e) {
-
+   async function handleSubmit(e) {
         e.preventDefault();
+
         setError("");
 
         if (!name || !email || !password) {
@@ -31,12 +30,16 @@ function CreateAccountCard() {
             return;
         }
 
+        setLoading(true);
+
         try {
-            setLoading(true);
-            await auth.register(name, email, password);
+            await register(name, email, password);
             navigate("/");
         } catch (error) {
-            setError(error.message);
+            setError(
+                error.response?.data?.message ??
+                "Something went wrong while creating your account."
+            );
         } finally {
             setLoading(false);
         }
@@ -63,7 +66,7 @@ function CreateAccountCard() {
                     type="text"
                     placeholder="Username"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />
     
@@ -83,12 +86,18 @@ function CreateAccountCard() {
                     className="p-3 rounded-md bg-white/10 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500 transition cursor-pointer"
                 />
     
-                <button
-                    type="submit"
-                    className="mt-4 py-3 rounded-md bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white font-semibold hover:scale-105 transition shadow-lg shadow-purple-500/40 cursor-pointer"
-                    >
-                    Create Account
-                </button>
+                {loading && (
+                    <div className="mt-4 py-3 w-full h-[40px] rounded-md bg-zinc-800 animate-pulse" /> 
+                )}
+
+                {!loading && (
+                    <button
+                        type="submit"
+                        className="mt-4 py-3 rounded-md bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white font-semibold hover:scale-105 transition shadow-lg shadow-purple-500/40 cursor-pointer"
+                        >
+                        Create Account
+                    </button>    
+                )}
             </form>
             
             </div>

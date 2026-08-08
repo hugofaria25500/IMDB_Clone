@@ -1,24 +1,25 @@
-import * as authMock from "../js/auth";
+/*API */
+import api from "./api";
 
-export async function login(email, password) {
-    return authMock.login(email, password);
-}
+const authService = {
+    async register(username, email, password) {
 
-export async function register(name, email, password) {
-    return authMock.register(name, email, password);
-}
+        try {
+            const response = await api.post("/users", {
+                name,
+                email,
+                password
+            });
 
-export async function logout() {
-    return authMock.logout();
-}
+            return response.data;
 
-/*
-export async function login(email, password) {
-    const response = await apiClient.post("/auth/login", {
-        email,
-        password
-    });
+        } catch (error) {
+            throw new Error(
+                error.response?.data?.message ||
+                "Something went wrong while creating your account."
+            );
+        }
+    }
+};
 
-    return response.data;
-}
-*/
+export default authService;
