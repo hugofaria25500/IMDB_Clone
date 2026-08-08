@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.entity.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.request.CreateUserRequest;
+import com.example.backend.request.UpdateUserRequest;
 import com.example.backend.response.UserResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class UserService {
                 user.getEmail(),
                 user.getIcon()
         );
+    }
+
+    public UserResponse updateUser( User user, UpdateUserRequest request) {
+        user.setIcon(request.getIcon());
+        User updatedUser = userRepository.save(user);
+        return getUserResponse(updatedUser);
     }
 
 }
