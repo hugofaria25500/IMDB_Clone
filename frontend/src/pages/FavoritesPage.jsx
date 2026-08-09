@@ -28,8 +28,8 @@ function FavoritesPage() {
 
     const [page, setPage] = useState(1);
 
-    const { movies, loading: loadingMovies} = useFavoriteMovies();
-    const { series, loading: loadingSeries} = useFavoriteSeries();
+    const { movies, loading: loadingMovies, fetchFavorites: fetchFavoriteMovies} = useFavoriteMovies();
+    const { series, loading: loadingSeries, fetchFavorites: fetchFavoriteSeries} = useFavoriteSeries();
 
     const {genres: movieGenres, loading: movieGenresLoading} = useMovieGenres();
     const {genres: seriesGenres, loading: seriesGenresLoading} = useSeriesGenres();
@@ -128,6 +128,7 @@ function FavoritesPage() {
                     mediaId={selectedMedia.id}
                     mediaType={selectedMedia.type}
                     onClose={closeMediaModal}
+                    onFavoriteChange={selectedMedia.type === "movies" ? fetchFavoriteMovies : fetchFavoriteSeries}
                 />
             )}
 

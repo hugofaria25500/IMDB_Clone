@@ -6,37 +6,38 @@ export function useFavoriteMovies() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    async function fetchFavorites() {
 
-        async function fetchFavorites() {
+        try {
 
-            try {
+            setLoading(true);
 
-                setLoading(true);
+            const data = await getFavoriteMovies();
 
-                const data = await getFavoriteMovies();
+            console.log("New favorites1:", data);
 
-                setMovies(data);
+            setMovies(data);
 
-            } catch (error) {
+        } catch (error) {
 
-                console.error(
-                    "Error fetching favorite movies:",
-                    error
-                );
+            console.error(
+                "Error fetching favorite movies:",
+                error
+            );
 
-            } finally {
+        } finally {
 
-                setLoading(false);
-            }
+            setLoading(false);
         }
+    }
 
+    useEffect(() => {
         fetchFavorites();
-
     }, []);
 
     return {
         movies,
-        loading
+        loading,
+        fetchFavorites
     };
 }

@@ -17,7 +17,7 @@ import crossLogo from "../assets/cross_logo.png";
 import favoriteLogo from "../assets/heart_logo.png";
 import watchlistLogo from "../assets/watchlist_logo.png";
 
-function MediaModal({type, mediaId, mediaType, onClose }) {
+function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null }) {
 
     const {isAuthenticated} = useAuth();
 
@@ -25,8 +25,6 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
         details,
         loading
     } = useMediaDetails(mediaId, mediaType);
-
-    console.log(details)
 
     const {
         trailer,
@@ -78,6 +76,12 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
 
                 setIsFavorite(true);
             }
+
+            if (onFavoriteChange) {
+                await onFavoriteChange();
+            }
+
+            onClose();
 
         } catch (error) {
             console.error("Error updating favourite:", error);
@@ -141,7 +145,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                 )}
 
                 {/* MOVIES CARD */}
-                {!loading && details && type=="movies" && (
+                {!loading && details && mediaType=="movies" && (
                     <div className="flex flex-col lg:flex-row gap-8 max-h-[calc(100vh-180px)] overflow-y-auto overflow-y-auto overflow-x-hidden pr-2"
                         style={{
                             scrollbarWidth: "none",
@@ -356,7 +360,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                 )}
 
                 {/* SERIES CARD */}
-                {!loading && details && type=="series" && (
+                {!loading && details && mediaType=="series" && (
                     <div className="flex flex-col lg:flex-row gap-8 max-h-[calc(100vh-180px)] overflow-y-auto overflow-y-auto overflow-x-hidden pr-2"
                         style={{
                             scrollbarWidth: "none",
@@ -463,7 +467,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                             
                             <div className="flex flex-row gap-2 items-center">
                                 <span className="text-yellow-400 text-sm font-semibold">
-                                    ⭐{details.rating.substring(0,3)}
+                                    ⭐{details.rating.toFixed(1)}
                                 </span>
                                 <span className="text-sm font-semibold">•</span>
                                 <span className="text-sm font-semibold">
