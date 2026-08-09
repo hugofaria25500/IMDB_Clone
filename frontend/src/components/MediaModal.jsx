@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 /*SERVICES*/
 import { addMovieFavorite, addSeriesFavorite, removeMovieFavorite, removeSeriesFavorite, isMovieFavorite, isSeriesFavorite } from "../services/favoriteService"
+import { addMovieWatchlist, addSeriesWatchlist, removeMovieWatchlist, removeSeriesWatchlist, isWatchlistMovies, isWatchlistSeries} from "../services/watchlistService"
 
 /*HOOKS*/
 import useAuth from "../hooks/useAuth";
@@ -17,7 +18,7 @@ import crossLogo from "../assets/cross_logo.png";
 import favoriteLogo from "../assets/heart_logo.png";
 import watchlistLogo from "../assets/watchlist_logo.png";
 
-function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null }) {
+function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWatchlistChange = null}) {
 
     const {isAuthenticated} = useAuth();
 
@@ -85,6 +86,61 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null }) {
 
         } catch (error) {
             console.error("Error updating favourite:", error);
+        }
+    }
+
+    const [isWatchlist, setIsWacthlist] = useState(null);
+
+    useEffect(() => {
+
+        async function checkWatchlist() {
+
+            if (mediaType === "movies") {
+                const watchlist = await isWatchlistMovies(mediaId);
+                setIsWacthlist(watchlist);
+            }
+
+            if (mediaType === "series") {
+                const watchlist = await isWatchlistSeries(mediaId);
+                setIsWacthlist(watchlist);
+            }
+        }
+
+        if (mediaId) {
+            checkWatchlist();
+        }
+
+    }, [mediaId, mediaType]);
+
+    async function handleWatchlist() {
+        try {
+            if (isWatchlist) {
+                if (mediaType === "movies") {
+                    await removeMovieWatchlist(mediaId);
+                } else {
+                    await removeSeriesWatchlist(mediaId);
+                }
+
+                setIsWacthlist(false);
+
+            } else {
+                if (mediaType === "movies") {
+                    await addMovieWatchlist(mediaId);
+                } else {
+                    await addSeriesWatchlist(mediaId);
+                }
+
+                setIsWacthlist(true);
+            }
+
+            if (onWatchlistChange) {
+                await onWatchlistChange();
+            }
+
+            onClose();
+
+        } catch (error) {
+            console.error("Error updating watchlist:", error);
         }
     }
 

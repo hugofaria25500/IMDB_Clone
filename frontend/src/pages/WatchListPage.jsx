@@ -138,7 +138,7 @@ function WatchlistPage() {
                     mediaId={selectedMedia.id}
                     mediaType={selectedMedia.type}
                     onClose={closeMediaModal}
-                    onFavoriteChange={selectedMedia.type === "movies" ? fetchWatchlistMovies : fetchWatchlistSeries}
+                    onWatchlistChange={selectedMedia.type === "movies" ? fetchWatchlistMovies : fetchWatchlistSeries}
                 />
             )}
 
