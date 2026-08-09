@@ -26,6 +26,8 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
         loading
     } = useMediaDetails(mediaId, mediaType);
 
+    console.log(details)
+
     const {
         trailer,
         loading: trailerLoading

@@ -17,9 +17,6 @@ function CollectionFilters({ type, catalog, filters, setFilters, genres, genresL
         setPage(1);
     }, [filters]);
 
-    console.log(type)
-    console.log(catalog)
-
     const handlePageChange = (nextPage) => {
 
         setPage(nextPage);

@@ -43,8 +43,6 @@ const authService = {
 
         const accessToken = localStorage.getItem("accessToken");
 
-        console.log("ACCESS TOKEN:", accessToken);
-
         const response = await api.get("/users/me",
                 {
                     headers: {
