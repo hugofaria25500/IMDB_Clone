@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class WatchlistStatusResponse {
 
-    private boolean favorite;
+    private boolean watchlist;
 }

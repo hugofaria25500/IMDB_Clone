@@ -41,5 +41,5 @@ export async function getWatchlistSeries() {
 
 export async function isWatchlistSeries(seriesId) {
     const { data } = await api.get(`/watchlist/series/${seriesId}`);
-    return data.favorite;
+    return data.watchlist;
 }

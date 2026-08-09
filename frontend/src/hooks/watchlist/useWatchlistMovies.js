@@ -12,7 +12,7 @@ export function useWatchlistMovies() {
 
             setLoading(true);
 
-            const data = await getWatchlistMovies();~
+            const data = await getWatchlistMovies();
             
             setMovies(data);
 
