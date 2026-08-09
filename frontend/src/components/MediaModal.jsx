@@ -39,7 +39,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
 
         async function checkFavorite() {
 
-            if (mediaType === "movie") {
+            if (mediaType === "movies") {
                 const favorite = await isMovieFavorite(mediaId);
                 setIsFavorite(favorite);
             }
@@ -461,7 +461,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                             
                             <div className="flex flex-row gap-2 items-center">
                                 <span className="text-yellow-400 text-sm font-semibold">
-                                    ⭐{details.rating.toFixed(1)}
+                                    ⭐{details.rating.substring(0,3)}
                                 </span>
                                 <span className="text-sm font-semibold">•</span>
                                 <span className="text-sm font-semibold">
