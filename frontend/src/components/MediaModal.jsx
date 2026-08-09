@@ -2,6 +2,10 @@
 import { useEffect, useState, useRef } from "react";
 
 /*SERVICES*/
+import { addMovieFavorite, addSeriesFavorite, removeMovieFavorite, removeSeriesFavorite, isMovieFavorite, isSeriesFavorite } from "../services/favoriteService"
+
+/*HOOKS*/
+import useAuth from "../hooks/useAuth";
 import { useMediaDetails } from "../hooks/media/useMediaDetails";
 import { useTrailer } from "../hooks/media/useTrailer";
 
@@ -10,8 +14,12 @@ import { posterPathBase, logoPathBase } from "../js/constants";
 
 /*IMAGES*/
 import crossLogo from "../assets/cross_logo.png";
+import favoriteLogo from "../assets/heart_logo.png";
+import watchlistLogo from "../assets/watchlist_logo.png";
 
-function MediaModal({type, mediaId, mediaType, onClose }) {
+function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null }) {
+
+    const {isAuthenticated} = useAuth();
 
     const {
         details,
@@ -24,6 +32,61 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
     } = useTrailer(mediaId, mediaType);
 
     if (!mediaId && !mediaType) return null;
+
+    const [isFavorite, setIsFavorite] = useState(null);
+
+    useEffect(() => {
+
+        async function checkFavorite() {
+
+            if (mediaType === "movies") {
+                const favorite = await isMovieFavorite(mediaId);
+                setIsFavorite(favorite);
+            }
+
+            if (mediaType === "series") {
+                const favorite = await isSeriesFavorite(mediaId);
+                setIsFavorite(favorite);
+            }
+        }
+
+        if (mediaId) {
+            checkFavorite();
+        }
+
+    }, [mediaId, mediaType]);
+
+    async function handleFavorite() {
+        try {
+            if (isFavorite) {
+                if (mediaType === "movies") {
+                    await removeMovieFavorite(mediaId);
+                } else {
+                    await removeSeriesFavorite(mediaId);
+                }
+
+                setIsFavorite(false);
+
+            } else {
+                if (mediaType === "movies") {
+                    await addMovieFavorite(mediaId);
+                } else {
+                    await addSeriesFavorite(mediaId);
+                }
+
+                setIsFavorite(true);
+            }
+
+            if (onFavoriteChange) {
+                await onFavoriteChange();
+            }
+
+            onClose();
+
+        } catch (error) {
+            console.error("Error updating favourite:", error);
+        }
+    }
 
     return (
         <div
@@ -82,7 +145,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                 )}
 
                 {/* MOVIES CARD */}
-                {!loading && details && type=="movies" && (
+                {!loading && details && mediaType=="movies" && (
                     <div className="flex flex-col lg:flex-row gap-8 max-h-[calc(100vh-180px)] overflow-y-auto overflow-y-auto overflow-x-hidden pr-2"
                         style={{
                             scrollbarWidth: "none",
@@ -104,13 +167,87 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                         {/* RIGHT */}
                         <div className="flex-1">
 
-                            <div className="flex flex-row gap-1 items-center">
-                                <h1 className="text-2xl font-bold">
-                                    {details.title}
-                                </h1>
-                                <span className="text-lg text-gray-500 font-semibold">
-                                    ({details.releaseDate.substring(0,4)})
-                                </span>
+                            <div className="flex flex-row gap-1 justify-between">
+                                <div className="flex flex-row items-center">
+                                    <h1 className="text-2xl font-bold">
+                                        {details.title}
+                                    </h1>
+                                    <span className="text-lg text-gray-500 font-semibold">
+                                        ({details.releaseDate.substring(0,4)})
+                                    </span>
+                                </div>
+
+                                {isAuthenticated && (
+                                    <div className="flex items-center gap-2 mr-2">
+
+                                        {/* FAVORITE */}
+                                        <button
+                                            type="button"
+                                            onClick={handleFavorite}
+                                            title={isFavorite ? "Remove from favourites" : "Add to favourites"}
+                                            className={`
+                                                group
+                                                flex items-center justify-center
+                                                h-8 w-8
+                                                rounded-full
+                                                border
+                                                transition-all duration-300
+                                                cursor-pointer
+                                                ${
+                                                    isFavorite
+                                                        ? "bg-violet-600/20 border-violet-500 shadow-[0_0_12px_rgba(139,92,246,0.45)]"
+                                                        : "bg-white/5 border-white/10 hover:bg-violet-600/20 hover:border-violet-500/50"
+                                                }
+                                            `}
+                                        >
+                                            <img
+                                                src={favoriteLogo}
+                                                alt="Favourite"
+                                                className={`
+                                                    h-4 w-4
+                                                    transition-all duration-300
+                                                    ${
+                                                        isFavorite
+                                                            ? "scale-110"
+                                                            : "opacity-70 group-hover:opacity-100 group-hover:scale-110"
+                                                    }
+                                                `}
+                                            />
+                                        </button>
+
+                                        {/* WATCHLIST */}
+                                        <button
+                                            type="button"
+                                            title="Add to watchlist"
+                                            className="
+                                                group
+                                                flex items-center justify-center
+                                                h-8 w-8
+                                                rounded-full
+                                                bg-white/5
+                                                border border-white/10
+                                                hover:bg-violet-600/20
+                                                hover:border-violet-500/50
+                                                transition-all duration-300
+                                                cursor-pointer
+                                            "
+                                        >
+                                            <img
+                                                src={watchlistLogo}
+                                                alt="Watchlist"
+                                                className="
+                                                    h-5 w-5
+                                                    opacity-70
+                                                    transition-all duration-300
+                                                    group-hover:opacity-100
+                                                    group-hover:scale-110
+                                                "
+                                            />
+                                        </button>
+
+                                    </div>
+                                )}
+                                
                             </div>
                             
                             <div className="flex flex-row gap-2 items-center">
@@ -223,7 +360,7 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                 )}
 
                 {/* SERIES CARD */}
-                {!loading && details && type=="series" && (
+                {!loading && details && mediaType=="series" && (
                     <div className="flex flex-col lg:flex-row gap-8 max-h-[calc(100vh-180px)] overflow-y-auto overflow-y-auto overflow-x-hidden pr-2"
                         style={{
                             scrollbarWidth: "none",
@@ -245,13 +382,87 @@ function MediaModal({type, mediaId, mediaType, onClose }) {
                         {/* RIGHT */}
                         <div className="flex-1">
 
-                            <div className="flex flex-row gap-1 items-center">
-                                <h1 className="text-2xl font-bold">
-                                    {details.originalName}
-                                </h1>
-                                <span className="text-lg text-gray-500 font-semibold">
-                                    ({details.firstAirDate.substring(0,4)})
-                                </span>
+                             <div className="flex flex-row gap-1 justify-between">
+                                <div className="flex flex-row items-center">
+                                    <h1 className="text-2xl font-bold">
+                                        {details.originalName}
+                                    </h1>
+                                    <span className="text-lg text-gray-500 font-semibold">
+                                        ({details.firstAirDate.substring(0,4)})
+                                    </span>
+                                </div>
+
+                                {isAuthenticated && (
+                                    <div className="flex items-center gap-2 mr-2">
+
+                                        {/* FAVORITE */}
+                                        <button
+                                            type="button"
+                                            onClick={handleFavorite}
+                                            title={isFavorite ? "Remove from favourites" : "Add to favourites"}
+                                            className={`
+                                                group
+                                                flex items-center justify-center
+                                                h-8 w-8
+                                                rounded-full
+                                                border
+                                                transition-all duration-300
+                                                cursor-pointer
+                                                ${
+                                                    isFavorite
+                                                        ? "bg-violet-600/20 border-violet-500 shadow-[0_0_12px_rgba(139,92,246,0.45)]"
+                                                        : "bg-white/5 border-white/10 hover:bg-violet-600/20 hover:border-violet-500/50"
+                                                }
+                                            `}
+                                        >
+                                            <img
+                                                src={favoriteLogo}
+                                                alt="Favourite"
+                                                className={`
+                                                    h-4 w-4
+                                                    transition-all duration-300
+                                                    ${
+                                                        isFavorite
+                                                            ? "scale-110"
+                                                            : "opacity-70 group-hover:opacity-100 group-hover:scale-110"
+                                                    }
+                                                `}
+                                            />
+                                        </button>
+
+                                        {/* WATCHLIST */}
+                                        <button
+                                            type="button"
+                                            title="Add to watchlist"
+                                            className="
+                                                group
+                                                flex items-center justify-center
+                                                h-8 w-8
+                                                rounded-full
+                                                bg-white/5
+                                                border border-white/10
+                                                hover:bg-violet-600/20
+                                                hover:border-violet-500/50
+                                                transition-all duration-300
+                                                cursor-pointer
+                                            "
+                                        >
+                                            <img
+                                                src={watchlistLogo}
+                                                alt="Watchlist"
+                                                className="
+                                                    h-5 w-5
+                                                    opacity-70
+                                                    transition-all duration-300
+                                                    group-hover:opacity-100
+                                                    group-hover:scale-110
+                                                "
+                                            />
+                                        </button>
+
+                                    </div>
+                                )}
+                                
                             </div>
                             
                             <div className="flex flex-row gap-2 items-center">

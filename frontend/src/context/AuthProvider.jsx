@@ -1,7 +1,6 @@
-import { createContext, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import authService from "../services/authService";
-
-export const AuthContext = createContext();
+import { AuthContext } from "./AuthContext";
 
 function AuthProvider({ children }) {
 
@@ -61,8 +60,6 @@ function AuthProvider({ children }) {
             email,
             password
         );
-
-        console.log(response)
 
         localStorage.setItem(
             "accessToken",

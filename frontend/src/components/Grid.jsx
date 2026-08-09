@@ -41,7 +41,9 @@ function Grid({type, catalog = [], onOpenModal, loading, hasSearched = true }) {
             <div className="flex flex-col items-center justify-center">
 
                 <h2 className="text-2xl font-semibold">
-                    No Movies Found
+                    {type === "movies"
+                        ? "No Movies Found"
+                        : "No Series Found"}
                 </h2>
 
                 <p className="text-gray-400 mt-3">

@@ -51,7 +51,7 @@ function MoviesPage() {
     function openTrailerModal(item) {
         setSelectedTrailer({
             id: item.id,
-            type: "movies"
+            setSelectedMedia: "movies"
         });
     }
 
@@ -103,7 +103,6 @@ function MoviesPage() {
             {/* MEDIA MODAL */}
             {selectedMedia && (
                 <MediaModal
-                    type={"movies"}
                     mediaId={selectedMedia.id}
                     mediaType={selectedMedia.type}
                     onClose={closeMediaModal}

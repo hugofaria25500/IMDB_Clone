@@ -17,7 +17,7 @@ function MediaStatsHeader({ type, selectedType, onTypeChange, movieCount = 0, se
             {/*LABEL HERO*/}
             <div className="flex items-center gap-3">
                 <img
-                    className="h-[44px] w-[44px] rounded-full bg-violet-900/40 p-[8px]"
+                    className="h-[40px] w-[40px] rounded-full bg-violet-900/40 p-[9px]"
                     src={logo}
                     alt={title}
                 />
