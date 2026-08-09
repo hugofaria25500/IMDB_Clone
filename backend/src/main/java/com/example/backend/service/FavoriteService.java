@@ -7,13 +7,12 @@ import com.example.backend.repository.FavoriteMovieRepository;
 import com.example.backend.repository.FavoriteSeriesRepository;
 import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
 import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
-import com.example.backend.tmdb_client.response.movies.MovieDetailsResponse;
-import com.example.backend.tmdb_client.response.movies.MoviesListResponse;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FavoriteService {
 
     private final FavoriteMovieRepository favoriteMovieRepository;
