@@ -64,6 +64,7 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWa
                     await removeMovieFavorite(mediaId);
                 } else {
                     await removeSeriesFavorite(mediaId);
+                    console.log("here1")
                 }
 
                 setIsFavorite(false);
@@ -73,12 +74,16 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWa
                     await addMovieFavorite(mediaId);
                 } else {
                     await addSeriesFavorite(mediaId);
+                    console.log("here2")
                 }
 
                 setIsFavorite(true);
             }
 
+            console.log(onFavoriteChange)
+
             if (onFavoriteChange) {
+                console.log("here3")
                 await onFavoriteChange();
             }
 
@@ -274,30 +279,35 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWa
                                         {/* WATCHLIST */}
                                         <button
                                             type="button"
-                                            title="Add to watchlist"
-                                            className="
+                                            onClick={handleWatchlist}
+                                            title={isWatchlist ? "Remove from watchlist" : "Add to watchlist"}
+                                            className={`
                                                 group
                                                 flex items-center justify-center
                                                 h-8 w-8
                                                 rounded-full
-                                                bg-white/5
-                                                border border-white/10
-                                                hover:bg-violet-600/20
-                                                hover:border-violet-500/50
+                                                border
                                                 transition-all duration-300
                                                 cursor-pointer
-                                            "
+                                                ${
+                                                    isWatchlist
+                                                        ? "bg-violet-600/20 border-violet-500 shadow-[0_0_12px_rgba(139,92,246,0.45)]"
+                                                        : "bg-white/5 border-white/10 hover:bg-violet-600/20 hover:border-violet-500/50"
+                                                }
+                                            `}
                                         >
                                             <img
                                                 src={watchlistLogo}
                                                 alt="Watchlist"
-                                                className="
-                                                    h-5 w-5
-                                                    opacity-70
+                                                className={`
+                                                    h-4 w-4
                                                     transition-all duration-300
-                                                    group-hover:opacity-100
-                                                    group-hover:scale-110
-                                                "
+                                                    ${
+                                                        isWatchlist
+                                                            ? "scale-110"
+                                                            : "opacity-70 group-hover:opacity-100 group-hover:scale-110"
+                                                    }
+                                                `}
                                             />
                                         </button>
 
@@ -489,30 +499,35 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWa
                                         {/* WATCHLIST */}
                                         <button
                                             type="button"
-                                            title="Add to watchlist"
-                                            className="
+                                            onClick={handleWatchlist}
+                                            title={isWatchlist ? "Remove from watchlist" : "Add to watchlist"}
+                                            className={`
                                                 group
                                                 flex items-center justify-center
                                                 h-8 w-8
                                                 rounded-full
-                                                bg-white/5
-                                                border border-white/10
-                                                hover:bg-violet-600/20
-                                                hover:border-violet-500/50
+                                                border
                                                 transition-all duration-300
                                                 cursor-pointer
-                                            "
+                                                ${
+                                                    isWatchlist
+                                                        ? "bg-violet-600/20 border-violet-500 shadow-[0_0_12px_rgba(139,92,246,0.45)]"
+                                                        : "bg-white/5 border-white/10 hover:bg-violet-600/20 hover:border-violet-500/50"
+                                                }
+                                            `}
                                         >
                                             <img
                                                 src={watchlistLogo}
                                                 alt="Watchlist"
-                                                className="
-                                                    h-5 w-5
-                                                    opacity-70
+                                                className={`
+                                                    h-4 w-4
                                                     transition-all duration-300
-                                                    group-hover:opacity-100
-                                                    group-hover:scale-110
-                                                "
+                                                    ${
+                                                        isWatchlist
+                                                            ? "scale-110"
+                                                            : "opacity-70 group-hover:opacity-100 group-hover:scale-110"
+                                                    }
+                                                `}
                                             />
                                         </button>
 
