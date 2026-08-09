@@ -5,6 +5,7 @@ import com.example.backend.entity.FavoriteSeries;
 import com.example.backend.entity.User;
 import com.example.backend.repository.FavoriteMovieRepository;
 import com.example.backend.repository.FavoriteSeriesRepository;
+import com.example.backend.response.FavoriteStatusResponse;
 import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
 import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,6 +79,12 @@ public class FavoriteService {
         return movies;
     }
 
+    public FavoriteStatusResponse isMovieFavorite(Integer movieId) {
+        User user = getAuthenticatedUser();
+        boolean isFavorite = favoriteMovieRepository.existsByUserAndMovieId(user, movieId);
+        return new FavoriteStatusResponse(isFavorite);
+    }
+
     // =========================
     // SERIES
     // =========================
@@ -123,6 +130,12 @@ public class FavoriteService {
                 .toList();
 
         return series;
+    }
+
+    public FavoriteStatusResponse isSeriesFavorite(Integer seriesId) {
+        User user = getAuthenticatedUser();
+        boolean isFavorite = favoriteSeriesRepository.existsByUserAndSeriesId(user, seriesId);
+        return new FavoriteStatusResponse(isFavorite);
     }
 
     // =========================

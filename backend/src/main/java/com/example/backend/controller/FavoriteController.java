@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.FavoriteMovie;
 import com.example.backend.entity.FavoriteSeries;
+import com.example.backend.response.FavoriteStatusResponse;
 import com.example.backend.service.FavoriteService;
 import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
 import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
@@ -42,6 +43,11 @@ public class FavoriteController {
         return ResponseEntity.ok(favoriteService.getFavoriteMovies());
     }
 
+    @GetMapping("/movies/{movieId}")
+    public ResponseEntity<FavoriteStatusResponse> isMovieFavorite( @PathVariable Integer movieId) {
+        return ResponseEntity.ok(favoriteService.isMovieFavorite(movieId));
+    }
+
     // =========================
     // SERIES
     // =========================
@@ -61,5 +67,10 @@ public class FavoriteController {
     @GetMapping("/series")
     public ResponseEntity<List<SeriesDetailsDTO>> getFavoriteSeries() {
         return ResponseEntity.ok(favoriteService.getFavoriteSeries());
+    }
+
+    @GetMapping("/series/{seriesId}")
+    public ResponseEntity<FavoriteStatusResponse> isSeriesFavorite(@PathVariable Integer seriesId) {
+        return ResponseEntity.ok(favoriteService.isSeriesFavorite(seriesId));
     }
 }
