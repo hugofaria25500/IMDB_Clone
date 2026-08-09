@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
-import { getFavoriteMovies } from "../../services/favoriteService";
+import { getWatchlistMovies } from "../../services/watchlistService";
 
 export function useFavoriteMovies() {
 
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchFavorites() {
+    async function fetchWatchlist() {
 
         try {
 
             setLoading(true);
 
-            const data = await getFavoriteMovies();
-
+            const data = await getWatchlistMovies();~
+            
             setMovies(data);
 
         } catch (error) {
 
             console.error(
-                "Error fetching favorite movies:",
+                "Error fetching watchlist movies:",
                 error
             );
 
@@ -30,12 +30,12 @@ export function useFavoriteMovies() {
     }
 
     useEffect(() => {
-        fetchFavorites();
+        fetchWatchlist();
     }, []);
 
     return {
         movies,
         loading,
-        fetchFavorites
+        fetchWatchlist
     };
 }
