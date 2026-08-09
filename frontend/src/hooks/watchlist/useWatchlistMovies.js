@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getWatchlistMovies } from "../../services/watchlistService";
 
-export function useFavoriteMovies() {
+export function useWatchlistMovies() {
 
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -68,7 +68,7 @@ function ProfileMenu({ onOpen }) {
                     </button>
 
                     <button onClick={() => navigate("/watchlist")} className="w-full px-5 py-3 text-left text-white hover:bg-violet-600 transition">
-                        WatchList
+                        Watchlist
                     </button>
 
                     <button onClick={() => navigate("/favourites")} className="w-full px-5 py-3 text-left text-white hover:bg-violet-600 transition">

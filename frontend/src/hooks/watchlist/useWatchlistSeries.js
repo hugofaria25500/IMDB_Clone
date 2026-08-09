@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { getFavoriteSeries } from "../../services/favoriteService";
 
-export function useFavoriteSeries() {
+export function useWatchlistSeries() {
 
     const [series, setSeries] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchFavorites() {
+    async function fetchWatchlist() {
     
             try {
     
@@ -32,12 +32,12 @@ export function useFavoriteSeries() {
         }
     
         useEffect(() => {
-            fetchFavorites();
+            fetchWatchlist();
         }, []);
     
         return {
             series,
             loading,
-            fetchFavorites
+            fetchWatchlist
         };
     }
