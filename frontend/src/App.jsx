@@ -9,7 +9,7 @@ import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
 import ProfilePage from "./pages/ProfilePage";
 import WatchlistPage from "./pages/WatchListPage";
-import FavouritesPage from "./pages/FavouitesPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
 
                 <Route path="/watchlist" element={<WatchlistPage />} />
 
-                <Route path="/favourites" element={<FavouritesPage />} />
+                <Route path="/favourites" element={<FavoritesPage />} />
 
             </Routes>
         </BrowserRouter>
