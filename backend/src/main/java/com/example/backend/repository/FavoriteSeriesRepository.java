@@ -12,7 +12,7 @@ public interface FavoriteSeriesRepository
 
     List<FavoriteSeries> findByUser(User user);
 
-    Optional<FavoriteSeries> findByUserAndSeriesId(User user, Long seriesId);
+    Optional<FavoriteSeries> findByUserAndSeriesId(User user, Integer seriesId);
 
-    boolean existsByUserAndSeriesId(User user, Long seriesId);
+    boolean existsByUserAndSeriesId(User user, Integer seriesId);
 }

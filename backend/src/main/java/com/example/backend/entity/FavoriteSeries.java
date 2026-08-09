@@ -13,24 +13,24 @@ public class FavoriteSeries {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "series_id", nullable = false)
-    private Long seriesId;
+    private Integer seriesId;
 
     public FavoriteSeries() {
     }
 
-    public FavoriteSeries(User user, Long seriesId) {
+    public FavoriteSeries(User user, Integer seriesId) {
         this.user = user;
         this.seriesId = seriesId;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class FavoriteSeries {
         return user;
     }
 
-    public Long getSeriesId() {
+    public Integer getSeriesId() {
         return seriesId;
     }
 
@@ -46,7 +46,7 @@ public class FavoriteSeries {
         this.user = user;
     }
 
-    public void setSeriesId(Long seriesId) {
+    public void setSeriesId(Integer seriesId) {
         this.seriesId = seriesId;
     }
 }

@@ -13,24 +13,24 @@ public class FavoriteMovie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "movie_id", nullable = false)
-    private Long movieId;
+    private Integer movieId;
 
     public FavoriteMovie() {
     }
 
-    public FavoriteMovie(User user, Long movieId) {
+    public FavoriteMovie(User user, Integer movieId) {
         this.user = user;
         this.movieId = movieId;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class FavoriteMovie {
         return user;
     }
 
-    public Long getMovieId() {
+    public Integer getMovieId() {
         return movieId;
     }
 
@@ -46,7 +46,7 @@ public class FavoriteMovie {
         this.user = user;
     }
 
-    public void setMovieId(Long movieId) {
+    public void setMovieId(Integer movieId) {
         this.movieId = movieId;
     }
 }

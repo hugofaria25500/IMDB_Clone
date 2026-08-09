@@ -5,6 +5,11 @@ import com.example.backend.entity.FavoriteSeries;
 import com.example.backend.entity.User;
 import com.example.backend.repository.FavoriteMovieRepository;
 import com.example.backend.repository.FavoriteSeriesRepository;
+import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
+import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
+import com.example.backend.tmdb_client.response.movies.MovieDetailsResponse;
+import com.example.backend.tmdb_client.response.movies.MoviesListResponse;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
@@ -14,16 +19,22 @@ public class FavoriteService {
     private final FavoriteMovieRepository favoriteMovieRepository;
     private final FavoriteSeriesRepository favoriteSeriesRepository;
 
-    public FavoriteService(FavoriteMovieRepository favoriteMovieRepository, FavoriteSeriesRepository favoriteSeriesRepository) {
+    private final MovieService movieService;
+
+    private final SeriesService seriesService;
+
+    public FavoriteService(FavoriteMovieRepository favoriteMovieRepository, FavoriteSeriesRepository favoriteSeriesRepository, MovieService movieService, SeriesService seriesService) {
         this.favoriteMovieRepository = favoriteMovieRepository;
         this.favoriteSeriesRepository = favoriteSeriesRepository;
+        this.movieService = movieService;
+        this.seriesService = seriesService;
     }
 
     // =========================
     // MOVIES
     // =========================
 
-    public FavoriteMovie addMovie(Long movieId) {
+    public FavoriteMovie addMovie(Integer movieId) {
 
         User user = getAuthenticatedUser();
 
@@ -37,7 +48,7 @@ public class FavoriteService {
         return favoriteMovieRepository.save(favoriteMovie);
     }
 
-    public void removeMovie(Long movieId) {
+    public void removeMovie(Integer movieId) {
 
         User user = getAuthenticatedUser();
 
@@ -53,22 +64,26 @@ public class FavoriteService {
         favoriteMovieRepository.delete(favoriteMovie);
     }
 
-    public List<FavoriteMovie> getFavoriteMovies() {
+    public List<MovieDetailsDTO> getFavoriteMovies() {
 
         User user = getAuthenticatedUser();
 
-        return favoriteMovieRepository.findByUser(user);
+        List<FavoriteMovie> favorites = favoriteMovieRepository.findByUser(user);
+
+        List<MovieDetailsDTO> movies = favorites.stream()
+                .map(favorite ->
+                        movieService.getMovieDetails(favorite.getMovieId())
+                )
+                .toList();
+
+        return movies;
     }
 
     // =========================
     // SERIES
     // =========================
 
-    // =========================
-    // SERIES
-    // =========================
-
-    public FavoriteSeries addSeries(Long seriesId) {
+    public FavoriteSeries addSeries(Integer seriesId) {
 
         User user = getAuthenticatedUser();
 
@@ -81,7 +96,7 @@ public class FavoriteService {
         return favoriteSeriesRepository.save(favoriteSeries);
     }
 
-    public void removeSeries(Long seriesId) {
+    public void removeSeries(Integer seriesId) {
 
         User user = getAuthenticatedUser();
 
@@ -97,11 +112,19 @@ public class FavoriteService {
         favoriteSeriesRepository.delete(favoriteSeries);
     }
 
-    public List<FavoriteSeries> getFavoriteSeries() {
+    public List<SeriesDetailsDTO> getFavoriteSeries() {
         User user = getAuthenticatedUser();
-        return favoriteSeriesRepository.findByUser(user);
-    }
 
+        List<FavoriteSeries> favorites = favoriteSeriesRepository.findByUser(user);
+
+        List<SeriesDetailsDTO> series = favorites.stream()
+                .map(favorite ->
+                        seriesService.getSeriesDetails(favorite.getSeriesId())
+                )
+                .toList();
+
+        return series;
+    }
 
     // =========================
     // USER CONTEXT

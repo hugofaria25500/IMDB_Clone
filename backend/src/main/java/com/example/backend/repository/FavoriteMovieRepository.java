@@ -12,7 +12,7 @@ public interface FavoriteMovieRepository
 
     List<FavoriteMovie> findByUser(User user);
 
-    Optional<FavoriteMovie> findByUserAndMovieId(User user, Long movieId);
+    Optional<FavoriteMovie> findByUserAndMovieId(User user, Integer movieId);
 
-    boolean existsByUserAndMovieId( User user, Long movieId);
+    boolean existsByUserAndMovieId( User user, Integer movieId);
 }
