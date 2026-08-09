@@ -8,7 +8,7 @@ import CreateAccountPage from "./pages/CreateAccountPage";
 import MoviesPage from "./pages/MoviesPage";
 import SeriesPage from "./pages/SeriesPage";
 import ProfilePage from "./pages/ProfilePage";
-import WatchlistPage from "./pages/WatchListPage";
+import WatchlistPage from "./pages/WatchlistPage";
 import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
