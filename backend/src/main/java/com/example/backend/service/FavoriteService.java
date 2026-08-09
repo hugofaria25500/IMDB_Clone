@@ -6,7 +6,10 @@ import com.example.backend.entity.User;
 import com.example.backend.repository.FavoriteMovieRepository;
 import com.example.backend.repository.FavoriteSeriesRepository;
 import com.example.backend.response.FavoriteStatusResponse;
+import com.example.backend.tmdb_client.dto.genres.GenreDTO;
+import com.example.backend.tmdb_client.dto.movies.BasicMovieDTO;
 import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
+import com.example.backend.tmdb_client.dto.series.BasicSeriesDTO;
 import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -64,19 +67,20 @@ public class FavoriteService {
         favoriteMovieRepository.delete(favoriteMovie);
     }
 
-    public List<MovieDetailsDTO> getFavoriteMovies() {
+    public List<BasicMovieDTO> getFavoriteMovies() {
 
         User user = getAuthenticatedUser();
 
         List<FavoriteMovie> favorites = favoriteMovieRepository.findByUser(user);
 
-        List<MovieDetailsDTO> movies = favorites.stream()
+        return favorites.stream()
                 .map(favorite ->
-                        movieService.getMovieDetails(favorite.getMovieId())
+                        movieService.getMovieDetails(
+                                favorite.getMovieId()
+                        )
                 )
+                .map(this::toBasicSeriesDTO)
                 .toList();
-
-        return movies;
     }
 
     public FavoriteStatusResponse isMovieFavorite(Integer movieId) {
@@ -118,19 +122,22 @@ public class FavoriteService {
         favoriteSeriesRepository.delete(favoriteSeries);
     }
 
-    public List<SeriesDetailsDTO> getFavoriteSeries() {
+    public List<BasicSeriesDTO> getFavoriteSeries() {
+
         User user = getAuthenticatedUser();
 
         List<FavoriteSeries> favorites = favoriteSeriesRepository.findByUser(user);
 
-        List<SeriesDetailsDTO> series = favorites.stream()
+        return favorites.stream()
                 .map(favorite ->
-                        seriesService.getSeriesDetails(favorite.getSeriesId())
+                        seriesService.getSeriesDetails(
+                                favorite.getSeriesId()
+                        )
                 )
+                .map(this::toBasicSeriesDTO)
                 .toList();
-
-        return series;
     }
+
 
     public FavoriteStatusResponse isSeriesFavorite(Integer seriesId) {
         User user = getAuthenticatedUser();
@@ -148,5 +155,47 @@ public class FavoriteService {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
+    }
+
+    // =========================
+    // MAPPER
+    // =========================
+
+    private BasicSeriesDTO toBasicSeriesDTO(SeriesDetailsDTO series) {
+
+        BasicSeriesDTO dto = new BasicSeriesDTO();
+
+        dto.setId(series.getId());
+        dto.setOriginalName(series.getOriginalName());
+        dto.setPosterPath(series.getPosterPath());
+        dto.setGenreIds(
+                series.getGenres()
+                        .stream()
+                        .map(GenreDTO::getId)
+                        .toList()
+        );
+        dto.setFirstReleaseDate(series.getFirstAirDate());
+        dto.setRating(series.getRating().toString());
+
+        return dto;
+    }
+
+    private BasicMovieDTO toBasicSeriesDTO(MovieDetailsDTO movie) {
+
+        BasicMovieDTO dto = new BasicMovieDTO();
+
+        dto.setId(movie.getId());
+        dto.setTitle(movie.getTitle());
+        dto.setPosterPath(movie.getPosterPath());
+        dto.setGenreIds(
+                movie.getGenres()
+                        .stream()
+                        .map(GenreDTO::getId)
+                        .toList()
+        );
+        dto.setReleaseDate(movie.getReleaseDate());
+        dto.setRating(movie.getRating().toString());
+
+        return dto;
     }
 }

@@ -4,8 +4,8 @@ import com.example.backend.entity.FavoriteMovie;
 import com.example.backend.entity.FavoriteSeries;
 import com.example.backend.response.FavoriteStatusResponse;
 import com.example.backend.service.FavoriteService;
-import com.example.backend.tmdb_client.dto.movies.MovieDetailsDTO;
-import com.example.backend.tmdb_client.dto.series.SeriesDetailsDTO;
+import com.example.backend.tmdb_client.dto.movies.BasicMovieDTO;
+import com.example.backend.tmdb_client.dto.series.BasicSeriesDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +39,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/movies")
-    public ResponseEntity<List<MovieDetailsDTO>> getFavoriteMovies() {
+    public ResponseEntity<List<BasicMovieDTO>> getFavoriteMovies() {
         return ResponseEntity.ok(favoriteService.getFavoriteMovies());
     }
 
@@ -65,7 +65,7 @@ public class FavoriteController {
     }
 
     @GetMapping("/series")
-    public ResponseEntity<List<SeriesDetailsDTO>> getFavoriteSeries() {
+    public ResponseEntity<List<BasicSeriesDTO>> getFavoriteSeries() {
         return ResponseEntity.ok(favoriteService.getFavoriteSeries());
     }
 
