@@ -23,7 +23,7 @@ function FavoritesPage() {
     const [filters, setFilters] = useState({
         genre: null,
         rating: "all",
-        sortBy: "rating.desc",
+        sortBy: "vote_average.desc",
     });
 
     const [page, setPage] = useState(1);
@@ -40,6 +40,17 @@ function FavoritesPage() {
     const catalog = selectedType === "movies" ? movies : series;
 
     const loading = selectedType === "movies" ? loadingMovies : loadingSeries;
+
+    const fields = {
+        movies: {
+            release: "releaseDate",
+            title: "title"
+        },
+        series: {
+            release: "firstReleaseDate",
+            title: "originalName"
+        }
+    };
 
     const filteredCatalog = catalog.filter(item => {
 
@@ -68,17 +79,16 @@ function FavoritesPage() {
 
         switch (filters.sortBy) {
 
-            case "rating.desc":
+            case "release_date.desc":
+                return new Date(b[fields[selectedType].release])
+                    - new Date(a[fields[selectedType].release]);
+
+            case "vote_average.desc":
                 return Number(b.rating) - Number(a.rating);
 
-            case "rating.asc":
-                return Number(a.rating) - Number(b.rating);
-
-            case "release.desc":
-                return new Date(b.releaseDate) - new Date(a.releaseDate);
-
-            case "release.asc":
-                return new Date(a.releaseDate) - new Date(b.releaseDate);
+            case "title.asc":
+                return a[fields[selectedType].title]
+                    .localeCompare(b[fields[selectedType].title]);
 
             default:
                 return 0;

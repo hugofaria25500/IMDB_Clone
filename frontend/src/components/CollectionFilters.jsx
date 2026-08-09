@@ -74,6 +74,7 @@ function CollectionFilters({ type, catalog, filters, setFilters, genres, genresL
                             ...newFilters
                         }))
                     }
+                    showYear={false}
                 />
 
             </div>
