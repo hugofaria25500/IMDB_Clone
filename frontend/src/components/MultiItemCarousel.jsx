@@ -8,7 +8,7 @@ import "../css/MultiItemCarousel.css";
 
 import MediaCard from "./MediaCard";
 
-function MultiItemCarouselSwiper({ title, type, catalog, onOpenModal, loading }) {
+function MultiItemCarousel({ title, type, catalog, onOpenModal, loading }) {
 
     return (
         <div className="w-full px-[50px] py-6 bg-black">
@@ -60,4 +60,4 @@ function MultiItemCarouselSwiper({ title, type, catalog, onOpenModal, loading })
     );
 }
 
-export default MultiItemCarouselSwiper;
+export default MultiItemCarousel;
