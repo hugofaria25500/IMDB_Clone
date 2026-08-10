@@ -41,8 +41,8 @@ function MoviesPage() {
     const { results: searchMovies, totalPages: searchTotalPages, loading: searchLoading} = useSearchMovies(searchQuery, searchPage);
     const { results: discoverMovies,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverMovies(filters, discoverPage);
     const { genres:movieGenres, loading: movieGenresLoading } = useMovieGenres();
-    const { popularMovies, popularMoviesLoading } = usePopularMovies();
-    const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+    const { popularMovies, loading: popularMoviesLoading } = usePopularMovies();
+    const { trendingMovies, loading: trendingMoviesLoading } = useTrendingMovies();
     const { randomMovie, loading:randomMovieLoading, refreshRandomMovie } = useRandomMovie();
 
     const [selectedTrailer, setSelectedTrailer] = useState(null);
