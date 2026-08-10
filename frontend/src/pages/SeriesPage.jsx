@@ -41,8 +41,8 @@ function SeriesPage() {
     const { results: searchSeries, totalPages: searchTotalPages, loading: searchLoading} = useSearchSeries(searchQuery, searchPage);
     const { results: discoverSeries,  totalPages: discoverTotalPages, loading: discoverLoading } = useDiscoverSeries(filters, discoverPage);
     const { genres:seriesGenres, loading: seriesGenresLoading } = useSeriesGenres();
-    const { popularSeries, popularSeriesLoading } = usePopularSeries();
-    const { trendingSeries, trendingSeriesLoading } = useTrendingSeries();
+    const { popularSeries, loading: popularSeriesLoading } = usePopularSeries();
+    const { trendingSeries, loading: trendingSeriesLoading } = useTrendingSeries();
     const { randomSeries, loading:randomSeriesLoading, refreshRandomSeries } = useRandomSeries();
 
     const [selectedTrailer, setSelectedTrailer] = useState(null);

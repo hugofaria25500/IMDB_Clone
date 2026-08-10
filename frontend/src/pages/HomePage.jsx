@@ -14,8 +14,8 @@ import { usePopularMovies } from "../hooks/movies/usePopularMovies";
 import { useTrendingMovies } from "../hooks/movies/useTrendingMovies";
 
 function Homepage() {
-    const { popularMovies, popularMoviesLoading } = usePopularMovies();
-    const { trendingMovies, trendingMoviesLoading } = useTrendingMovies();
+    const { popularMovies, loading: popularMoviesLoading } = usePopularMovies();
+    const { trendingMovies, loading: trendingMoviesLoading } = useTrendingMovies();
 
     const [selectedMedia, setSelectedMedia] = useState(null);
   

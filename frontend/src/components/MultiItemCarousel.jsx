@@ -6,7 +6,9 @@ import "swiper/css/navigation";
 
 import "../css/MultiItemCarousel.css";
 
+/*COMPONENTS*/
 import MediaCard from "./MediaCard";
+import SkeletonCard from "./SkeletonCard"
 
 function MultiItemCarousel({ title, type, catalog, onOpenModal, loading }) {
 
