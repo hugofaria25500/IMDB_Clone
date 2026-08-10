@@ -80,8 +80,6 @@ function MediaModal({ mediaId, mediaType, onClose, onFavoriteChange = null, onWa
                 setIsFavorite(true);
             }
 
-            console.log(onFavoriteChange)
-
             if (onFavoriteChange) {
                 console.log("here3")
                 await onFavoriteChange();
