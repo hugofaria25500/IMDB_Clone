@@ -8,23 +8,28 @@ An IMDB-inspired full-stack web application for discovering movies and TV series
 
 ## Desktop
 
-<!--
-PLACEHOLDER — Add a desktop screenshot here.
-Recommended image: ./docs/images/desktop-preview.png
-The screenshot should show the main application interface, including the navbar, hero section and movie/series content.
--->
+Homepage
+<img width="1781" height="2411" alt="image" src="https://github.com/user-attachments/assets/1dbffb8e-3bd8-416c-8555-385d87005b62" />
 
-![Desktop Application Preview](./docs/images/desktop-preview.png)
+Movies Page
+<img width="1781" height="4973" alt="image" src="https://github.com/user-attachments/assets/0d32b79d-f1ed-49b8-8593-4f0ce41bd470" />
+
+Favourites Page
+<img width="1781" height="1224" alt="image" src="https://github.com/user-attachments/assets/12d285b4-d8d9-4adf-9861-149791a318f7" />
+
+Login
+<img width="1781" height="872" alt="image" src="https://github.com/user-attachments/assets/bc25929c-b7c5-40d2-9b0a-9bc6a3974e66" />
 
 ## Mobile
 
-<!--
-PLACEHOLDER — Add a mobile screenshot here.
-Recommended image: ./docs/images/mobile-preview.png
-The screenshot should demonstrate the responsive mobile layout.
--->
+Homepage
 
-![Mobile Application Preview](./docs/images/mobile-preview.png)
+Series Page
+
+Watchlist Page
+
+Create Account Page
+
 
 ---
 
