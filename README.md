@@ -8,28 +8,31 @@ An IMDB-inspired full-stack web application for discovering movies and TV series
 
 ## Desktop
 
-Homepage
+### Homepage
 <img width="1781" height="2411" alt="image" src="https://github.com/user-attachments/assets/1dbffb8e-3bd8-416c-8555-385d87005b62" />
 
-Movies Page
+### Movies Page
 <img width="1781" height="4973" alt="image" src="https://github.com/user-attachments/assets/0d32b79d-f1ed-49b8-8593-4f0ce41bd470" />
 
-Favourites Page
+### Favourites Page
 <img width="1781" height="1224" alt="image" src="https://github.com/user-attachments/assets/12d285b4-d8d9-4adf-9861-149791a318f7" />
 
-Login
+### Login
 <img width="1781" height="872" alt="image" src="https://github.com/user-attachments/assets/bc25929c-b7c5-40d2-9b0a-9bc6a3974e66" />
 
 ## Mobile
 
-Homepage
+### Homepage
+<img width="486" height="3187" alt="image" src="https://github.com/user-attachments/assets/2117a782-54b2-4649-8ff7-6763944842e1" />
 
-Series Page
+### Series Page
+<img width="486" height="7875" alt="image" src="https://github.com/user-attachments/assets/3833a8bb-5bfb-472d-acd9-4b56783349b3" />
 
-Watchlist Page
+### Watchlist Page
+<img width="486" height="1791" alt="image" src="https://github.com/user-attachments/assets/1bf69497-8566-47d5-90ed-3ff29882d0b1" />
 
-Create Account Page
-
+### Create Account Page
+<img width="486" height="1056" alt="image" src="https://github.com/user-attachments/assets/7654be17-a8e4-485a-8725-59572d654cae" />
 
 ---
 
@@ -109,39 +112,8 @@ Response
 
 ### Complete System Flow
 
-```text
-                         ┌──────────────────────┐
-                         │      React App        │
-                         │      Frontend        │
-                         └──────────┬───────────┘
-                                    │
-                                  Axios
-                                    │
-                                    ▼
-                         ┌──────────────────────┐
-                         │   Spring Boot API    │
-                         └──────────┬───────────┘
-                                    │
-                 ┌──────────────────┼──────────────────┐
-                 │                  │                  │
-                 ▼                  ▼                  ▼
-          ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-          │   Services  │    │ Repositories│    │ TMDB Client │
-          └─────────────┘    └──────┬──────┘    └──────┬──────┘
-                                    │                  │
-                                    ▼                  ▼
-                              ┌──────────┐       ┌──────────┐
-                              │ Database │       │   TMDB   │
-                              └──────────┘       │   API    │
-                                                 └──────────┘
-```
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/c3bd4ffb-5156-414e-8e97-2299e20a3119" />
 
-<!--
-PLACEHOLDER — Replace the ASCII architecture diagrams above with a polished Draw.io diagram if desired.
-Recommended image: ./docs/images/system-architecture.png
--->
-
-![System Architecture](./docs/images/system-architecture.png)
 
 ---
 
@@ -160,12 +132,6 @@ The list below is based on technologies that are actually represented in the app
 - Vite
 - ESLint
 
-### Frontend dependencies declared but not currently used by application code
-
-- TanStack React Query
-
-TanStack React Query is present in `package.json`, but the current hooks use React's `useEffect` and `useState` directly for data fetching and loading state management.
-
 ## Backend
 
 - Java 17
@@ -174,7 +140,7 @@ TanStack React Query is present in `package.json`, but the current hooks use Rea
 - Spring Data JPA
 - Spring Security
 - Spring Validation
-- JWT (`jjwt`)
+- JWT
 - H2 Database
 - PostgreSQL driver
 - Lombok
@@ -539,13 +505,6 @@ Protected Controller
 
 Public endpoints include authentication, movies, series, genres and the H2 console. Favourites, watchlists and user endpoints require authentication. Everything else is protected by default.
 
-<!--
-PLACEHOLDER — Add an authentication flow diagram.
-Recommended image: ./docs/images/authentication-flow.png
--->
-
-![Authentication Flow](./docs/images/authentication-flow.png)
-
 ---
 
 # 🔗 External API — TMDB
@@ -675,14 +634,6 @@ H2 is useful for local development and inspection through the H2 console, while 
 
 The application database primarily stores user and user-specific data rather than the complete TMDB catalogue.
 
-<!--
-PLACEHOLDER — Add a database/entity relationship diagram.
-Recommended image: ./docs/images/database-diagram.png
-The diagram should show User, RefreshToken, FavoriteMovie, FavoriteSeries, WatchlistMovie and WatchlistSeries and their relationships.
--->
-
-![Database Diagram](./docs/images/database-diagram.png)
-
 ---
 
 # 🔄 Data Flow
@@ -792,13 +743,6 @@ The application contains dedicated UI components for:
 - Profile areas
 - Modals
 
-<!--
-PLACEHOLDER — Add a desktop/tablet/mobile comparison.
-Recommended image: ./docs/images/responsive-design.png
--->
-
-![Responsive Design](./docs/images/responsive-design.png)
-
 ---
 
 # 🎬 Main Features
@@ -855,35 +799,6 @@ Relevant API areas include:
 - `/api/watchlist`
 - `/api/users`
 
-<!--
-PLACEHOLDER — Add a Postman screenshot here.
-Recommended image: ./docs/images/postman-api.png
--->
-
-![Postman API Testing](./docs/images/postman-api.png)
-
----
-
-# 🖼️ Documentation Images
-
-The README uses image placeholders so screenshots and diagrams can be added later without changing the documentation structure.
-
-Recommended directory:
-
-```text
-docs/
-└── images/
-    ├── desktop-preview.png
-    ├── mobile-preview.png
-    ├── system-architecture.png
-    ├── authentication-flow.png
-    ├── database-diagram.png
-    ├── responsive-design.png
-    └── postman-api.png
-```
-
-If an image has not been added yet, the corresponding Markdown reference can remain as a placeholder until the asset is available.
-
 ---
 
 # 📁 Project Structure
@@ -930,26 +845,6 @@ IMDB_Clone/
 │
 └── README.md
 ```
-
----
-
-# 🚀 Future Improvements
-
-Possible future improvements include:
-
-- Removing unused dependencies such as TanStack React Query if it is not introduced later.
-- Improving automated backend and frontend tests.
-- Adding more comprehensive exception handling.
-- Improving API error messages.
-- Adding production environment configuration.
-- Improving token refresh handling on the frontend.
-- Adding Docker support.
-- Adding CI/CD.
-- Deploying the frontend and backend.
-- Improving caching where useful.
-- Adding user reviews and ratings.
-- Adding more advanced recommendation functionality.
-- Adding more profile customization.
 
 ---
 
